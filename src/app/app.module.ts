@@ -33,7 +33,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { ContractDetailComponent } from './contract-detail/contract-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 
 @NgModule({
@@ -48,7 +47,6 @@ import { RegisterComponent } from './register/register.component';
     ContractDetailComponent,
     DashboardComponent,
     HomeComponent,
-    AboutComponent,
     RegisterComponent
   ],
   imports: [

@@ -7,15 +7,15 @@ import {LoginComponent} from './login/login.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HomeComponent} from './home/home.component';
 import {ContractListComponent} from './contract-list/contract-list.component';
-import {AboutComponent} from './about/about.component';
+import {RegisterComponent} from './register/register.component';
+import {ContractUpdateComponent} from './contract-update/contract-update.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home/login', pathMatch: 'full'},
 
   {
     path: 'home', component: HomeComponent, children: [
-      {path: 'about', component: AboutComponent},
-      // { path: 'register', component: RegisterComponent },
+      {path: 'register', component: RegisterComponent},
       {path: 'login', component: LoginComponent},
     ]
   },
@@ -27,6 +27,7 @@ const routes: Routes = [
       // { path: 'contract-update/:id', component:ContractUpdateComponent, canActivate: [AdminGuard] },
       // { path: 'contract-create', component: ContractCreateComponent, canActivate: [AdminGuard] },
       {path: 'contract-create', component: ContractCreateComponent},
+      {path: 'contract-update', component: ContractUpdateComponent},
     ]
   },
 

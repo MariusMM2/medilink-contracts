@@ -1,1 +1,32 @@
-<p>contract-update works!</p>
+<mat-card>
+  <form [formGroup]="contract" (ngSubmit)="updateContract()">
+    <mat-card-title id="create">Create Contract Page</mat-card-title>
+    <div>
+      <mat-form-field>
+        <input id="name" matInput placeholder="Contract Name" formControlName="name">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input id="description" matInput placeholder="Contract Description" formControlName="description">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input id="startDate" matInput placeholder="Contract Start Date" formControlName="startDate">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input id="expirationDate" matInput placeholder="Contract Expiration Date" formControlName="expirationDate">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input id="contractType" matInput placeholder="Contract Type" formControlName="contractType">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input id="contractFile" matInput placeholder="Contract File" formControlName="contractFile">
+      </mat-form-field>
+      <br>
+    </div>
+    <button id="updateButton" mat-raised-button color="primary">Update Contract</button>
+  </form>
+</mat-card>

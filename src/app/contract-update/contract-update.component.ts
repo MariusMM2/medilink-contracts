@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-contract-update',
@@ -7,9 +10,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContractUpdateComponent implements OnInit {
 
-  constructor() { }
+  contract: FormGroup;
+  constructor(private snackBar: MatSnackBar, private fb: FormBuilder,
+              private router: Router) {
+    // , private productActions: ProductActions, private productService: ProductService) {
+  }
 
   ngOnInit() {
+    this.contract = this.fb.group({
+      _id: [''],
+      name: [''],
+      description: [''],
+      startDate: [''],
+      expirationDate: [''],
+      contractType: [''],
+      contractFile: [''],
+    });
+  }
+
+  updateContract() {
+    console.log('TODO: Contract updated!');
+    // let product = this.product.value as Product;
+    //
+    // this.productService.addProduct(product)
+    //   .then(() => {
+    //     console.log("product added!");
+    //     this.product.reset();
+    //     this.snackBar.open('Product added', "", {duration: 500}).afterDismissed().subscribe(() => {
+    //       this.router.navigate(['../portal/product-list']);
+    //     });
+    //   });
   }
 
 }
