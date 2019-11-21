@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ContractComponent } from './contract/contract.component';
+import { ContractListComponent } from './contract-list/contract-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ContractComponent
+    ContractComponent,
+    ContractListComponent
   ],
   imports: [
     BrowserModule
