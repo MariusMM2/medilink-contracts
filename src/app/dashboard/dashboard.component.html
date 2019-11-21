@@ -1,1 +1,13 @@
-<p>dashboard works!</p>
+<mat-toolbar color="primary">
+  <span>Contract Management Platform - MediLink        .</span>
+  <button mat-button routerLink="/dashboard/contract-list">Contract List</button>
+  <button mat-button routerLink="/dashboard/contract-create">Contract Create</button>
+  <span class="example-fill-remaining-space"></span>
+  <p *ngIf="true">User</p>
+<!--  <p *ngIf="isAdmin$ | async">ADMIN</p>-->
+<!--  <p *ngIf="!(isAdmin$ | async)">USER</p>-->
+  <button mat-button (click)="onLogoutClick()" routerLink="/dashboard">Log out</button>
+</mat-toolbar>
+
+<!-- for Routing -->
+<router-outlet></router-outlet>

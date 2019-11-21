@@ -1,1 +1,13 @@
-<p>home works!</p>
+<mat-toolbar color="primary">
+  <span>Contract Management Platform - MediLink        .</span>
+  <button mat-button routerLink="about">About</button>
+  <button mat-button routerLink="login">Login</button>
+  <button mat-button routerLink="register">Register</button>
+  <button mat-button routerLink="/dashboard">Dashboard</button>
+  <span class="example-fill-remaining-space"></span>
+<!--  <button mat-button *ngIf="!loggedIn" routerLink="login">Login</button>-->
+  <!--  <button mat-button *ngIf="loggedIn" (click)="onLogoutClick()" routerLink="/" >Log out</button>-->
+</mat-toolbar>
+
+<!-- for Routing -->
+<router-outlet></router-outlet>

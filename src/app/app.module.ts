@@ -33,6 +33,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { ContractDetailComponent } from './contract-detail/contract-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { HomeComponent } from './home/home.component';
     PageNotFoundComponent,
     ContractDetailComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    AboutComponent
   ],
   imports: [
     AppRoutingModule,

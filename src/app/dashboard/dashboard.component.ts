@@ -12,4 +12,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
+  onLogoutClick() {
+    console.log('TODO: Logout!');
+  }
 }
