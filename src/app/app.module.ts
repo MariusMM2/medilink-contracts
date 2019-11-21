@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { ContractComponent } from './contract/contract.component';
 import { ContractListComponent } from './contract-list/contract-list.component';
 import { ContractCreateComponent } from './contract-create/contract-create.component';
+import { ContractUpdateComponent } from './contract-update/contract-update.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ContractCreateComponent } from './contract-create/contract-create.compo
     LoginComponent,
     ContractComponent,
     ContractListComponent,
-    ContractCreateComponent
+    ContractCreateComponent,
+    ContractUpdateComponent
   ],
   imports: [
     BrowserModule
