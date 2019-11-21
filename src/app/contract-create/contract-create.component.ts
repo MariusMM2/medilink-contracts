@@ -20,7 +20,10 @@ export class ContractCreateComponent implements OnInit {
       _id: [''],
       name: [''],
       description: [''],
-      price: []
+      startDate: [''],
+      expirationDate: [''],
+      contractType: [''],
+      contractFile: [''],
     });
   }
 

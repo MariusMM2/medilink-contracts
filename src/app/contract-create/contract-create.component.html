@@ -1,20 +1,31 @@
-<p>contract-create works!</p>
-
 
 <form [formGroup]="contract" (ngSubmit)="saveContract()">
   <mat-card-title id="create">Create Contract Page</mat-card-title>
   <div>
     <mat-form-field>
-      <input id="name" matInput placeholder="Contract name" formControlName="name">
+      <input id="name" matInput placeholder="Contract Name" formControlName="name">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input id="description" matInput placeholder="Contract description" formControlName="description">
+      <input id="description" matInput placeholder="Contract Description" formControlName="description">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input id="price" matInput placeholder="Product price" formControlName="price">
+      <input id="startDate" matInput placeholder="Contract Start Date" formControlName="startDate">
     </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input id="expirationDate" matInput placeholder="Contract Expiration Date" formControlName="expirationDate">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input id="contractType" matInput placeholder="Contract Type" formControlName="contractType">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input id="contractFile" matInput placeholder="Contract File" formControlName="contractFile">
+    </mat-form-field>
+    <br>
   </div>
   <button id="saveButton" mat-raised-button color="primary">Save Contract</button>
 </form>
