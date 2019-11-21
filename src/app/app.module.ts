@@ -18,7 +18,7 @@ import {
   MatExpansionModule,
   MatIconModule,
   MatMenuModule,
-  MatProgressBarModule,
+  MatProgressBarModule, MatProgressSpinnerModule,
   MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
@@ -29,7 +29,7 @@ import { ContractComponent } from './contract/contract.component';
 import { ContractListComponent } from './contract-list/contract-list.component';
 import { ContractCreateComponent } from './contract-create/contract-create.component';
 import { ContractUpdateComponent } from './contract-update/contract-update.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ContractDetailComponent } from './contract-detail/contract-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
@@ -57,7 +57,7 @@ import { RegisterComponent } from './register/register.component';
     MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatCardModule, MatDividerModule, MatExpansionModule,
     MatCheckboxModule,
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, FormsModule, MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-contract-list',
@@ -6,10 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contract-list.component.css']
 })
 export class ContractListComponent implements OnInit {
-
-  constructor() { }
-
+  constructor() {
+  }
   ngOnInit() {
   }
-
 }

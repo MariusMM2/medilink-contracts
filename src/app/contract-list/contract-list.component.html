@@ -1,1 +1,11 @@
-<p>contract-list works!</p>
+<div id="search">
+  <mat-form-field>
+    <input matInput placeholder="Search product" value="">
+  </mat-form-field>
+</div>
+<div class="container">
+  <div *ngFor="let i of [1,2,3]">
+    <app-contract></app-contract>
+  </div>
+
+</div>
