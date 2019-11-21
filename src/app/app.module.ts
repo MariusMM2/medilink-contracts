@@ -29,6 +29,7 @@ import { ContractComponent } from './contract/contract.component';
 import { ContractListComponent } from './contract-list/contract-list.component';
 import { ContractCreateComponent } from './contract-create/contract-create.component';
 import { ContractUpdateComponent } from './contract-update/contract-update.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { ContractUpdateComponent } from './contract-update/contract-update.compo
     BrowserAnimationsModule,
     MatInputModule, MatProgressBarModule, MatSelectModule, MatGridListModule, MatMenuModule, MatIconModule, MatToolbarModule,
     MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatCardModule, MatDividerModule, MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
