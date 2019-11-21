@@ -34,6 +34,7 @@ import { ContractDetailComponent } from './contract-detail/contract-detail.compo
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AboutComponent } from './about/about.component';
     ContractDetailComponent,
     DashboardComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    RegisterComponent
   ],
   imports: [
     AppRoutingModule,

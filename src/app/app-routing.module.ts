@@ -7,24 +7,30 @@ import {LoginComponent} from './login/login.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HomeComponent} from './home/home.component';
 import {ContractListComponent} from './contract-list/contract-list.component';
+import {AboutComponent} from './about/about.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home/login', pathMatch: 'full'},
 
-  { path: 'home', component: HomeComponent, children: [
+  {
+    path: 'home', component: HomeComponent, children: [
+      {path: 'about', component: AboutComponent},
       // { path: 'register', component: RegisterComponent },
-      { path: 'login', component: LoginComponent },
-    ]},
+      {path: 'login', component: LoginComponent},
+    ]
+  },
 
-  { path: 'dashboard', component: DashboardComponent, children: [
-      { path: 'contract-list', component: ContractListComponent},
+  {
+    path: 'dashboard', component: DashboardComponent, children: [
+      {path: 'contract-list', component: ContractListComponent},
       // { path: 'contract-detail/:id', component:ContractDetailComponent, canActivate: [AuthGuard] },
       // { path: 'contract-update/:id', component:ContractUpdateComponent, canActivate: [AdminGuard] },
       // { path: 'contract-create', component: ContractCreateComponent, canActivate: [AdminGuard] },
-      { path: 'contract-create', component: ContractCreateComponent},
-    ]},
+      {path: 'contract-create', component: ContractCreateComponent},
+    ]
+  },
 
-  { path: '**', component: PageNotFoundComponent },
+  {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({
