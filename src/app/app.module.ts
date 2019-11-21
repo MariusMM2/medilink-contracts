@@ -24,6 +24,7 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import {MatSelectModule} from '@angular/material/select';
     BrowserAnimationsModule,
     MatInputModule, MatProgressBarModule, MatSelectModule, MatGridListModule, MatMenuModule, MatIconModule, MatToolbarModule,
     MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatCardModule, MatDividerModule, MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

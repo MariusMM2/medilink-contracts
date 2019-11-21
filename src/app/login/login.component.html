@@ -1,1 +1,54 @@
-<p>login works!</p>
+<mat-grid-list cols="4" rowHeight="500px">
+  <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+  <mat-grid-tile [colspan]="2" [rowspan]="1">
+    <mat-card>
+
+      <mat-card-header>
+        <mat-card-title id="login">Login</mat-card-title>
+        <mat-card-subtitle>Write your credentials!</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div>
+            <mat-form-field>
+              <input matInput type="email" formControlName="email" placeholder="Email" id="email">
+            </mat-form-field>
+
+            <div *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched">
+              You must fill out the email!
+            </div>
+
+            <div *ngIf="loginForm.controls.email.errors?.email && loginForm.controls.email.touched">
+              You must write a correct email!
+            </div>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <input matInput type="password" formControlName="password" placeholder="Password" id="password">
+            </mat-form-field>
+
+            <div *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
+              You must fill out the password!
+            </div>
+
+            <div *ngIf="loginForm.controls.password.errors?.minlength && loginForm.controls.password.touched">
+              The password must be at least 6 characters length!
+            </div>
+          </div>
+
+          <button type="submit" mat-raised-button color="primary" id="loginButton">Login</button>
+          <br><br>
+          <mat-card-actions>
+            <mat-divider></mat-divider>
+            <br><br>
+            <mat-card-subtitle>I want to register instead</mat-card-subtitle>
+            <button type="button" mat-raised-button color="accent" routerLink="../register">Register</button>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+</mat-grid-list>
