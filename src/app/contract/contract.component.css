@@ -1,0 +1,9 @@
+mat-card.contract {
+  /*display: inline-block;*/
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 40px;
+  margin-right: 40px;
+  width: 250px;
+}
