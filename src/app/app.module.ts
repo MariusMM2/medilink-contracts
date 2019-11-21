@@ -30,6 +30,9 @@ import { ContractListComponent } from './contract-list/contract-list.component';
 import { ContractCreateComponent } from './contract-create/contract-create.component';
 import { ContractUpdateComponent } from './contract-update/contract-update.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ContractDetailComponent } from './contract-detail/contract-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import {ReactiveFormsModule} from '@angular/forms';
     ContractListComponent,
     ContractCreateComponent,
     ContractUpdateComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ContractDetailComponent,
+    DashboardComponent,
+    HomeComponent
   ],
   imports: [
     AppRoutingModule,
