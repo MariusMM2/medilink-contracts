@@ -6,8 +6,9 @@ import {ContractCreateComponent} from './contract-create/contract-create.compone
 
 const routes: Routes = [
   // {path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'contract-create', component: ContractCreateComponent },
-  { path: '**', component: PageNotFoundComponent },
+
+  {path: 'test', component: ContractCreateComponent},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
