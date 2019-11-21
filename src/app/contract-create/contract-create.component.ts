@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-contract-create',
@@ -8,10 +10,18 @@ import {FormGroup} from '@angular/forms';
 })
 export class ContractCreateComponent implements OnInit {
   contract: FormGroup;
-
-  constructor() { }
+  constructor(private snackBar: MatSnackBar, private fb: FormBuilder,
+              private router: Router) {
+              // , private productActions: ProductActions, private productService: ProductService) {
+  }
 
   ngOnInit() {
+    this.contract = this.fb.group({
+      _id: [''],
+      name: [''],
+      description: [''],
+      price: []
+    });
   }
 
   saveContract() {
