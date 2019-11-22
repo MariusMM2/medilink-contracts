@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -25,7 +26,6 @@ import {
 } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
-import {RegisterComponent} from './register/register.component';
 
 @NgModule({
   declarations: [
