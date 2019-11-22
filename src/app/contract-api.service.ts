@@ -15,7 +15,7 @@ export class ContractApiService {
 
   constructor(private http: HttpClient) { }
 
-  getAllContracts1(){
+  getAllContracts1() {
     return this.http.get(this.baseUrl);
     // return
     // return this.http.get<Contract[]>(this.baseUrl);
