@@ -34,7 +34,14 @@
             </div>
 
             <div *ngIf="loginForm.controls.password.errors?.minlength && loginForm.controls.password.touched">
-              The password must be at least 6 characters length!
+              Password must be at least 8 characters length!
+            </div>
+
+            <div *ngIf="loginForm.controls.password.errors?.maxlength && loginForm.controls.password.touched">
+              The password must contain maximum 12 characters!
+            </div>
+            <div *ngIf="loginForm.controls.password.errors?.pattern && loginForm.controls.password.touched">
+              The password must contain at least one uppercase letter, one lowercase letter, one number and a special character!
             </div>
           </div>
 
