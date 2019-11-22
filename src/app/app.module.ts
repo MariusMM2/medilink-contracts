@@ -34,6 +34,7 @@ import { ContractDetailComponent } from './contract-detail/contract-detail.compo
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [

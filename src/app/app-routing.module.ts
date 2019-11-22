@@ -22,12 +22,12 @@ const routes: Routes = [
 
   {
     path: 'dashboard', component: DashboardComponent, children: [
-      {path: 'contract-list', component: ContractListComponent},
-      // { path: 'contract-detail/:id', component:ContractDetailComponent, canActivate: [AuthGuard] },
-      // { path: 'contract-update/:id', component:ContractUpdateComponent, canActivate: [AdminGuard] },
-      // { path: 'contract-create', component: ContractCreateComponent, canActivate: [AdminGuard] },
-      {path: 'contract-create', component: ContractCreateComponent},
-      {path: 'contract-update', component: ContractUpdateComponent},
+      {path: 'contract.ts-list', component: ContractListComponent},
+      // { path: 'contract.ts-detail/:id', component:ContractDetailComponent, canActivate: [AuthGuard] },
+      // { path: 'contract.ts-update/:id', component:ContractUpdateComponent, canActivate: [AdminGuard] },
+      // { path: 'contract.ts-create', component: ContractCreateComponent, canActivate: [AdminGuard] },
+      {path: 'contract.ts-create', component: ContractCreateComponent},
+      {path: 'contract.ts-update', component: ContractUpdateComponent},
     ]
   },
 
