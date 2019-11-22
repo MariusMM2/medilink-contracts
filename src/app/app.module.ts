@@ -35,6 +35,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatCardModule, MatDividerModule, MatExpansionModule,
     MatCheckboxModule,
     BrowserModule,
-    ReactiveFormsModule, FormsModule, MatProgressSpinnerModule
+    ReactiveFormsModule, FormsModule, MatProgressSpinnerModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
