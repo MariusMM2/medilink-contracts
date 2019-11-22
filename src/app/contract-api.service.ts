@@ -9,13 +9,21 @@ import { Contract } from './entities/contract';
 })
 export class ContractApiService {
 
-  private baseUrl = 'https://developer.microsoft.com/en-us/graph/graph-explorer/preview';
+  // private baseUrl = 'https://developer.microsoft.com/en-us/graph/graph-explorer/preview';
+  private baseUrl = 'https://graph.microsoft.com/v1.0/me/drive/root/children';
   // private baseUrl: string = 'http://angular2api2.azurewebsites.net/api/internships';
 
   constructor(private http: HttpClient) { }
 
+  getAllContracts1(){
+    return this.http.get(this.baseUrl);
+    // return
+    // return this.http.get<Contract[]>(this.baseUrl);
+  }
+
   getAllContracts(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl);
+    // return
     // return this.http.get<Contract[]>(this.baseUrl);
   }
 

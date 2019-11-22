@@ -15,6 +15,8 @@ export class ContractListComponent implements OnInit {
 
   showContractsFromApi() {
     console.log('showContractsFromApi');
+    // return this.contractApi.getAllContracts1();
+    console.log(this.contractApi.getAllContracts1());
     this.contractApi.getAllContracts().subscribe(ContractFromWs => {
       console.log(ContractFromWs);
       console.log('3');
