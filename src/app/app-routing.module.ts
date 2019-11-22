@@ -2,9 +2,12 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {RegisterComponent} from './register/register.component';
 
 const routes: Routes = [
-  // {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', redirectTo: 'register', pathMatch: 'full'},
+
+  {path: 'register', component: RegisterComponent},
 
   {path: '**', component: PageNotFoundComponent}
 ];
