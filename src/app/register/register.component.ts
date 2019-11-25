@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {UserApiService} from '../user-api.service';
+import {User} from '../models/user';
 
 // custom validator to check that two fields match
 export function MustMatch(controlName: string, matchingControlName: string) {
@@ -34,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
   // form builder is used to create instances of the form group
   // router is used for navigation after the form is successfully submitted
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private userApi: UserApiService) { }
 
   ngOnInit() {
     // register form validators
@@ -53,14 +55,22 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     console.log(this.registerForm);
+    const user = this.registerForm.value as User;
+    console.log('user: ', user);
     if (this.registerForm.valid) {
-      this.router.navigate([''])
-        .then(() => {
-          console.log('Successfully registered in!');
-        })
-        .catch(e => {
-          console.log('An error occurred: ', e);
-        });
+      this.userApi.createUser(user).subscribe(backendRes => { // arrow function
+        console.log('backendRes:', backendRes);
+        // this.quizActions.createQuiz(quizFromWS);
+        this.router.navigate([''])
+          .then(() => {
+            console.log('Successfully registered in!');
+          })
+          .catch(e => {
+            console.log('An error occurred: ', e);
+          });
+      }, error => {
+        console.log('something bad happened', error);
+      });
     } else {
       console.log('Invalid form!');
     }

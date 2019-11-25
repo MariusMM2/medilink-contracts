@@ -26,6 +26,8 @@ import {
 } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     BrowserAnimationsModule,
     MatInputModule, MatProgressBarModule, MatSelectModule, MatGridListModule, MatMenuModule, MatIconModule, MatToolbarModule,
     MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatCardModule, MatDividerModule, MatExpansionModule,
-    MatCheckboxModule, ReactiveFormsModule
+    MatCheckboxModule, ReactiveFormsModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
