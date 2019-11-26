@@ -1,6 +1,8 @@
+<p class="page-title">Update Contract</p>
+
 <mat-card class="example-card">
   <form *ngIf="contract | async as contract" [formGroup]="contractForm" (ngSubmit)="updateContract()">
-    <mat-card-title id="update">Update Contract</mat-card-title>
+    <mat-card-title id="update">Contract</mat-card-title>
     <div>
       <input type="hidden" formControlName="_id" [ngModel]="contract._id">
       <mat-form-field>
