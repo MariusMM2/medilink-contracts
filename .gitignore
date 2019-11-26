@@ -45,5 +45,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/server/node_modules
-/server/config
+server/config
+server/node_modules
