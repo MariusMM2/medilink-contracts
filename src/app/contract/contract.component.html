@@ -1,11 +1,25 @@
-<mat-card class="contract">
-  <mat-card-title color="primary">Quiz title: Title1</mat-card-title>
 
-  <p><span>Name: </span><span>Name 1</span></p>
-  <p><span>Description: </span><span>Description 1</span></p>
-  <p><span>Start Date: </span><span>Date 1</span></p>
-  <p><span>Expiration Date: </span><span>Date 1</span></p>
-  <p><span>Type: </span><span>Type 1</span></p>
-  <p><span>File: </span><span>File 1</span></p>
-  <button id="updateButton" mat-raised-button color="primary">Update Contract</button>
+<mat-card class="example-card ">
+<!--<mat-card class="example-card contract">-->
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title class="name">{{contractInput.name}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="https://perfume10.worldsecuresystems.com/images/products/placeholder-product-image-large.png" alt="Photo">
+  <mat-card-content>
+    <p class="description">Description: {{contractInput.description}}</p>
+    <p class="description">Start Date: {{contractInput.startDate}}</p>
+    <p class="description">Expiration Date: {{contractInput.expirationDate}}</p>
+    <p class="description">Type: {{contractInput.type}}</p>
+    <p class="description">File: {{contractInput.file}}</p>
+  </mat-card-content>
+  <mat-card-actions class="buttons" >
+    <div class="example-button-row">
+      <button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/contract-detail/{{contractInput._id}}">Show Contract</button>
+<!--      <button class="addProduct" mat-raised-button color="primary" (click)="addToCart()">Add to Cart</button>-->
+<!--      <button *ngIf="isAdmin$ | async" class="updateProduct" mat-raised-button color="primary" routerLink="/portal/product-update/{{productInput._id}}">Update Product</button>-->
+<!--      <button *ngIf="isAdmin$ | async" class="deleteProduct" mat-raised-button color="primary" (click)="deleteProduct()">Delete Product</button>-->
+    </div>
+  </mat-card-actions>
 </mat-card>
+

@@ -1,11 +1,11 @@
 export class Contract {
-  id: string;
-  name1: string;
+  _id: string;
+  name: string;
   description: string;
-  start: string;
+  startDate: string;
   expirationDate: string;
   type: string;
-  file1: string;
+  file: string;
   // user: User;
 }
 
