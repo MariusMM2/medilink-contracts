@@ -1,0 +1,10 @@
+.example-card {
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.example-header-image {
+  background-image: url('http://www.stonyelectrical.com/wp-content/uploads/2018/04/Product_Icon.png');
+  background-size: cover;
+}
