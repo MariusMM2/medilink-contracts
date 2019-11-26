@@ -12,9 +12,9 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Running Node.JS backend server
 
-Select the server folder by running `cd server` from the project's folder.
-Run `npm install` to install all the necessary dependencies.
-Run `npm run dev` to run the server
+Select the server folder by running `cd server` from the project's folder. <br>
+Run `npm install` to install all the necessary dependencies. <br>
+Run `npm run dev` to run the server.
 
 ## Build
 
