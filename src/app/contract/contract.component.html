@@ -1,6 +1,4 @@
-
 <mat-card class="example-card ">
-<!--<mat-card class="example-card contract">-->
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title class="name">{{contractInput.name}}</mat-card-title>
@@ -10,17 +8,11 @@
     <p class="description">Description: {{contractInput.description}}</p>
     <p class="description">Start Date: {{contractInput.startDate}}</p>
     <p class="description">Expiration Date: {{contractInput.expirationDate}}</p>
-<!--    <p class="description">Type: {{contractInput.type}}</p>-->
-<!--    <p class="description">File: {{contractInput.file}}</p>-->
   </mat-card-content>
 
   <mat-card-actions class="buttons" >
     <div class="example-button-row">
-      <button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/contract-detail/{{contractInput._id}}">Show Contract</button>
-<!--      <button class="addProduct" mat-raised-button color="primary" (click)="addToCart()">Add to Cart</button>-->
-<!--      <button *ngIf="isAdmin$ | async" class="updateProduct" mat-raised-button color="primary" routerLink="/portal/product-update/{{productInput._id}}">Update Product</button>-->
-<!--      <button *ngIf="isAdmin$ | async" class="deleteProduct" mat-raised-button color="primary" (click)="deleteProduct()">Delete Product</button>-->
+      <button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/contract-detail/{{contractInput._id}}">Show Details</button>
     </div>
   </mat-card-actions>
 </mat-card>
-

@@ -26,7 +26,5 @@ export class ContractListComponent implements OnInit {
         subscriber.next(false);
       }, 2000);
     });
-    // create an observable for the isAdmin field
-    // this.isAdmin$ = this.ngRedux.select(state => state.products.isAdmin);
   }
 }
