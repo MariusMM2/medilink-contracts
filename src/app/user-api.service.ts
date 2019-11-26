@@ -15,4 +15,8 @@ export class UserApiService {
     return this.http.post<User>(this.baseUrl + 'register', user);
   }
 
+  loginUser(user: User): Observable<any> {
+    return this.http.post<User>(this.baseUrl + 'login', user);
+  }
+
 }

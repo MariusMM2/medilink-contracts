@@ -59,8 +59,8 @@ export class RegisterComponent implements OnInit {
     console.log('user: ', user);
     if (this.registerForm.valid) {
       this.userApi.createUser(user).subscribe(backendRes => { // arrow function
-        console.log('backendRes:', backendRes);
-        // this.quizActions.createQuiz(quizFromWS);
+        console.log('backend response:', backendRes);
+
         this.router.navigate([''])
           .then(() => {
             console.log('Successfully registered in!');
@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
             console.log('An error occurred: ', e);
           });
       }, error => {
-        console.log('something bad happened', error);
+        console.log('Error: ', error);
       });
     } else {
       console.log('Invalid form!');
