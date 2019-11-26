@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ContractApiService} from '../services/contract-api.service';
+import {ContractService} from '../services/contract.service';
+import {Contract} from '../entities/contract';
 
 @Component({
   selector: 'app-contract-list',
@@ -8,24 +9,24 @@ import {ContractApiService} from '../services/contract-api.service';
   styleUrls: ['./contract-list.component.css']
 })
 export class ContractListComponent implements OnInit {
-  constructor( private contractApi: ContractApiService) {
+  contracts$: Observable<Contract[]>;
+  isLoading$: Observable<boolean>;
+  // userSearch: string;
+  // isAdmin$: Observable<boolean>;
+
+  constructor( private contractService: ContractService) {
   }
   ngOnInit() {
-  }
+    this.isLoading$ = new Observable(subscriber => {
+      subscriber.next(true);
 
-  showContractsFromApi() {
-    console.log('showContractsFromApi');
-    // return this.contractApi.getAllContracts1();
-    console.log(this.contractApi.getAllContracts1());
-    this.contractApi.getAllContracts().subscribe(ContractFromWs => {
-      console.log(ContractFromWs);
-      console.log('3');
-      // this.quizActions.createQuiz(ContractFromWs);
-      // this.router.navigate(['/portal/display-quizzes']);
-    }, error => {
-      // Write some code for if the ws breaks.
-      console.log('something bad happened', error);
-      // this.quizActions.createQuizFailed(error);
+      this.contracts$ = this.contractService.getContracts();
+
+      setTimeout(() => {
+        subscriber.next(false);
+      }, 2000);
     });
+    // create an observable for the isAdmin field
+    // this.isAdmin$ = this.ngRedux.select(state => state.products.isAdmin);
   }
 }
