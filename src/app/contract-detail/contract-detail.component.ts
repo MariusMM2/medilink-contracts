@@ -45,10 +45,9 @@ export class ContractDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.contractService.deleteContract(id)
       .then(() => {
-        this.snackBar.open(`Contract ${id} has been deleted`, 'Dismiss', {duration: 2000});
-        // this.snackBar.open(`Contract ${this.contractInput.name} has been deleted`, 'Dismiss', {duration: 2000});
-        this.router.navigate(['../dashboard/contract-list']);
+        this.snackBar.open(`Contract ${id} has been deleted`, 'Dismiss', {duration: 2000}).afterDismissed().subscribe(() => {
+          this.router.navigate(['../dashboard/contract-list']);
+        });
       });
   }
-
 }
