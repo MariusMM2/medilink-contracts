@@ -5,6 +5,7 @@
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title class="name">{{contractInput.name}}</mat-card-title>
   </mat-card-header>
+
   <mat-card-content>
     <p class="description">Description: {{contractInput.description}}</p>
     <p class="description">Start Date: {{contractInput.startDate}}</p>
@@ -12,6 +13,7 @@
 <!--    <p class="description">Type: {{contractInput.type}}</p>-->
 <!--    <p class="description">File: {{contractInput.file}}</p>-->
   </mat-card-content>
+
   <mat-card-actions class="buttons" >
     <div class="example-button-row">
       <button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/contract-detail/{{contractInput._id}}">Show Contract</button>

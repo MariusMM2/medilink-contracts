@@ -8,3 +8,15 @@
   background-image: url('http://www.stonyelectrical.com/wp-content/uploads/2018/04/Product_Icon.png');
   background-size: cover;
 }
+
+mat-card-header,
+mat-card-content,
+mat-card-actions {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+mat-card-actions {
+  text-align: center;
+  height: 50px;
+}
