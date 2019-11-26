@@ -15,6 +15,9 @@ export class ContractCreateComponent implements OnInit {
               // , private productActions: ProductActions, private productService: ProductService) {
   }
 
+
+  //  TODO: implement Firebase API
+  
   ngOnInit() {
     this.contract = this.fb.group({
       _id: [''],

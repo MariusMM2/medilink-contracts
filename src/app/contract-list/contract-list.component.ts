@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ContractApiService} from '../contract-api.service';
+import {ContractApiService} from '../services/contract-api.service';
 
 @Component({
   selector: 'app-contract-list',
