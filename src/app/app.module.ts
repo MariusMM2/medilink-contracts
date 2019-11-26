@@ -36,6 +36,11 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment.prod';
+// import {environment} from '../environments/environment';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {ContractService} from './services/contract.service';
 
 @NgModule({
   declarations: [
@@ -60,9 +65,11 @@ import { HttpClient } from '@angular/common/http';
     MatCheckboxModule,
     BrowserModule,
     ReactiveFormsModule, FormsModule, MatProgressSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
   ],
-  providers: [],
+  providers: [ContractService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

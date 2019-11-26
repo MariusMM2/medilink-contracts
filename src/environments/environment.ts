@@ -2,8 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
+export const firebaseConfig = {
+  apiKey: 'AIzaSyB9EVbofUJEM_DYyRg7wMd4NCBq-XjCqlM',
+  authDomain: 'medilink-contracts.firebaseapp.com',
+  databaseURL: 'https://medilink-contracts.firebaseio.com',
+  projectId: 'medilink-contracts',
+  storageBucket: 'medilink-contracts.appspot.com',
+  messagingSenderId: '817454403732',
+  appId: '1:817454403732:web:756e60599edb7922886481'
 };
 
 /*
