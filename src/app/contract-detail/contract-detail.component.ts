@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 import {ContractService} from '../services/contract.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Contract} from '../entities/contract';
 
@@ -16,7 +16,8 @@ export class ContractDetailComponent implements OnInit {
   isLoading$: Observable<boolean>;
   // isAdmin$: Observable<boolean>;
 
-  constructor(private snackBar: MatSnackBar, private contractService: ContractService, private route: ActivatedRoute) {
+  constructor(private snackBar: MatSnackBar, private contractService: ContractService,
+              private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -37,6 +38,17 @@ export class ContractDetailComponent implements OnInit {
     console.log('found matching contract:');
     console.log(contract);
     this.contract$ = contract;
+  }
+
+  deleteContract() {
+    // Get the id from the url
+    const id = this.route.snapshot.paramMap.get('id');
+    this.contractService.deleteContract(id)
+      .then(() => {
+        this.snackBar.open(`Contract ${id} has been deleted`, 'Dismiss', {duration: 2000});
+        // this.snackBar.open(`Contract ${this.contractInput.name} has been deleted`, 'Dismiss', {duration: 2000});
+        this.router.navigate(['../dashboard/contract-list']);
+      });
   }
 
 }

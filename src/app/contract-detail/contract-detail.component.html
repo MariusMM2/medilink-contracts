@@ -4,10 +4,11 @@
   <ng-container *ngIf="contract$ | async as contract">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{contract.name}}</mat-card-title>
+      <mat-card-title>Contract Detail</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
+      <p class="description">Name: {{contract.name}}</p>
       <p class="description">Description: {{contract.description}}</p>
       <p class="description">Start Date: {{contract.startDate}}</p>
       <p class="description">Expiration Date: {{contract.expirationDate}}</p>
@@ -20,8 +21,9 @@
               routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract
       </button>
       <button class="deleteContract" mat-raised-button color="warn"
-              routerLink="/dashboard/contract-delete/{{contract._id}}">Delete Contract
+              (click)="deleteContract()">Delete Contract
       </button>
+
 <!--      <button *ngIf="isAdmin$ | async" class="updateContract" mat-raised-button color="primary"-->
 <!--              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract-->
 <!--      </button>-->
