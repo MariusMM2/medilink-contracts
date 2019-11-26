@@ -22,9 +22,6 @@ export class ContractService {
 
   getContracts(): Observable<Contract[]> {
     console.log('getContracts()');
-    console.log(this.db
-      .collection(config.contracts_endpoint)
-      .valueChanges() as Observable<Contract[]>);
     return this.db
       .collection(config.contracts_endpoint)
       .valueChanges() as Observable<Contract[]>;

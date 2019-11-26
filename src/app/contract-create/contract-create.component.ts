@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import {Contract} from '../entities/contract';
+import {ContractService} from '../services/contract.service';
 
 @Component({
   selector: 'app-contract-create',
@@ -11,13 +13,9 @@ import {MatSnackBar} from '@angular/material';
 export class ContractCreateComponent implements OnInit {
   contract: FormGroup;
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder,
-              private router: Router) {
-              // , private productActions: ProductActions, private productService: ProductService) {
+              private router: Router, private contractService: ContractService) {
   }
 
-
-  //  TODO: implement Firebase API
-  
   ngOnInit() {
     this.contract = this.fb.group({
       _id: [''],
@@ -25,22 +23,21 @@ export class ContractCreateComponent implements OnInit {
       description: [''],
       startDate: [''],
       expirationDate: [''],
-      contractType: [''],
-      contractFile: [''],
+      type: [''],
+      file: [''],
     });
   }
 
   saveContract() {
-    console.log('TODO: Contract saved!');
-    // let product = this.product.value as Product;
-    //
-    // this.productService.addProduct(product)
-    //   .then(() => {
-    //     console.log("product added!");
-    //     this.product.reset();
-    //     this.snackBar.open('Product added', "", {duration: 500}).afterDismissed().subscribe(() => {
-    //       this.router.navigate(['../portal/product-list']);
-    //     });
-    //   });
+    const contract = this.contract.value as Contract;
+
+    this.contractService.addContract(contract)
+      .then(() => {
+        console.log('contract added!');
+        this.contract.reset();
+        this.snackBar.open('contract added', '', {duration: 500}).afterDismissed().subscribe(() => {
+          this.router.navigate(['../dashboard/contract-list']);
+        });
+      });
   }
 }
