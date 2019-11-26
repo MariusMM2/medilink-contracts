@@ -1,6 +1,26 @@
-.container {
-  display: flex;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  width: 1000px;
+.page-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: 50px;
+}
+
+#search {
+  text-align: center;
+  width: 300px;
+  height: 50px;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ng-star-inserted {
+  display: inline-block;
+}
+
+.createProduct {
+  width: 180px;
+  display: block;
 }

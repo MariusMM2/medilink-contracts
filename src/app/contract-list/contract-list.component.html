@@ -1,3 +1,5 @@
+<p class="page-title">Contract List</p>
+
 <div id="search">
   <mat-form-field>
     <input matInput placeholder="Search product" value="">
@@ -18,11 +20,4 @@
   <ng-container *ngIf="!(contracts$ | async) && !(isLoading$ | async)">
     <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts</mat-card-title>
   </ng-container>
-
-<!--  <div *ngFor="let i of [1,2,3]">-->
-<!--    <app-contract></app-contract>-->
-<!--  </div>-->
-
-<!--  <button (click)="showContractsFromApi()">Show Contracts From Api</button>-->
-
 </div>
