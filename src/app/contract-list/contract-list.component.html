@@ -4,10 +4,25 @@
   </mat-form-field>
 </div>
 <div class="container">
-  <div *ngFor="let i of [1,2,3]">
-    <app-contract></app-contract>
+  <div *ngFor="let contract of contracts$ | async ">
+<!--  <div *ngFor="let contract of contracts$ | async | contractPipe: userSearch">-->
+    <app-contract class="contract"
+                 [contractInput]="contract"
+    ></app-contract>
   </div>
 
-  <button (click)="showContractsFromApi()">Show Contracts From Api</button>
+  <ng-container *ngIf=" !(contracts$ | async) && (isLoading$ | async)">
+    <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
+  </ng-container>
+
+  <ng-container *ngIf="!(contracts$ | async) && !(isLoading$ | async)">
+    <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts</mat-card-title>
+  </ng-container>
+
+<!--  <div *ngFor="let i of [1,2,3]">-->
+<!--    <app-contract></app-contract>-->
+<!--  </div>-->
+
+<!--  <button (click)="showContractsFromApi()">Show Contracts From Api</button>-->
 
 </div>

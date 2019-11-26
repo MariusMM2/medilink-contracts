@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Contract} from '../entities/contract';
 
 @Component({
   selector: 'app-contract',
@@ -7,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContractComponent implements OnInit {
 
+  @Input() productInput: Contract;
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
   }
