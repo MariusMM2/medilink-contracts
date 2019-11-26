@@ -10,6 +10,12 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
+## Running Node.JS backend server
+
+Select the server folder by running `cd server` from the project's folder.
+Run `npm install` to install all the necessary dependencies.
+Run `npm run dev` to run the server
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
