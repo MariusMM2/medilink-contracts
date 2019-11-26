@@ -14,7 +14,7 @@ export class ContractService {
 
   addContract(contract: Contract): Promise<void> {
     const id = this.db.createId();
-    let contractDoc = this.getContractDoc(id);
+    const contractDoc = this.getContractDoc(id);
     contract._id = id;
     console.log(contract);
     return contractDoc.set(contract);
@@ -29,14 +29,14 @@ export class ContractService {
 
   getContract(id: string): Observable<Contract> {
     console.log('Retrieving contract with id ' + id);
-    let contractDoc = this.getContractDoc(id);
+    const contractDoc = this.getContractDoc(id);
     return contractDoc.valueChanges();
   }
 
   updateContract(contract: Contract): Promise<void> {
     console.log('updating contract');
     console.log(contract);
-    let contractDoc = this.getContractDoc(contract._id);
+    const contractDoc = this.getContractDoc(contract._id);
     return contractDoc.update(contract);
   }
 
