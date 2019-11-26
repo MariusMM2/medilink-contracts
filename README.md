@@ -14,7 +14,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Select the server folder by running `cd server` from the project's folder. <br>
 Run `npm install` to install all the necessary dependencies. <br>
-Create a config folder and inside it a config.js file to create all the hidden variables (like the database information)
+Create a config folder and inside it a config.js file to create all the hidden variables (like the database information). <br>
 Run `npm run dev` to run the server.
 
 ## Build
