@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../user.service';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {Observable} from 'rxjs';
 import {User} from 'firebase';
 
@@ -17,10 +16,8 @@ export class LoginComponent implements OnInit {
   idToken$: Observable<string>;
   authState$: Observable<User>;
 
-  constructor(private fireAuth: AngularFireAuth, private formBuilder: FormBuilder, private router: Router, private users: UserService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private users: UserService) {
     this.error = '';
-    this.idToken$ = this.fireAuth.idToken;
-    this.authState$ = this.fireAuth.authState;
   }
 
   ngOnInit() {
@@ -34,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.loginForm.value);
-    if (this.fireAuth.auth.currentUser) {
+    if (this.users.isLoggedIn()) {
       this.users.signOut().then(() => {
         this.onSubmit();
       });
