@@ -53,6 +53,10 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  clearErrorMessage() {
+    document.getElementById('emailErrMsg').innerHTML = '';
+  }
+
   onSubmit() {
     console.log(this.registerForm);
     const user = this.registerForm.value as User;
@@ -61,13 +65,19 @@ export class RegisterComponent implements OnInit {
       this.userApi.createUser(user).subscribe(backendRes => { // arrow function
         console.log('backend response:', backendRes);
 
-        this.router.navigate([''])
-          .then(() => {
-            console.log('Successfully registered in!');
-          })
-          .catch(e => {
-            console.log('An error occurred: ', e);
-          });
+        if (backendRes.status === 200) {
+          this.router.navigate([''])
+            .then(() => {
+              console.log('Successfully logged in!');
+            })
+            .catch(e => {
+              console.log('An error occurred: ', e);
+            });
+        } else if (backendRes.status === 400) {
+
+          document.getElementById('emailErrMsg').innerHTML = backendRes.message + '<br><br>';
+
+        }
       }, error => {
         console.log('Error: ', error);
       });

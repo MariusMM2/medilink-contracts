@@ -43,7 +43,7 @@ function register(req, res) {
     } else {
       res.json({
         status: 400,
-        message: "Registration failed! A user with this email already exists!"
+        message: "A user with this email already exists!"
       });
     }
   }).catch((err) => {

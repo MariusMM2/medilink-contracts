@@ -28,6 +28,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  clearErrorMessage() {
+    document.getElementById('emailErrMsg').innerHTML = '';
+    document.getElementById('passwordErrMsg').innerHTML = '';
+  }
+
   onSubmit() {
     console.log(this.loginForm);
     const user = this.loginForm.value as User;
@@ -36,13 +41,24 @@ export class LoginComponent implements OnInit {
       this.userApi.loginUser(user).subscribe(backendRes => { // arrow function
         console.log('backend response:', backendRes);
 
-        this.router.navigate([''])
-          .then(() => {
-            console.log('Successfully logged in!');
-          })
-          .catch(e => {
-            console.log('An error occurred: ', e);
-          });
+        if (backendRes.status === 200) {
+          this.router.navigate([''])
+            .then(() => {
+              console.log('Successfully logged in!');
+            })
+            .catch(e => {
+              console.log('An error occurred: ', e);
+            });
+        } else if (backendRes.status === 401) {
+
+          document.getElementById('emailErrMsg').innerHTML = backendRes.message + '<br><br>';
+
+        } else if (backendRes.status === 400) {
+
+          document.getElementById('passwordErrMsg').innerHTML = backendRes.message + '<br><br>';
+
+        }
+
       }, error => {
         console.log('Error: ', error);
       });
