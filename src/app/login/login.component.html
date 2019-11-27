@@ -10,9 +10,11 @@
       <mat-card-content>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
           <div>
+
             <mat-form-field>
-              <input matInput type="email" formControlName="email" placeholder="Email" id="email">
+              <input matInput type="email" formControlName="email" placeholder="Email" id="email" (click)="clearErrorMessage()">
             </mat-form-field>
 
             <div *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched">
@@ -22,11 +24,15 @@
             <div *ngIf="loginForm.controls.email.errors?.email && loginForm.controls.email.touched">
               You must write a correct email!
             </div>
+
+            <div id="emailErrMsg"></div>
+
           </div>
 
           <div>
+
             <mat-form-field>
-              <input matInput type="password" formControlName="password" placeholder="Password" id="password">
+              <input matInput type="password" formControlName="password" placeholder="Password" id="password" (click)="clearErrorMessage()">
             </mat-form-field>
 
             <div *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
@@ -40,20 +46,31 @@
             <div *ngIf="loginForm.controls.password.errors?.maxlength && loginForm.controls.password.touched">
               The password must contain maximum 12 characters!
             </div>
+
             <div *ngIf="loginForm.controls.password.errors?.pattern && loginForm.controls.password.touched">
               The password must contain at least one uppercase letter, one lowercase letter, one number and a special character!
             </div>
+
+            <div id="passwordErrMsg"></div>
+
           </div>
 
           <button type="submit" mat-raised-button color="primary" id="loginButton">Login</button>
+
           <br><br>
+
           <mat-card-actions>
+
             <mat-divider></mat-divider>
             <br><br>
+
             <mat-card-subtitle>I want to register instead</mat-card-subtitle>
             <button type="button" mat-raised-button color="accent" routerLink="../register">Register</button>
+
           </mat-card-actions>
+
         </form>
+
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
