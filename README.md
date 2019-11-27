@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Running Node.JS backend server
+
+Select the server folder by running `cd server` from the project's folder. <br>
+Run `npm install` to install all the necessary dependencies. <br>
+Create a config folder and inside it a config.js file to create all the hidden variables (like the database information). <br>
+Run `npm run dev` to run the server.
