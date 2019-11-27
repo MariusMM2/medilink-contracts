@@ -1,1 +1,31 @@
-<p>login works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <input type="email" formControlName="email" placeholder="Email" id="email">
+
+  <div>
+    <div *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched">
+      You must fill out the email!
+    </div>
+
+    <div *ngIf="loginForm.controls.email.errors?.email && loginForm.controls.email.touched">
+      You must write a correct email!
+    </div>
+  </div>
+
+  <div>
+    <input type="password" formControlName="password" placeholder="Password" id="password">
+
+    <div *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
+      You must fill out the password!
+    </div>
+
+    <div *ngIf="loginForm.controls.password.errors?.minlength && loginForm.controls.password.touched">
+      Password must be at least 6 characters length!
+    </div>
+  </div>
+
+  <div *ngIf="error">
+    <p style="color: red">{{error}}</p>
+  </div>
+
+  <button type="submit" id="loginButton">Login</button>
+</form>

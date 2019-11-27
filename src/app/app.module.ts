@@ -24,12 +24,19 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {environment} from '../environments/environment';
+import {RegisterComponent} from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    RegisterComponent
   ],
   imports: [
     AppRoutingModule,
@@ -37,7 +44,10 @@ import {MatSelectModule} from '@angular/material/select';
     BrowserAnimationsModule,
     MatInputModule, MatProgressBarModule, MatSelectModule, MatGridListModule, MatMenuModule, MatIconModule, MatToolbarModule,
     MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatCardModule, MatDividerModule, MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule, ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [],
   bootstrap: [AppComponent]
