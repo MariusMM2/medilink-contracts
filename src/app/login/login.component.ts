@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         console.log('backend response:', backendRes);
 
         if (backendRes.status === 200) {
-          this.router.navigate([''])
+          this.router.navigate(['../dashboard/contract-list'])
             .then(() => {
               console.log('Successfully logged in!');
             })

@@ -25,8 +25,8 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+// import { AppComponent } from './app.component';
+// import { LoginComponent } from './login/login.component';
 import { ContractComponent } from './contract/contract.component';
 import { ContractListComponent } from './contract-list/contract-list.component';
 import { ContractCreateComponent } from './contract-create/contract-create.component';
@@ -35,7 +35,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ContractDetailComponent } from './contract-detail/contract-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
+// import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import {AngularFireModule} from '@angular/fire';
