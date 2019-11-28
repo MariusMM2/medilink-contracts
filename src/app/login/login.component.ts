@@ -2,19 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../user.service';
-import {ErrorComponent} from '../templates/ErrorComponent';
+import {ErrorUserComponent} from '../error-user/error-user.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent extends ErrorComponent implements OnInit {
+export class LoginComponent extends ErrorUserComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private users: UserService) {
     super();
-    this.error = '';
   }
 
   ngOnInit() {

@@ -29,14 +29,14 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from '../environments/environment';
-import {RegisterComponent} from './register/register.component';
+import {ErrorUserComponent} from './error-user/error-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PageNotFoundComponent,
-    RegisterComponent
+    ErrorUserComponent
   ],
   imports: [
     AppRoutingModule,
