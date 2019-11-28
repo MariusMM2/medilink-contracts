@@ -12,6 +12,7 @@ import {ContractUpdateComponent} from './contract-update/contract-update.compone
 import {ContractDetailComponent} from './contract-detail/contract-detail.component';
 import {AuthGuard} from './auth/auth.guard';
 import {StatisticsComponent} from './statistics/statistics.component';
+import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home/login', pathMatch: 'full'},
@@ -25,11 +26,13 @@ const routes: Routes = [
 
   {
     path: 'dashboard', component: DashboardComponent, children: [
-      {path: 'contract-list', component: ContractListComponent, canActivate: [AuthGuard]},
-      {path: 'contract-create', component: ContractCreateComponent, canActivate: [AuthGuard]},
-      {path: 'contract-detail/:id', component: ContractDetailComponent, canActivate: [AuthGuard]},
-      {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
-      {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard]},
+      {path: 'contract-list', component: ContractListComponent},
+      // {path: 'contract-list', component: ContractListComponent, canActivate: [AuthGuard]},
+      {path: 'contract-create', component: ContractCreateComponent},
+      {path: 'contract-detail/:id', component: ContractDetailComponent},
+      {path: 'contract-update/:id', component: ContractUpdateComponent},
+      {path: 'statistics', component: StatisticsComponent},
+      {path: 'admin-panel', component: AdminPanelComponent},
     ]
   },
 
