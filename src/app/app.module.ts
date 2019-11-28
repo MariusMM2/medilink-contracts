@@ -22,7 +22,8 @@ import {
   MatMenuModule,
   MatProgressBarModule, MatProgressSpinnerModule,
   MatSnackBarModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatSidenavModule,
 } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 // import { AppComponent } from './app.component';
@@ -46,6 +47,7 @@ import {ContractService} from './services/contract.service';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +64,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     StatisticsComponent,
     AdminPanelComponent
   ],
+  exports: [MatSidenavModule],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -74,6 +77,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    MatSidenavModule
   ],
   providers: [ContractService],
   bootstrap: [AppComponent]
