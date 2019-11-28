@@ -35,11 +35,10 @@ export class LoginComponent extends ErrorUserComponent implements OnInit {
     }
 
     this.users.tryLogin(this.loginForm.value.email, this.loginForm.value.password).then(() => {
+
       console.log('onFulfilled');
-      if (!this.error) {
-        this.error = '';
-        this.router.navigate(['PLACEHOLDER']);
-      }
+      this.error = '';
+      this.router.navigate(['PLACEHOLDER']);
     }, this.parseError);
   }
 
