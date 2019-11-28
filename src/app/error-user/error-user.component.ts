@@ -13,8 +13,8 @@ export class ErrorUserComponent {
   }
 
   // On a normal function, for some reason, 'this' gets undefined
-  // when called from a subclass
-  // While on an arrow function, it gets preseved
+  // when called from a subclass by function reference
+  // While on an arrow function, it gets preserved
   protected parseError = (error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -31,4 +31,8 @@ export class ErrorUserComponent {
     console.log('errorCode:' + errorCode);
     console.log('errorMessage:' + errorMessage);
   };
+
+  protected clearError() {
+    this.error = '';
+  }
 }
