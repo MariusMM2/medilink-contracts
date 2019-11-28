@@ -2,12 +2,25 @@
 
 <mat-drawer-container class="example-container" >
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
+    <p>Categories</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+<!--    <button (click)="showFiller = !showFiller" mat-raised-button>-->
+<!--      Toggle extra text-->
+<!--    </button>-->
+
+    <p>Expiration Date</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+<!--    <button (click)="showFiller = !showFiller" mat-raised-button>-->
+<!--      Toggle extra text-->
+<!--    </button>-->
+
+    <p>Location</p>
     <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
     <button (click)="showFiller = !showFiller" mat-raised-button>
       Toggle extra text
     </button>
   </mat-drawer>
+
 
   <div class="example-sidenav-content">
     <button type="button" mat-button (click)="drawer.toggle()">
