@@ -11,6 +11,7 @@ import {RegisterComponent} from './register/register.component';
 import {ContractUpdateComponent} from './contract-update/contract-update.component';
 import {ContractDetailComponent} from './contract-detail/contract-detail.component';
 import {AuthGuard} from './auth/auth.guard';
+import {StatisticsComponent} from './statistics/statistics.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home/login', pathMatch: 'full'},
@@ -28,6 +29,7 @@ const routes: Routes = [
       {path: 'contract-create', component: ContractCreateComponent, canActivate: [AuthGuard]},
       {path: 'contract-detail/:id', component: ContractDetailComponent, canActivate: [AuthGuard]},
       {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
+      {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard]},
     ]
   },
 
