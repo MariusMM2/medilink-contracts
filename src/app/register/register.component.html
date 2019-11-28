@@ -1,0 +1,44 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <input type="email" formControlName="email" placeholder="Email" id="email">
+
+  <div>
+    <div *ngIf="registerForm.controls.email.errors?.required && registerForm.controls.email.touched">
+      You must fill out the email!
+    </div>
+
+    <div *ngIf="registerForm.controls.email.errors?.email && registerForm.controls.email.touched">
+      You must write a correct email!
+    </div>
+  </div>
+
+  <div>
+    <input type="password" formControlName="password" placeholder="Password" id="password">
+
+    <div *ngIf="registerForm.controls.password.errors?.required && registerForm.controls.password.touched">
+      You must fill out the password!
+    </div>
+
+    <div *ngIf="registerForm.controls.password.errors?.minlength && registerForm.controls.password.touched">
+      Password must be at least 6 characters length!
+    </div>
+  </div>
+
+  <div>
+    <input id="confirmPassword" matInput type="password" formControlName="confirmPassword"
+           placeholder="Confirm Password">
+    <div
+      *ngIf="submitted && registerForm.controls.confirmPassword.errors?.required && registerForm.controls.confirmPassword.touched">
+      You must fill out the password!
+    </div>
+    <div
+      *ngIf="submitted && registerForm.controls.confirmPassword.errors?.mustMatch && registerForm.controls.confirmPassword.touched">
+      Passwords must match!
+    </div>
+  </div>
+
+  <div *ngIf="error">
+    <p style="color: red">{{error}}</p>
+  </div>
+
+  <button type="submit" id="loginButton">Register</button>
+</form>
