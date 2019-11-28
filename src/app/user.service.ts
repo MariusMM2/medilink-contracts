@@ -22,7 +22,7 @@ export class UserService {
     return this.fireAuth.auth.signOut();
   }
 
-  tryLogin(email, password): Promise<void | UserCredential> {
+  tryLogin(email, password): Promise<UserCredential> {
     return this.fireAuth.auth.signInWithEmailAndPassword(email, password);
   }
 }
