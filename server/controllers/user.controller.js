@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
 const User = require("../models/user.model");
+const Config = require("../config/config");
 
 function register(req, res) {
   console.log("req.body: ", req.body);
@@ -18,21 +20,13 @@ function register(req, res) {
       req.body.password = hashedPassword;
       console.log(req.body);
 
-
       User.create(req.body).then(user => {
         console.log("created: ", user);
-
-        // const token = jwt.sign(user.dataValues, process.env.JWT_SECRET, {
-        //   expiresIn: 86400 // expires in 24 hours (60 = 1 minute)
-        // });
-        // res.header('Authorization', 'Bearer '+ token);
-        // res.cookie("userData", token, {expire: 43200000 + Date.now()});
 
         res.json({
           status: 200,
           message: 'User successfully created!',
           user
-          // token
         });
 
       }).catch((err) => {
@@ -69,17 +63,20 @@ function login(req, res) {
         console.log("user: ", user);
         console.log("user.dataValues: ", user.dataValues);
 
-        // const token = jwt.sign(user.dataValues, process.env.JWT_SECRET, {
-        //   expiresIn: 86400 // expires in 24 hours (60 = 1 minute)
-        // });
-        // res.header('Authorization', 'Bearer '+ token);
-        // res.cookie("userData", token, {expire: 43200000 + Date.now()});
+        const token = jwt.sign(user.dataValues, Config.JWT_SECRET, {
+          expiresIn: 86400 // expires in 24 hours = 86400 seconds
+        });
+
+        res.cookie("token", token, {
+          expire: Date.now() + 43200000,  // 43200000 milliseconds = 12 hours
+          secure: false, // set to true if your using https
+          httpOnly: true
+        });
 
         res.json({
           status: 200,
           message: `Logged in as: ${user.firstName} ${user.lastName}!`,
-          id: user.id
-          // token
+          user
         });
       } else {
         res.json({

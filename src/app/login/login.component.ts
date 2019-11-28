@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         console.log('backend response:', backendRes);
 
         if (backendRes.status === 200) {
+          console.log(document.cookie);
           this.router.navigate([''])
             .then(() => {
               console.log('Successfully logged in!');
