@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserApiService} from '../user-api.service';
 import {User} from '../models/user';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   // form builder is used to create instances of the form group
   // router is used for navigation after the form is successfully submitted
-  constructor( private formBuilder: FormBuilder, private router: Router, private userApi: UserApiService ) {
+  // tslint:disable-next-line:max-line-length
+  constructor( private formBuilder: FormBuilder, private router: Router, private userApi: UserApiService, private authService: AuthService ) {
   }
 
   ngOnInit() {
@@ -42,8 +44,11 @@ export class LoginComponent implements OnInit {
         console.log('backend response:', backendRes);
 
         if (backendRes.status === 200) {
+          this.authService.isLoggedIn = true;
+
           this.router.navigate(['../dashboard/contract-list'])
             .then(() => {
+
               console.log('Successfully logged in!');
             })
             .catch(e => {
