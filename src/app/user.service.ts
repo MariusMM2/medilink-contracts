@@ -33,4 +33,8 @@ export class UserService {
   sendVerification(): Promise<void | UserCredential> {
     return this.fireAuth.auth.currentUser.sendEmailVerification();
   }
+
+  sendRecoveryEmail(email: string): Promise<void> {
+    return this.fireAuth.auth.sendPasswordResetEmail(email);
+  }
 }

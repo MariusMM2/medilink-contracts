@@ -1,0 +1,24 @@
+<form [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
+  <input type="email" formControlName="recoveryEmail" placeholder="Enter you recovery email" id="recoveryEmail">
+
+  <div>
+    <div *ngIf="recoveryForm.controls.recoveryEmail.errors?.required && recoveryForm.controls.recoveryEmail.touched">
+      You must fill out the email!
+    </div>
+
+    <div *ngIf="recoveryForm.controls.recoveryEmail.errors?.email && recoveryForm.controls.recoveryEmail.touched">
+      You must write a correct email!
+    </div>
+  </div>
+
+  <div *ngIf="error">
+    <p style="color: red">{{error}}</p>
+  </div>
+
+  <div *ngIf="recoveryMessage">
+    <p style="color: green">{{recoveryMessage}}</p>
+  </div>
+
+  <button type="button" id="backToLoginButton" (click)="onBackToLogin()">Back to Login</button>
+  <button type="submit" id="resetPasswordButton">Send password reset email</button>
+</form>

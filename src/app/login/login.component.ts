@@ -42,4 +42,7 @@ export class LoginComponent extends ErrorUserComponent implements OnInit {
     }, this.parseError);
   }
 
+  onForgotPassword() {
+    this.router.navigate(['forgotPassword']);
+  }
 }

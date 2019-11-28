@@ -4,12 +4,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {RecoveryPassComponent} from './recovery-pass/recovery-pass.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
 
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'forgotPassword', component: RecoveryPassComponent},
 
   {path: '**', component: PageNotFoundComponent}
 ];

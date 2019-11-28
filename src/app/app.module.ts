@@ -31,6 +31,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from '../environments/environment';
 import {ErrorUserComponent} from './error-user/error-user.component';
 import {RegisterComponent} from './register/register.component';
+import {RecoveryPassComponent} from './recovery-pass/recovery-pass.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {RegisterComponent} from './register/register.component';
     LoginComponent,
     PageNotFoundComponent,
     RegisterComponent,
-    ErrorUserComponent
+    ErrorUserComponent,
+    RecoveryPassComponent
   ],
   imports: [
     AppRoutingModule,
