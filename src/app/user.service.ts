@@ -27,14 +27,10 @@ export class UserService {
   }
 
   tryRegister(email, password): Promise<void | UserCredential> {
-    return this.fireAuth.auth.createUserWithEmailAndPassword(email, password).then(() => {
-
-    });
+    return this.fireAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   sendVerification(): Promise<void | UserCredential> {
-    return this.fireAuth.auth.currentUser.sendEmailVerification().then(() => {
-      alert('Email Verification Sent!');
-    });
+    return this.fireAuth.auth.currentUser.sendEmailVerification();
   }
 }
