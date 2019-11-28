@@ -44,6 +44,7 @@ import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {ContractService} from './services/contract.service';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
     DashboardComponent,
     HomeComponent,
     RegisterComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    AdminPanelComponent
   ],
   imports: [
     AppRoutingModule,
