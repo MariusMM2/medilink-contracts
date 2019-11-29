@@ -5,7 +5,9 @@ const cookieParser = require('cookie-parser');
 
 require("./db/db_connection");
 const Config = require("./config/config");
+
 const userRouter = require("./routers/user.router");
+const contractRouter = require("./routers/contract.router");
 
 const app = express();
 const port = Config.PORT || 3000;
@@ -24,6 +26,7 @@ app.use(bodyParser.json());
 
 // using the route
 app.use(userRouter);
+app.use(contractRouter);
 
 app.listen(port, () => {
   console.log(`Server is up on port ${port}!`);

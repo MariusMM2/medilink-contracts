@@ -4,29 +4,31 @@
   <form *ngIf="contract | async as contract" [formGroup]="contractForm" (ngSubmit)="updateContract()">
     <mat-card-title id="update">Contract</mat-card-title>
     <div>
-      <input type="hidden" formControlName="_id" [ngModel]="contract._id">
+<!--      <input type="hidden" formControlName="_id" [ngModel]="contract._id">-->
+      <input type="hidden" formControlName="id" [ngModel]="contract.id">
+
       <mat-form-field>
-        <input id="name" matInput formControlName="name" [ngModel]="contract.name">
+        <input type="text" id="name" matInput formControlName="name" [ngModel]="contract.name">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input id="description" matInput formControlName="description" [ngModel]="contract.description">
+        <input type="text" id="description" matInput formControlName="description" [ngModel]="contract.description">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input id="startDate" matInput formControlName="startDate" [ngModel]="contract.startDate">
+        <input type="date" id="startDate" matInput formControlName="startDate" [ngModel]="contract.startDate">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input id="expirationDate" matInput formControlName="expirationDate" [ngModel]="contract.expirationDate">
+        <input type="date" id="expirationDate" matInput formControlName="expirationDate" [ngModel]="contract.expirationDate">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input id="type" matInput formControlName="type" [ngModel]="contract.type">
+        <input type="text" id="type" matInput formControlName="type" [ngModel]="contract.type">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input id="file" matInput formControlName="file" [ngModel]="contract.file">
+        <input type="text" id="file" matInput formControlName="file" [ngModel]="contract.file">
       </mat-form-field>
     </div>
     <button id="updateButton" mat-raised-button color="primary">Update</button>

@@ -24,7 +24,8 @@ export class ContractUpdateComponent implements OnInit {
     const contract = this.contractForm.value as Contract;
 
     this.contractService.updateContract(contract)
-      .then(() => {
+      // .then(() => {
+      .subscribe(() => {
         console.log('contract updated!');
         this.snackBar.open('Contract updated', '', {duration: 500}).afterDismissed().subscribe(() => {
           this.router.navigate(['../dashboard/contract-list']);
@@ -34,7 +35,8 @@ export class ContractUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.contractForm = this.fb.group({
-      _id: [''],
+      // _id: [''],
+      id: [''],
       name: [''],
       description: [''],
       startDate: [''],

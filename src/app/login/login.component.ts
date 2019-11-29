@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {UserApiService} from '../user-api.service';
-import {User} from '../models/user';
+import {UserService} from '../services/user.service';
+import {User} from '../entities/user';
 import {AuthService} from '../auth/auth.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   // form builder is used to create instances of the form group
   // router is used for navigation after the form is successfully submitted
   // tslint:disable-next-line:max-line-length
-  constructor( private formBuilder: FormBuilder, private router: Router, private userApi: UserApiService, private authService: AuthService ) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private userApi: UserService, private authService: AuthService ) {
   }
 
   ngOnInit() {

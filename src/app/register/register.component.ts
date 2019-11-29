@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {UserApiService} from '../user-api.service';
-import {User} from '../models/user';
+import {UserService} from '../services/user.service';
+import {User} from '../entities/user';
 
 // custom validator to check that two fields match
 export function MustMatch(controlName: string, matchingControlName: string) {
@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
   // form builder is used to create instances of the form group
   // router is used for navigation after the form is successfully submitted
-  constructor(private formBuilder: FormBuilder, private router: Router, private userApi: UserApiService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private userApi: UserService) { }
 
   ngOnInit() {
     // register form validators

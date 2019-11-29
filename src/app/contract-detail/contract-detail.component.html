@@ -20,8 +20,10 @@
     <mat-divider></mat-divider>
 
     <mat-card-actions>
+<!--      <button class="updateContract" mat-raised-button color="accent"-->
+<!--              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract-->
       <button class="updateContract" mat-raised-button color="accent"
-              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract
+              routerLink="/dashboard/contract-update/{{contract.id}}">Update Contract
       </button>
       <button class="deleteContract" mat-raised-button color="warn"
               (click)="deleteContract()">Delete Contract

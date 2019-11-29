@@ -29,12 +29,18 @@ export class ContractCreateComponent implements OnInit {
   }
 
   saveContract() {
+    console.log(this.contract);
+
     const contract = this.contract.value as Contract;
+    console.log('contract: ', contract);
 
     this.contractService.addContract(contract)
-      .then(() => {
+      // .then(() => {
+      .subscribe(backendRes => {
+        console.log('backend response:', backendRes);
         console.log('contract added!');
         this.contract.reset();
+
         this.snackBar.open('contract added', '', {duration: 500}).afterDismissed().subscribe(() => {
           this.router.navigate(['../dashboard/contract-list']);
         });

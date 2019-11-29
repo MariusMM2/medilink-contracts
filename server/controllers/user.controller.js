@@ -7,14 +7,14 @@ const Config = require("../config/config");
 function register(req, res) {
   console.log("req.body: ", req.body);
   const email = req.body.email;
-  //
+  // search if a user with that email already exists in the database
   User.findOne({
     where: {
       email
     }
-  }).then(user => {
+  }).then(userDB => {
     // if there is not already a user with that email in the database
-    if(!user) {
+    if(!userDB) {
       // hash the password
       const hashedPassword = bcrypt.hashSync(req.body.password, 8);
       req.body.password = hashedPassword;
@@ -101,4 +101,4 @@ function login(req, res) {
 module.exports = {
   register,
   login
-}
+};
