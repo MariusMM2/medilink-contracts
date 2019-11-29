@@ -15,6 +15,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+
 import {
   MatCheckboxModule,
   MatExpansionModule,
@@ -77,7 +80,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    MatSidenavModule
+    MatSidenavModule, MatTableModule
   ],
   providers: [ContractService],
   bootstrap: [AppComponent]

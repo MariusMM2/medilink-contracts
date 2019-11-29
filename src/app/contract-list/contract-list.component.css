@@ -16,11 +16,17 @@
   margin-right: auto;
 }
 
-.ng-star-inserted {
-  display: inline-block;
-}
+/*.ng-star-inserted {*/
+/*  display: inline-block;*/
+/*}*/
 
 .createProduct {
   width: 180px;
   display: block;
+}
+
+
+/**/
+.mat-sort-header-container {
+  align-items: center;
 }
