@@ -26,7 +26,8 @@
 }
 
 
-/**/
-.mat-sort-header-container {
-  align-items: center;
+table {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
