@@ -2,26 +2,28 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ContractService} from '../services/contract.service';
 import {Contract} from '../entities/contract';
-import {Sort} from '@angular/material/sort';
 
 export interface PeriodicElement {
+
   name: string;
   position: number;
-  weight: number;
-  symbol: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  type: string;
+  file: string;
+
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {position: 1, name: 'Contract 1', description: 'desc 1', startDate: '29.NOV.2019', endDate: '30.NOV.2019', type: 'company to company', file: 'file1.pdf' },
+  {position: 2, name: 'Contract 2', description: 'desc 2', startDate: '12.JUN.2019', endDate: '05.DEC.2019', type: 'company to employee', file: 'file2.pdf' },
+  {position: 3, name: 'Contract 3', description: 'desc 3', startDate: '13.JUN.2019', endDate: '03.DEC.2019', type: 'company to company', file: 'file3.pdf' },
+  {position: 4, name: 'Contract 4', description: 'desc 4', startDate: '14.JUN.2019', endDate: '08.DEC.2019', type: 'company to employee', file: 'file4.pdf' },
+  {position: 5, name: 'Contract 5', description: 'desc 5', startDate: '15.JUN.2019', endDate: '06.DEC.2019', type: 'company to employee', file: 'file5.pdf' },
+  {position: 6, name: 'Contract 6', description: 'desc 6', startDate: '16.JUN.2019', endDate: '09.DEC.2019', type: 'company to company', file: 'file6.pdf' },
+
+
 ];
 
 @Component({
@@ -35,7 +37,7 @@ export class ContractListComponent implements OnInit {
   // userSearch: string;
   // isAdmin$: Observable<boolean>;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'description', 'startDate', 'endDate', 'type', 'file'];
   dataSource = ELEMENT_DATA;
 
   constructor( private contractService: ContractService) {
