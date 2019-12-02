@@ -39,7 +39,7 @@ table {
 .mat-header-cell {
   color: #ffffff;
   font-size: 16px;
-  text-align: center;
+  /*text-align: center;*/
 }
 .button {
   margin-left: 5px;
