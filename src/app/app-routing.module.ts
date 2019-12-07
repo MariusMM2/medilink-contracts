@@ -24,10 +24,11 @@ const routes: Routes = [
 
   {
     path: 'dashboard', component: DashboardComponent, children: [
-      {path: 'contract-list', component: ContractListComponent, canActivate: [AuthGuard]},
-      {path: 'contract-create', component: ContractCreateComponent, canActivate: [AuthGuard]},
-      {path: 'contract-detail/:id', component: ContractDetailComponent, canActivate: [AuthGuard]},
-      {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
+      {path: 'contract-list', component: ContractListComponent /*, canActivate: [AuthGuard]*/ },
+      {path: 'contract-create', component: ContractCreateComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'contract-detail/:id', component: ContractDetailComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'contract-update/:id', component: ContractUpdateComponent /*, canActivate: [AuthGuard]*/},
+      // {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
     ]
   },
 
