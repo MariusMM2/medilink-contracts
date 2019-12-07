@@ -46,13 +46,14 @@ export class AdminChangeRoleComponent implements OnInit {
       password: [''],
       emailVerified: [''],
       active: [''],
-      roles: [''],
+      role: [''],
       notificationEmail: [''],
       confirmedRole: [''],
     });
 
     const id = this.route.snapshot.paramMap.get('id');
     this.user = this.userService.getUser(id);
+    console.log('-- this.user', this.user);
   }
 
 }

@@ -5,21 +5,26 @@
     <mat-card-title id="update">User</mat-card-title>
     <div>
       <input type="hidden" formControlName="id" [ngModel]="user.id">
+      <input type="hidden" formControlName="email" [ngModel]="user.email">
 
       <mat-form-field>
-        <input type="text" id="firstName" matInput formControlName="name" [ngModel]="user.name">
+        <input type="text" id="firstName" matInput formControlName="firstName" [ngModel]="user.firstName">
       </mat-form-field>
       <br>
       <mat-form-field>
         <input type="text" id="lastName" matInput formControlName="lastName" [ngModel]="user.lastName">
       </mat-form-field>
+      <input type="hidden" formControlName="password" [ngModel]="user.password">
+      <input type="hidden" formControlName="emailVerified" [ngModel]="user.emailVerified">
+      <input type="hidden" formControlName="active" [ngModel]="user.active">
       <br>
       <mat-form-field>
-        <input type="date" id="role" matInput formControlName="role" [ngModel]="user.role">
+        <input type="text" id="role" matInput formControlName="role" [ngModel]="user.role">
       </mat-form-field>
       <br>
+      <input type="hidden" formControlName="notificationEmail" [ngModel]="user.notificationEmail">
       <mat-form-field>
-        <input type="date" id="confirmedRole" matInput formControlName="confirmedRole" [ngModel]="user.confirmedRole">
+        <input type="text" id="confirmedRole" matInput formControlName="confirmedRole" [ngModel]="user.confirmedRole">
       </mat-form-field>
       <br>
 
