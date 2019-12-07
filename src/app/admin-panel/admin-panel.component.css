@@ -1,0 +1,62 @@
+.page-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: 50px;
+}
+
+#search {
+  text-align: center;
+  width: 300px;
+  height: 50px;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table-header {
+  background: rgba(2, 188, 212, 0.9);
+}
+
+.mat-header-cell {
+  color: #ffffff;
+  font-size: 16px;
+  /*text-align: center;*/
+}
+.button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+
+/**/
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+
+.mat-sort-header-container {
+  align-items: center;
+  background: red;
+}
+
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+
+

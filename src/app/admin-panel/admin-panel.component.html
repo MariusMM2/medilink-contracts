@@ -4,3 +4,46 @@
 <p>Display Users</p>
 <p>Update users</p>
 <p>Verify users</p>
+
+
+<div>
+
+  <table matSort>
+    <tr>
+      <th mat-sort-header="firstName">firstName</th>
+      <th mat-sort-header="lastName">lastName</th>
+      <th mat-sort-header="email">email</th>
+      <th mat-sort-header="role">role</th>
+      <th mat-sort-header="confirmedRole">confirmedRole</th>
+    </tr>
+
+    <tr *ngFor="let user of users$ | async ">
+
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.role}}</td>
+      <td>{{user.confirmedRole}}</td>
+      <td><button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/admin-change-role/{{user.id}}">Show Details</button></td>
+    </tr>
+  </table>
+
+</div>
+
+
+<div class="container">
+  <!--  <div *ngFor="let contract of contracts$ | async ">-->
+  <!--&lt;!&ndash;  <div *ngFor="let contract of contracts$ | async | contractPipe: userSearch">&ndash;&gt;-->
+  <!--    <app-contract class="contract"-->
+  <!--                 [contractInput]="contract"-->
+  <!--    ></app-contract>-->
+  <!--  </div>-->
+
+  <ng-container *ngIf=" !(users$ | async) && (isLoading$ | async)">
+    <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
+  </ng-container>
+
+  <ng-container *ngIf="!(users$ | async) && !(isLoading$ | async)">
+    <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve users</mat-card-title>
+  </ng-container>
+</div>

@@ -46,6 +46,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminChangeRoleComponent } from './admin-change-role/admin-change-role.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { ProfileComponent } from './profile/profile.component';
     AdminPanelComponent,
     StatisticsComponent,
     ProfileComponent,
+    AdminChangeRoleComponent,
   ],
   imports: [
     AppRoutingModule,

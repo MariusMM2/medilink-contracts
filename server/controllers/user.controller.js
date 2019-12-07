@@ -117,7 +117,7 @@ function readUser(req, res) {
 }
 
 function readAllUsers(req, res) {
-  Contract.findAll().then(users => {
+  User.findAll().then(users => {
     // console.log("contracts: ", contracts);
     if(!users) {
       res.json({
@@ -143,7 +143,7 @@ function updateUser(req, res) {
       id: req.body.id
     }
   }).then(user => {
-      Contract.update(req.body, {where: {id: req.params.id}}).then(() => {
+      User.update(req.body, {where: {id: req.params.id}}).then(() => {
         res.json({
           status: 200,
           message: "Successfully updated!"
@@ -166,5 +166,7 @@ function updateUser(req, res) {
 module.exports = {
   register,
   login,
-  updateUser
+  readUser,
+  readAllUsers,
+  updateUser,
 };
