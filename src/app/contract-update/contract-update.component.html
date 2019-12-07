@@ -30,6 +30,18 @@
       <mat-form-field>
         <input type="text" id="file" matInput formControlName="file" [ngModel]="contract.file">
       </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="category" matInput formControlName="category" [ngModel]="contract.category">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="cost" matInput formControlName="cost" [ngModel]="contract.cost">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="location" matInput formControlName="location" [ngModel]="contract.location">
+      </mat-form-field>
     </div>
     <button id="updateButton" mat-raised-button color="primary">Update</button>
   </form>

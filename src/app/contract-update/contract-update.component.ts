@@ -43,6 +43,9 @@ export class ContractUpdateComponent implements OnInit {
       expirationDate: [''],
       type: [''],
       file: [''],
+      category: [''],
+      cost: [''],
+      location: [''],
     });
 
     const id = this.route.snapshot.paramMap.get('id');
