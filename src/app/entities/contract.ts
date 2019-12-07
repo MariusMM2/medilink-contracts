@@ -6,6 +6,9 @@ export class Contract {
   expirationDate: string;
   type: string;
   file: string;
+  category: string;
+  cost: number;
+  location: string;
   userId: number;
 }
 

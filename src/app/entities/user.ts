@@ -6,6 +6,7 @@ export class User {
   lastName: string;
   password: string;
   emailVerfied: boolean;
+  // reminderEmail: string;
   active: boolean;
   role: Role;
 }
