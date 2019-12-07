@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt"); // for hashing
 const jwt = require('jsonwebtoken');
 
 const User = require("../models/user.model");
@@ -6,14 +6,11 @@ const Config = require("../config/config");
 
 function register(req, res) {
   console.log("req.body: ", req.body);
-  const email = req.body.email;
+  // const email = req.body.email;
   // search if a user with that email already exists in the database
-  User.findOne({
-    where: {
-      email
-    }
-  }).then(userDB => {
+  User.findOne({ where: { email: req.body.email } }).then(userDB => { // look in the email column for the email received from the register page
     // if there is not already a user with that email in the database
+    console.log('userDB' + userDB);
     if(!userDB) {
       // hash the password
       const hashedPassword = bcrypt.hashSync(req.body.password, 8);

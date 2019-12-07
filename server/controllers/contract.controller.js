@@ -48,7 +48,7 @@ function readContract(req, res) {
     where: {
       id: req.params.id
     }}).then(contract => {
-    console.log(contract);
+    // console.log(contract);
     if(!contract) {
       res.json({
         status: 400,
@@ -65,10 +65,8 @@ function readContract(req, res) {
 }
 
 function readAllContracts(req, res) {
-
-  console.log("here");
   Contract.findAll().then(contracts => {
-    console.log("contracts: ", contracts);
+    // console.log("contracts: ", contracts);
     if(!contracts) {
       res.json({
         status: 400,
@@ -96,7 +94,12 @@ function updateContract(req, res) {
   }).then(contract => {
     // if there is a contract found with this name and if the it is a different than the one that is being modified
 
+    console.log("contract.id.toString()", contract.id.toString())
+    console.log("req.params.id.toString()", req.params.id.toString())
     if(contract && (contract.id.toString() !== req.params.id.toString()) ) {
+      console.log("contract.id.toString()", contract.id.toString())
+      console.log("req.params.id.toString()", req.params.id.toString())
+
       res.json({
         status: 400,
         message: "Update failed! A contract with the updated name already exists!"
