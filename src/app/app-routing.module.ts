@@ -14,6 +14,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {StatisticsComponent} from './statistics/statistics.component';
 import {ProfileComponent} from './profile/profile.component';
+import {AdminChangeRoleComponent} from './admin-change-role/admin-change-role.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home/login', pathMatch: 'full'},
@@ -34,6 +35,7 @@ const routes: Routes = [
       {path: 'statistics', component: StatisticsComponent /*, canActivate: [AuthGuard]*/},
       {path: 'profile', component: ProfileComponent /*, canActivate: [AuthGuard]*/},
       {path: 'admin-panel', component: AdminPanelComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'admin-change-role/:id', component: AdminChangeRoleComponent /*, canActivate: [AuthGuard]*/},
       // {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
     ]
   },

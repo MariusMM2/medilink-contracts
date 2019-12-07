@@ -133,8 +133,55 @@ function readAllUsers(req, res) {
   });
 }
 
-function updateUser(req, res) {
+// function updateUser(req, res) {
+//
+//   console.log("----- req.body: ", req.body);
+//
+//   // check if there is already a contract with the same name in the database
+//   User.findOne({
+//     where: {
+//       email: req.body.email
+//     }
+//   }).then(user => {
+//     // if there is a contract found with this name and if the it is a different than the one that is being modified
+//
+//     // console.log("contract.id.toString()", contract.id.toString())
+//     // console.log("req.params.id.toString()", req.params.id.toString())
+//     if(user && (user.id.toString() !== req.params.id.toString()) ) {
+//       // console.log("contract.id.toString()", contract.id.toString())
+//       // console.log("req.params.id.toString()", req.params.id.toString())
+//
+//       res.json({
+//         status: 400,
+//         message: "Update failed! An user with the updated id already exists!"
+//       });
+//     } else {
+//
+//       User.update(req.body, {where: {id: req.params.id}}).then(() => {
+//         res.json({
+//           status: 200,
+//           message: "Successfully updated!"
+//         });
+//       }).catch((err) => {
+//         res.json({
+//           status: 400,
+//           message: "Update failed!",
+//           error: err
+//         });
+//       });
+//     }
+//
+//   }).catch((err) => {
+//     res.send({
+//       error: err
+//     });
+//   });
+//
+//
+// }
 
+function updateUser(req, res) {
+  console.log("--------------updateUser: ");
   console.log("req.body: ", req.body);
 
   // check if there is already a contract with the same name in the database
