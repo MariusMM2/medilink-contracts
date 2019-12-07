@@ -1,0 +1,30 @@
+<p class="page-title">Admin Change Role</p>
+
+<mat-card class="example-card">
+  <form *ngIf="user | async as user" [formGroup]="userForm" (ngSubmit)="updateUser()">
+    <mat-card-title id="update">User</mat-card-title>
+    <div>
+      <input type="hidden" formControlName="id" [ngModel]="user.id">
+
+      <mat-form-field>
+        <input type="text" id="firstName" matInput formControlName="name" [ngModel]="user.name">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="lastName" matInput formControlName="lastName" [ngModel]="user.lastName">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="date" id="role" matInput formControlName="role" [ngModel]="user.role">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="date" id="confirmedRole" matInput formControlName="confirmedRole" [ngModel]="user.confirmedRole">
+      </mat-form-field>
+      <br>
+
+    </div>
+    <button id="updateButton" mat-raised-button color="primary">Update</button>
+  </form>
+  <mat-card-title *ngIf="!(user | async)">User not found</mat-card-title>
+</mat-card>
