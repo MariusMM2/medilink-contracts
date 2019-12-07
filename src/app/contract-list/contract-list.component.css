@@ -45,3 +45,28 @@ table {
   margin-left: 5px;
   margin-right: 5px;
 }
+
+
+/**/
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+
+.mat-sort-header-container {
+  align-items: center;
+  background: red;
+}
+
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+
+
