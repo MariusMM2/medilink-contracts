@@ -13,6 +13,7 @@ import {ContractDetailComponent} from './contract-detail/contract-detail.compone
 import {AuthGuard} from './auth/auth.guard';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {StatisticsComponent} from './statistics/statistics.component';
+import {ProfileComponent} from './profile/profile.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home/login', pathMatch: 'full'},
@@ -31,6 +32,7 @@ const routes: Routes = [
       {path: 'contract-detail/:id', component: ContractDetailComponent /*, canActivate: [AuthGuard]*/},
       {path: 'contract-update/:id', component: ContractUpdateComponent /*, canActivate: [AuthGuard]*/},
       {path: 'statistics', component: StatisticsComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'profile', component: ProfileComponent /*, canActivate: [AuthGuard]*/},
       {path: 'admin-panel', component: AdminPanelComponent /*, canActivate: [AuthGuard]*/},
       // {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
     ]

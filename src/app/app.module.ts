@@ -45,6 +45,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +61,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
     RegisterComponent,
     AdminPanelComponent,
     StatisticsComponent,
+    ProfileComponent,
   ],
   imports: [
     AppRoutingModule,
