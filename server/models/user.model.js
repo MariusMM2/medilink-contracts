@@ -44,7 +44,18 @@ const User = db.define("users", {
     type: Sequelize.ENUM,
     values: ['User', 'Admin', 'SuperAdmin'],
     defaultValue: 'User'
-  }
+  },
+  notificationEmail: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    required: false,
+    trim: true
+  },
+  confirmedRole: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
 }, {
   timestamps: false
 });

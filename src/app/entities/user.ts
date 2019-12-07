@@ -6,9 +6,10 @@ export class User {
   lastName: string;
   password: string;
   emailVerfied: boolean;
-  // reminderEmail: string;
   active: boolean;
   role: Role;
+  notificationEmail: boolean;
+  confirmedRole: boolean;
 }
 
 export enum Role {
