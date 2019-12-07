@@ -25,6 +25,9 @@ export class ContractCreateComponent implements OnInit {
       expirationDate: [''],
       type: [''],
       file: [''],
+      category: [''],
+      cost: [''],
+      location: [''],
     });
   }
 
