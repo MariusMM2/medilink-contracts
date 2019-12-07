@@ -43,6 +43,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,8 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     DashboardComponent,
     HomeComponent,
     RegisterComponent,
+    AdminPanelComponent,
+    StatisticsComponent,
   ],
   imports: [
     AppRoutingModule,
