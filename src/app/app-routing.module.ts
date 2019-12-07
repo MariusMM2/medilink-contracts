@@ -33,7 +33,7 @@ const routes: Routes = [
       {path: 'contract-detail/:id', component: ContractDetailComponent /*, canActivate: [AuthGuard]*/},
       {path: 'contract-update/:id', component: ContractUpdateComponent /*, canActivate: [AuthGuard]*/},
       {path: 'statistics', component: StatisticsComponent /*, canActivate: [AuthGuard]*/},
-      {path: 'profile', component: ProfileComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'profile/:id', component: ProfileComponent /*, canActivate: [AuthGuard]*/},
       {path: 'admin-panel', component: AdminPanelComponent /*, canActivate: [AuthGuard]*/},
       {path: 'admin-change-role/:id', component: AdminChangeRoleComponent /*, canActivate: [AuthGuard]*/},
       // {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
