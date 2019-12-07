@@ -22,7 +22,8 @@ import {
   MatMenuModule,
   MatProgressBarModule, MatProgressSpinnerModule,
   MatSnackBarModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatSortModule
 } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import { ContractComponent } from './contract/contract.component';
@@ -39,7 +40,7 @@ import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {ContractService} from './services/contract.service';
 // import {MatTableModule} from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
+// import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
@@ -76,7 +77,7 @@ import { AdminChangeRoleComponent } from './admin-change-role/admin-change-role.
     ReactiveFormsModule, FormsModule, MatProgressSpinnerModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, MatTableModule,
+    AngularFirestoreModule, MatTableModule, MatSortModule
   ],
   exports: [
     MatSortModule,
