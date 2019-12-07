@@ -43,6 +43,8 @@ import {environment} from '../environments/environment';
 // import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {ContractService} from './services/contract.service';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,7 @@ import {ContractService} from './services/contract.service';
     ReactiveFormsModule, FormsModule, MatProgressSpinnerModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule, MatTableModule,
   ],
   providers: [ContractService],
   bootstrap: [AppComponent]

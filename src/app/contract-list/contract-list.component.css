@@ -16,11 +16,32 @@
   margin-right: auto;
 }
 
-.ng-star-inserted {
-  display: inline-block;
-}
+/*.ng-star-inserted {*/
+/*  display: inline-block;*/
+/*}*/
 
 .createProduct {
   width: 180px;
   display: block;
+}
+
+
+table {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table-header {
+  background: rgba(2, 188, 212, 0.9);
+}
+
+.mat-header-cell {
+  color: #ffffff;
+  font-size: 16px;
+  /*text-align: center;*/
+}
+.button {
+  margin-left: 5px;
+  margin-right: 5px;
 }
