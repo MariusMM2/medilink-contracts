@@ -21,6 +21,7 @@ export class AuthService {
   }
   logout(): void {
     console.log(' logout this.isLoggedIn ' + this.isLoggedIn);
+    window.localStorage.removeItem('token');
     this.isLoggedIn = false;
   }
 

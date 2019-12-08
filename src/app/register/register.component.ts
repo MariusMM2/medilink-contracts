@@ -75,7 +75,8 @@ export class RegisterComponent implements OnInit {
             });
         } else if (backendRes.status === 400) {
 
-          document.getElementById('emailErrMsg').innerHTML = backendRes.message + '<br><br>';
+          // document.getElementById('emailErrMsg').innerHTML = backendRes.message + '<br><br>';
+          alert(backendRes.message);
 
         }
       }, error => {

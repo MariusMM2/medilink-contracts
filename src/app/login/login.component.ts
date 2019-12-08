@@ -45,7 +45,9 @@ export class LoginComponent implements OnInit {
 
         if (backendRes.status === 200) {
           this.authService.isLoggedIn = true;
-
+          this.authService.login();
+          window.localStorage.setItem('token', backendRes.token);
+          // document.cookie = `token=${backendRes.token}`;
           this.router.navigate(['../dashboard/contract-list'])
             .then(() => {
 
@@ -56,11 +58,17 @@ export class LoginComponent implements OnInit {
             });
         } else if (backendRes.status === 401) {
 
-          document.getElementById('emailErrMsg').innerHTML = backendRes.message + '<br><br>';
+          // document.getElementById('emailErrMsg').innerHTML = backendRes.message + '<br><br>';
+          alert(backendRes.message);
 
         } else if (backendRes.status === 400) {
 
-          document.getElementById('passwordErrMsg').innerHTML = backendRes.message + '<br><br>';
+          // document.getElementById('passwordErrMsg').innerHTML = backendRes.message + '<br><br>';
+          alert(backendRes.message);
+
+        } else if (backendRes.status === 402) {
+
+          alert(backendRes.message);
 
         }
 

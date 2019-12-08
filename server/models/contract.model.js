@@ -20,14 +20,12 @@ const Contract = db.define("contracts", {
     trim: true
   },
   startDate: {
-    type: Sequelize.DATE,
-    allowNull: false,
-    trim: true
+    type: Sequelize.DATEONLY,
+    allowNull: false
   },
   expirationDate: {
-    type: Sequelize.DATE,
-    allowNull: false,
-    trim: true
+    type: Sequelize.DATEONLY,
+    allowNull: false
   },
   type: {
     type: Sequelize.STRING,

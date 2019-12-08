@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const User = require("../models/user.model");
 const Config = require("../config/config");
+const { sendConfirmEmail } = require("../emails/mail");
+
 
 function register(req, res) {
   console.log("req.body: ", req.body);
@@ -20,8 +22,17 @@ function register(req, res) {
       req.body.password = hashedPassword;
       console.log(req.body);
 
+      req.body.notificationEmail = req.body.email;
+
       User.create(req.body).then(user => {
         console.log("created: ", user);
+
+        const token = jwt.sign(user.dataValues, Config.JWT_SECRET, {
+          expiresIn: 86400 // expires in 24 hours = 86400 seconds
+        });
+
+        const url = `http://localhost:3000/api/users/confirmation/${token}`;
+        sendConfirmEmail(user.dataValues.email, `${user.dataValues.firstName} ${user.dataValues.lastName}`, url);
 
         res.json({
           status: 200,
@@ -47,6 +58,25 @@ function register(req, res) {
   });
 }
 
+function confirmEmail(req, res) {
+
+  const user = jwt.verify(req.params.token, Config.JWT_SECRET);
+
+  user.emailVerified = true;
+
+  User.update(user, {where: {id: user.id}}).then(() => {
+    res.json({
+      status: 200,
+      message: "Successfully updated user!"
+    });
+  }).catch((err) => {
+    res.send({
+      error: err
+    });
+  });
+
+}
+
 function login(req, res) {
   console.log("req.body: ", req.body);
   const email = req.body.email;
@@ -63,21 +93,35 @@ function login(req, res) {
         console.log("user: ", user);
         console.log("user.dataValues: ", user.dataValues);
 
-        const token = jwt.sign(user.dataValues, Config.JWT_SECRET, {
-          expiresIn: 86400 // expires in 24 hours = 86400 seconds
-        });
+        if(user.dataValues.emailVerified === true) {
 
-        res.cookie("token", token, {
-          expire: Date.now() + 43200000,  // 43200000 milliseconds = 12 hours
-          secure: false, // set to true if your using https
-          httpOnly: true
-        });
+          const token = jwt.sign(user.dataValues, Config.JWT_SECRET, {
+            expiresIn: 86400 // expires in 24 hours = 86400 seconds
+          });
 
-        res.json({
-          status: 200,
-          message: `Logged in as: ${user.firstName} ${user.lastName}!`,
-          user
-        });
+          // res.cookie("token", token, {
+          //   expire: Date.now() + 43200000,  // 43200000 milliseconds = 12 hours
+          //   secure: false, // set to true if your using https
+          //   httpOnly: true
+          // });
+          //
+          // res.header('Authorization', 'Bearer '+ token);
+
+
+          res.json({
+            status: 200,
+            message: `Logged in as: ${user.firstName} ${user.lastName}!`,
+            user,
+            token
+          });
+
+        } else {
+          res.json({
+            status: 402,
+            message: "Email not verified!"
+          });
+        }
+
       } else {
         res.json({
           status: 400,
@@ -100,5 +144,6 @@ function login(req, res) {
 
 module.exports = {
   register,
+  confirmEmail,
   login
 };

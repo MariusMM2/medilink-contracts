@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {Contract} from '../entities/contract';
@@ -11,39 +11,54 @@ import {ContractService} from '../services/contract.service';
   styleUrls: ['./contract-create.component.css']
 })
 export class ContractCreateComponent implements OnInit {
-  contract: FormGroup;
+  contractForm: FormGroup;
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder,
               private router: Router, private contractService: ContractService) {
   }
 
   ngOnInit() {
-    this.contract = this.fb.group({
-      _id: [''],
-      name: [''],
-      description: [''],
-      startDate: [''],
-      expirationDate: [''],
-      type: [''],
-      file: [''],
+    this.contractForm = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(15)]],
+      description: ['', [Validators.required, Validators.maxLength(20)]],
+      startDate: ['', [Validators.required]],
+      expirationDate: ['', [Validators.required]],
+      type: ['', [Validators.required, Validators.maxLength(20)]],
+      file: ['', [Validators.required, Validators.maxLength(20)]]
     });
   }
 
-  saveContract() {
-    console.log(this.contract);
+  clearErrorMessage() {
+    document.getElementById('nameErrMsg').innerHTML = '';
+  }
 
-    const contract = this.contract.value as Contract;
+  saveContract() {
+    console.log(this.contractForm);
+
+    const contract = this.contractForm.value as Contract;
     console.log('contract: ', contract);
 
-    this.contractService.addContract(contract)
-      // .then(() => {
-      .subscribe(backendRes => {
-        console.log('backend response:', backendRes);
-        console.log('contract added!');
-        this.contract.reset();
+    if (this.contractForm.valid) {
+      this.contractService.addContract(contract)
+        .subscribe(backendRes => {
+          console.log('backend response:', backendRes);
 
-        this.snackBar.open('contract added', '', {duration: 500}).afterDismissed().subscribe(() => {
-          this.router.navigate(['../dashboard/contract-list']);
+          if (backendRes.status === 200) {
+
+            this.contractForm.reset();
+            this.snackBar.open('contract added', '', {duration: 500}).afterDismissed().subscribe(() => {
+              this.router.navigate(['../dashboard/contract-list']);
+            });
+
+          } else if (backendRes.status === 400) {
+
+            // document.getElementById('nameErrMsg').innerHTML = backendRes.message + '<br><br>';
+            alert(backendRes.message);
+          }
+
         });
-      });
+
+    } else {
+      console.log('Invalid form!');
+    }
   }
 }

@@ -1,34 +1,101 @@
 <p class="page-title">Create Contract</p>
 
 <mat-card>
-  <form [formGroup]="contract" (ngSubmit)="saveContract()">
+
+  <form [formGroup]="contractForm" (ngSubmit)="saveContract()">
+
     <mat-card-title id="create">New Contract</mat-card-title>
+
     <div>
+
       <mat-form-field>
-        <input type="text" id="name" matInput placeholder="Contract Name" formControlName="name">
+        <input type="text" id="name" matInput placeholder="Contract Name" formControlName="name" (click)="clearErrorMessage()">
       </mat-form-field>
+
+      <div *ngIf="contractForm.controls.name.errors?.required && contractForm.controls.name.touched">
+        You must fill out the contract name!
+      </div>
+
+      <div *ngIf="contractForm.controls.name.errors?.maxlength && contractForm.controls.name.touched">
+        The contract name must contain maximum 15 characters!
+      </div>
+
+      <div id="nameErrMsg"></div>
+
+    </div>
       <br>
+    <div>
+
       <mat-form-field>
         <input type="text" id="description" matInput placeholder="Contract Description" formControlName="description">
       </mat-form-field>
+
+      <div *ngIf="contractForm.controls.description.errors?.required && contractForm.controls.description.touched">
+        You must fill out the contract description!
+      </div>
+
+      <div *ngIf="contractForm.controls.description.errors?.maxlength && contractForm.controls.description.touched">
+        The contract description must contain maximum 20 characters!
+      </div>
+
+    </div>
       <br>
+    <div>
+
       <mat-form-field>
         <input type="date" id="startDate" matInput placeholder="Contract Start Date" formControlName="startDate">
       </mat-form-field>
+
+      <div *ngIf="contractForm.controls.startDate.errors?.required && contractForm.controls.startDate.touched">
+        You must fill out the contract start date!
+      </div>
+
+    </div>
       <br>
+    <div>
+
       <mat-form-field>
         <input type="date" id="expirationDate" matInput placeholder="Contract Expiration Date" formControlName="expirationDate">
       </mat-form-field>
+
+      <div *ngIf="contractForm.controls.expirationDate.errors?.required && contractForm.controls.expirationDate.touched">
+        You must fill out the contract expiration date!
+      </div>
+
+    </div>
       <br>
+    <div>
+
       <mat-form-field>
         <input type="text" id="type" matInput placeholder="Contract Type" formControlName="type">
       </mat-form-field>
+
+      <div *ngIf="contractForm.controls.type.errors?.required && contractForm.controls.type.touched">
+        You must fill out the contract type!
+      </div>
+
+      <div *ngIf="contractForm.controls.type.errors?.maxlength && contractForm.controls.type.touched">
+        The contract type must contain maximum 20 characters!
+      </div>
+
+    </div>
       <br>
+    <div>
+
       <mat-form-field>
         <input type="text" id="file" matInput placeholder="Contract File" formControlName="file">
       </mat-form-field>
-      <br>
+
+      <div *ngIf="contractForm.controls.file.errors?.required && contractForm.controls.file.touched">
+        You must fill out the contract file!
+      </div>
+
+      <div *ngIf="contractForm.controls.file.errors?.maxlength && contractForm.controls.file.touched">
+        The contract file must contain maximum 20 characters!
+      </div>
+
     </div>
+    <br>
     <button id="saveButton" mat-raised-button color="primary">Save Contract</button>
   </form>
 </mat-card>

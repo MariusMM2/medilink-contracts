@@ -11,8 +11,8 @@
 
     <mat-card-content>
       <p class="description">Description: {{contract.description}}</p>
-      <p class="description">Start Date: {{contract.startDate}}</p>
-      <p class="description">Expiration Date: {{contract.expirationDate}}</p>
+      <p class="description">Start Date: {{contract.startDate | date: 'dd/MM/yyyy'}}</p>
+      <p class="description">Expiration Date: {{contract.expirationDate | date: 'dd/MM/yyyy'}}</p>
       <p class="description">Type: {{contract.type}}</p>
       <p class="description">File: {{contract.file}}</p>
     </mat-card-content>

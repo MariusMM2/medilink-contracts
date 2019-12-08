@@ -44,11 +44,19 @@ export class ContractDetailComponent implements OnInit {
     // Get the id from the url
     const id = this.route.snapshot.paramMap.get('id');
     this.contractService.deleteContract(id)
-      // .then(() => {
-      .subscribe(() => {
-        this.snackBar.open(`Contract ${id} has been deleted`, 'Dismiss', {duration: 2000}).afterDismissed().subscribe(() => {
-          this.router.navigate(['../dashboard/contract-list']);
-        });
+      .subscribe(backendRes => {
+        console.log('backend response:', backendRes);
+
+        if (backendRes.status === 200) {
+          this.snackBar.open(`Contract ${id} has been deleted`, 'Dismiss', {duration: 2000}).afterDismissed().subscribe(() => {
+            this.router.navigate(['../dashboard/contract-list']);
+          });
+        } else if (backendRes.status === 400) {
+
+          alert(backendRes.message);
+
+        }
+
       });
   }
 }
