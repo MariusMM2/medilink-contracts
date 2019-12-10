@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ContractService} from '../services/contract.service';
 import {Contract} from '../entities/contract';
+import {AzureService} from '../services/azure.service';
 
 @Component({
   selector: 'app-contract-list',
@@ -14,8 +15,9 @@ export class ContractListComponent implements OnInit {
   // userSearch: string;
   // isAdmin$: Observable<boolean>;
 
-  constructor( private contractService: ContractService) {
+  constructor(private contractService: ContractService, private azureService: AzureService) {
   }
+
   ngOnInit() {
     this.isLoading$ = new Observable(subscriber => {
       subscriber.next(true);
@@ -26,5 +28,9 @@ export class ContractListComponent implements OnInit {
         subscriber.next(false);
       }, 2000);
     });
+  }
+
+  async loginAzure() {
+    await this.azureService.signIn();
   }
 }

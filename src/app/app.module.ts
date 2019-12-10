@@ -20,29 +20,30 @@ import {
   MatExpansionModule,
   MatIconModule,
   MatMenuModule,
-  MatProgressBarModule, MatProgressSpinnerModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
   MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 // import { AppComponent } from './app.component';
 // import { LoginComponent } from './login/login.component';
-import { ContractComponent } from './contract/contract.component';
-import { ContractListComponent } from './contract-list/contract-list.component';
-import { ContractCreateComponent } from './contract-create/contract-create.component';
-import { ContractUpdateComponent } from './contract-update/contract-update.component';
+import {ContractComponent} from './contract/contract.component';
+import {ContractListComponent} from './contract-list/contract-list.component';
+import {ContractCreateComponent} from './contract-create/contract-create.component';
+import {ContractUpdateComponent} from './contract-update/contract-update.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ContractDetailComponent } from './contract-detail/contract-detail.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
+import {ContractDetailComponent} from './contract-detail/contract-detail.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {HomeComponent} from './home/home.component';
 // import { RegisterComponent } from './register/register.component';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 // import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {ContractService} from './services/contract.service';
+import {MsalModule} from '@azure/msal-angular';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,9 @@ import {ContractService} from './services/contract.service';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    MsalModule.forRoot({
+      clientID: environment.azure.appId
+    })
   ],
   providers: [ContractService],
   bootstrap: [AppComponent]
