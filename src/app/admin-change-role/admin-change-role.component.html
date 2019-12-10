@@ -1,0 +1,35 @@
+<p class="page-title">Admin Change Role</p>
+
+<mat-card class="example-card">
+  <form *ngIf="user | async as user" [formGroup]="userForm" (ngSubmit)="updateUser()">
+    <mat-card-title id="update">User</mat-card-title>
+    <div>
+
+      <mat-form-field>
+        <input type="text" id="firstName" matInput formControlName="firstName" [ngModel]="user.firstName" placeholder='firstName' readonly>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="lastName" matInput formControlName="lastName" [ngModel]="user.lastName" placeholder='lastName' readonly>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='role'>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="confirmedRole" matInput formControlName="confirmedRole" [ngModel]="user.confirmedRole" placeholder='confirmedRole'>
+      </mat-form-field>
+      <br>
+      <input type="hidden" formControlName="id" [ngModel]="user.id">
+      <input type="hidden" formControlName="email" [ngModel]="user.email">
+      <input type="hidden" formControlName="password" [ngModel]="user.password">
+      <input type="hidden" formControlName="emailVerified" [ngModel]="user.emailVerified">
+      <input type="hidden" formControlName="active" [ngModel]="user.active">
+      <input type="hidden" formControlName="notificationEmail" [ngModel]="user.notificationEmail">
+
+    </div>
+    <button id="updateButton" mat-raised-button color="primary">Update</button>
+  </form>
+  <mat-card-title *ngIf="!(user | async)">User not found</mat-card-title>
+</mat-card>

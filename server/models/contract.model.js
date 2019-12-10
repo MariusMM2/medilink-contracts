@@ -37,6 +37,21 @@ const Contract = db.define("contracts", {
     allowNull: false,
     trim: true
   },
+  category: {
+    type: Sequelize.STRING,
+    allowNull: true,
+    trim: true
+  },
+  cost: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    trim: true
+  },
+  location: {
+    type: Sequelize.STRING,
+    allowNull: true,
+    trim: true
+  },
   userId: {
     type: Sequelize.INTEGER,
     defaultValue: 1

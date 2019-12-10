@@ -48,7 +48,7 @@ function readContract(req, res) {
     where: {
       id: req.params.id
     }}).then(contract => {
-    console.log(contract);
+    // console.log(contract);
     if(!contract) {
       res.json({
         status: 400,
@@ -65,8 +65,8 @@ function readContract(req, res) {
 }
 
 function readAllContracts(req, res) {
-
   Contract.findAll().then(contracts => {
+    // console.log("contracts: ", contracts);
     if(!contracts) {
       res.json({
         status: 400,

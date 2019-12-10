@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt"); // for hashing
 const jwt = require('jsonwebtoken');
 
 const User = require("../models/user.model");
@@ -199,10 +199,78 @@ function changePassword(req, res) {
 
 }
 
+function readUser(req, res) {
+  // find a contract in the database based on the id from the url
+  User.findOne({
+    where: {
+      id: req.params.id
+    }}).then(user => {
+    // console.log(contract);
+    if(!user) {
+      res.json({
+        status: 400,
+        message: "There is no contract with this id in the database!"
+      });
+    }
+    res.send(user);
+  }).catch((err) => {
+    res.send({
+      error: err
+    });
+  });
+}
+
+function readAllUsers(req, res) {
+  User.findAll().then(users => {
+    // console.log("contracts: ", contracts);
+    if(!users) {
+      res.json({
+        status: 400,
+        message: "There are no contracts in the database!"
+      });
+    }
+    res.send(users);
+  }).catch((err) => {
+    res.send({
+      error: err
+    });
+  });
+}
+function updateUser(req, res) {
+  console.log("--------------updateUser: ");
+  console.log("req.body: ", req.body);
+
+  // check if there is already a contract with the same name in the database
+  User.findOne({
+    where: {
+      id: req.body.id
+    }
+  }).then(user => {
+    User.update(req.body, {where: {id: req.params.id}}).then(() => {
+      res.json({
+        status: 200,
+        message: "Successfully updated!"
+      });
+    }).catch((err) => {
+      res.json({
+        status: 400,
+        message: "Update failed!",
+        error: err
+      });
+    });
+  }).catch((err) => {
+    res.send({
+      error: err
+    });
+  });
+}
 module.exports = {
   register,
   confirmEmail,
   login,
   forgotPassword,
-  resetPassword: changePassword
+  changePassword,
+  readUser,
+  readAllUsers,
+  updateUser,
 };

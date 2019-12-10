@@ -23,7 +23,10 @@ export class ContractCreateComponent implements OnInit {
       startDate: ['', [Validators.required]],
       expirationDate: ['', [Validators.required]],
       type: ['', [Validators.required, Validators.maxLength(20)]],
-      file: ['', [Validators.required, Validators.maxLength(20)]]
+      file: ['', [Validators.required, Validators.maxLength(20)]],
+      category: [''],
+      cost: [''],
+      location: [''],
     });
   }
 

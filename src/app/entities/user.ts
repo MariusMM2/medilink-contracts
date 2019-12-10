@@ -5,9 +5,12 @@ export class User {
   firstName: string;
   lastName: string;
   password: string;
-  emailVerfied: boolean;
+  emailVerified: boolean;
   active: boolean;
-  role: Role;
+  role: string;
+  // role: Role;
+  notificationEmail: boolean;
+  confirmedRole: boolean;
 }
 
 export enum Role {

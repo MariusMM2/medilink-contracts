@@ -16,16 +16,6 @@
   margin-right: auto;
 }
 
-/*.ng-star-inserted {*/
-/*  display: inline-block;*/
-/*}*/
-
-.createProduct {
-  width: 180px;
-  display: block;
-}
-
-
 table {
   width: 70%;
   margin-left: auto;
@@ -37,7 +27,7 @@ table {
 }
 
 .mat-header-cell {
-  /*color: #ffffff;*/
+  color: #ffffff;
   font-size: 16px;
   /*text-align: center;*/
 }

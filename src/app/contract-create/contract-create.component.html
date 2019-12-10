@@ -7,7 +7,6 @@
     <mat-card-title id="create">New Contract</mat-card-title>
 
     <div>
-
       <mat-form-field>
         <input type="text" id="name" matInput placeholder="Contract Name" formControlName="name" (click)="clearErrorMessage()">
       </mat-form-field>
@@ -93,8 +92,21 @@
       <div *ngIf="contractForm.controls.file.errors?.maxlength && contractForm.controls.file.touched">
         The contract file must contain maximum 20 characters!
       </div>
-
     </div>
+
+    <br>
+    <mat-form-field>
+      <input type="text" id="category" matInput placeholder="Category" formControlName="category">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text" id="cost" matInput placeholder="Cost" formControlName="cost">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text" id="location" matInput placeholder="Location" formControlName="location">
+    </mat-form-field>
+    <br>
     <br>
     <button id="saveButton" mat-raised-button color="primary">Save Contract</button>
   </form>

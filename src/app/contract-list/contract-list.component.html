@@ -1,17 +1,170 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
 <p class="page-title">Contract List</p>
 
-<div id="search">
-  <mat-form-field>
-    <input matInput placeholder="Search product" value="">
-  </mat-form-field>
+<!--<div id="search">-->
+<!--  <mat-form-field>-->
+<!--    <input matInput placeholder="Search product" value="">-->
+<!--  </mat-form-field>-->
+<!--</div>-->
+
+
+<!---->
+<div>
+
+  <table matSort>
+    <tr>
+      <th mat-sort-header="name">name</th>
+      <th mat-sort-header="startDate">startDate</th>
+      <th mat-sort-header="expirationDate">expirationDate</th>
+      <th mat-sort-header="category">category</th>
+      <th mat-sort-header="cost">cost</th>
+      <th mat-sort-header="location">location</th>
+      <th mat-sort-header="actions">actions</th>
+    </tr>
+
+    <tr *ngFor="let contract of contracts$ | async ">
+        <td>{{contract.name}}</td>
+      <td>{{contract.startDate}}</td>
+      <td>{{contract.expirationDate}}</td>
+      <td>{{contract.category}}</td>
+      <td>{{contract.cost}}</td>
+      <td>{{contract.location}}</td>
+      <td><button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details</button></td>
+    </tr>
+  </table>
+
+
+<!--  -->
+
+<!--  <table mat-table [dataSource]="contracts$" matSort class="mat-elevation-z8" >-->
+<!--&lt;!&ndash;    matSortStart="asc"&ndash;&gt;-->
+<!--    &lt;!&ndash; Position Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="name">-->
+<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header matSortStart="desc"> name </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.name}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="startDate">-->
+<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> startDate </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Weight Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="expirationDate">-->
+<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> expirationDate </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.expirationDate}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="category">-->
+<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> category </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.category}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="cost">-->
+<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> cost </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.cost}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="location">-->
+<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> location </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.location}}-->
+
+<!--        <div class="example-button-row">-->
+<!--          <button class="showContract" mat-raised-button color="primary"-->
+<!--                  routerLink="/dashboard/contract-detail/{{element.id}}">Show Details</button>-->
+<!--        </div>-->
+<!--      </td>-->
+<!--    </ng-container>-->
+<!--    -->
+
+<!--    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--  </table>-->
+
+
+<!--  -->
+
+<!--  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">-->
+
+<!--    &lt;!&ndash;- Note that these columns can be defined in any order.-->
+<!--          The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Position Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="position">-->
+<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.position}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="name">-->
+<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.name}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Weight Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="description" mat-sort-header>-->
+<!--      <th mat-header-cell *matHeaderCellDef> Description </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.description}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="startDate" mat-sort-header>-->
+<!--      <th mat-header-cell *matHeaderCellDef> Start Date </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="endDate" mat-sort-header>-->
+<!--      <th mat-header-cell *matHeaderCellDef> End Date </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="type" mat-sort-header>-->
+<!--      <th mat-header-cell *matHeaderCellDef> Type </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.type}} </td>-->
+<!--    </ng-container>-->
+
+
+<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="file" mat-sort-header>-->
+<!--      <th mat-header-cell *matHeaderCellDef> File </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.file}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="actions" mat-sort-header>-->
+<!--      <th mat-header-cell *matHeaderCellDef> Actions </th>-->
+<!--      <td mat-cell *matCellDef="let element">-->
+<!--        {{element.actions}}-->
+<!--        <div class="example-button-row">-->
+<!--          <button mat-raised-button color="accent" class="button">Edit</button>-->
+<!--          <button mat-raised-button color="warn" class="button">Delete</button>-->
+<!--        </div>-->
+<!--      </td>-->
+<!--    </ng-container>-->
+
+
+<!--    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>-->
+<!--    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+
+<!--  </table>-->
+
 </div>
+
+<!---->
+
 <div class="container">
-  <div *ngFor="let contract of contracts$ | async ">
-<!--  <div *ngFor="let contract of contracts$ | async | contractPipe: userSearch">-->
-    <app-contract class="contract"
-                 [contractInput]="contract"
-    ></app-contract>
-  </div>
+<!--  <div *ngFor="let contract of contracts$ | async ">-->
+<!--&lt;!&ndash;  <div *ngFor="let contract of contracts$ | async | contractPipe: userSearch">&ndash;&gt;-->
+<!--    <app-contract class="contract"-->
+<!--                 [contractInput]="contract"-->
+<!--    ></app-contract>-->
+<!--  </div>-->
 
   <ng-container *ngIf=" !(contracts$ | async) && (isLoading$ | async)">
     <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>

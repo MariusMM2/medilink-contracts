@@ -1,11 +1,8 @@
 <p class="page-title">Update Contract</p>
 
 <mat-card class="example-card">
-
   <form *ngIf="contract | async as contract" [formGroup]="contractForm" (ngSubmit)="updateContract()">
-
     <mat-card-title id="update">Contract</mat-card-title>
-
     <div>
       <input type="hidden" formControlName="id" [ngModel]="contract.id">
     </div>
@@ -99,6 +96,19 @@
       </div>
 
     </div>
+
+    <br>
+    <mat-form-field>
+      <input type="text" id="category" matInput formControlName="category" [ngModel]="contract.category">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text" id="cost" matInput formControlName="cost" [ngModel]="contract.cost">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text" id="location" matInput formControlName="location" [ngModel]="contract.location">
+    </mat-form-field>
     <br>
     <button id="updateButton" mat-raised-button color="primary">Update</button>
   </form>

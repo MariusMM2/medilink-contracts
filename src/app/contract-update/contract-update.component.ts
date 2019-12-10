@@ -20,6 +20,8 @@ export class ContractUpdateComponent implements OnInit {
               private route: ActivatedRoute) {
   }
 
+
+
   ngOnInit() {
     this.contractForm = this.fb.group({
       id: [''],
@@ -28,7 +30,10 @@ export class ContractUpdateComponent implements OnInit {
       startDate: ['', [Validators.required]],
       expirationDate: ['', [Validators.required]],
       type: ['', [Validators.required, Validators.maxLength(20)]],
-      file: ['', [Validators.required, Validators.maxLength(20)]]
+      file: ['', [Validators.required, Validators.maxLength(20)]],
+      category: [''],
+      cost: [''],
+      location: [''],
     });
 
     const id = this.route.snapshot.paramMap.get('id');
