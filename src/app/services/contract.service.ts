@@ -7,16 +7,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ContractService {
-  private baseUrl = 'http://localhost:3000/api/contracts';
+  private baseUrl = 'http://localhost:3000/api/contracts/';
 
   constructor( private http: HttpClient ) { }
 
   addContract(contract: Contract): Observable<any> {
-    return this.http.post<Contract>(this.baseUrl + '/create', contract);
+    return this.http.post<Contract>(this.baseUrl + 'create', contract);
   }
 
   getContract(id: string): Observable<Contract> {
-    return this.http.get<Contract>(this.baseUrl + `/${id}`);
+    return this.http.get<Contract>(this.baseUrl + `${id}`);
   }
 
   getContracts(): Observable<Contract[]> {
@@ -24,11 +24,11 @@ export class ContractService {
   }
 
   updateContract(contract: Contract): Observable<any> {
-    return this.http.put<Contract>(this.baseUrl + `/${contract.id}`, contract);
+    return this.http.put<Contract>(this.baseUrl + `${contract.id}`, contract);
   }
 
   deleteContract(id: string): Observable<any> {
-    return this.http.delete<Contract>(this.baseUrl + `/${id}`);
+    return this.http.delete<Contract>(this.baseUrl + `${id}`);
   }
 
 }

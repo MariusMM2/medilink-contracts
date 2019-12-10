@@ -8,7 +8,7 @@ import {Contract} from '../entities/contract';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'http://localhost:3000/api/users';
+  private baseUrl = 'http://localhost:3000/api/users/';
 
   constructor( private http: HttpClient ) { }
 
@@ -21,7 +21,7 @@ export class UserService {
   }
 
   getUser(id: string): Observable<User> {
-    return this.http.get<User>(this.baseUrl + `/${id}`);
+    return this.http.get<User>(this.baseUrl + `${id}`);
   }
 
   getUsers(): Observable<User[]> {
@@ -30,7 +30,7 @@ export class UserService {
 
   updateUser(user: User): Observable<any> {
     console.log('-----------** ', user);
-    return this.http.put<User>(this.baseUrl + `/${user.id}`, user);
+    return this.http.put<User>(this.baseUrl + `${user.id}`, user);
   }
 
 }
