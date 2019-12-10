@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require("../models/user.model");
 const Config = require("../config/config");
-const { sendConfirmEmail } = require("../emails/mail");
+const { sendConfirmEmail, sendForgotPasswordEmail } = require("../emails/mail");
 
 
 function register(req, res) {
@@ -74,7 +74,6 @@ function confirmEmail(req, res) {
       error: err
     });
   });
-
 }
 
 function login(req, res) {
@@ -142,8 +141,68 @@ function login(req, res) {
   });
 }
 
+function forgotPassword(req, res) {
+
+  console.log("req.body: ", req.body);
+  const email = req.body.email;
+
+  // find the email from the user's input
+  User.findOne({
+    where: {
+      email
+    }
+  }).then(user => {
+    // if a user is found
+    if(user) {
+      console.log("user", user);
+
+      const token = jwt.sign(user.dataValues, Config.JWT_SECRET, {
+        expiresIn: 86400 // expires in 24 hours = 86400 seconds
+      });
+
+      const url = `http://localhost:3000/api/users/resetPwd/${token}`;
+      sendForgotPasswordEmail(user.dataValues.email, `${user.dataValues.firstName} ${user.dataValues.lastName}`, url);
+
+    } else {
+      res.json({
+        status: 401,
+        message: "This email does not exist, please write a valid email!"
+      });
+    }
+  }).catch((err) => {
+    res.send({
+      error: err
+    });
+  });
+
+}
+
+function changePassword(req, res) {
+
+  console.log("req.body: ", req.body);
+  const newPassword = req.body.password;
+
+  const user = jwt.verify(req.params.token, Config.JWT_SECRET);
+
+  user.password = newPassword;
+
+  User.update(user, {where: {id: user.id}}).then(() => {
+    res.json({
+      status: 200,
+      message: "Successfully updated user's password!"
+    });
+  }).catch((err) => {
+    res.send({
+      error: err
+    });
+  });
+
+}
+
 module.exports = {
   register,
   confirmEmail,
-  login
+  login,
+  forgotPassword,
+  resetPassword: changePassword
 };

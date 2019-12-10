@@ -19,7 +19,7 @@ const sendForgotPasswordEmail = (email, name, link) => {
     from: "razvan1598@gmail.com",
     subject: "Forgot password",
     html: `Hi ${name}! <br>
-        Click the link below to reset your Medilink Contracts Manager account password <br>
+        Click the link below to change your Medilink Contracts Manager account password <br>
         <a href=${link}>Click here to reset your password!</a>`
   });
 };
