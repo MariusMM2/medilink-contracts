@@ -46,6 +46,7 @@ import {
   MatSortModule,
   MatTabsModule
 } from '@angular/material';
+import { ContractPipe } from './contract.pipe';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {
     StatisticsComponent,
     ProfileComponent,
     AdminChangeRoleComponent,
+    ContractPipe,
   ],
   imports: [
     AppRoutingModule,
