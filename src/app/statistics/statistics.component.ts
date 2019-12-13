@@ -32,8 +32,17 @@ export class StatisticsComponent implements OnInit {
 
       this.contracts$ = this.contractService.getContracts();
 
+      this.contracts$.forEach(contracts => {
+
+        for (let i = 0; i < contracts.length; i++) {
+          console.log('i', i);
+          // contracts[i].expirationDate
+          console.log('contracts[i].expirationDate: ', contracts[i].expirationDate);
+
+        }
+      })
       // this.data$.push(this.contracts$.pipe());
-      console.log('------ ' + this.contracts$);
+      console.log('------ this.contracts$ ' + this.contracts$);
 
       setTimeout(() => {
         subscriber.next(false);

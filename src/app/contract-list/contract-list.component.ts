@@ -21,11 +21,13 @@ export class ContractListComponent implements OnInit, AfterViewInit {
 
     this.isLoading$ = new Observable(subscriber => {
       subscriber.next(true);
-
       this.contracts$ = this.contractService.getContracts();
-      // this.myDataSource = new MatTableDataSource();
-      // this.myDataSource = this.contracts$;
-      // console.log('this.myDataSource.data', this.myDataSource);
+      this.contracts$.forEach(contracts => {
+        console.log('contracts before sort', contracts);
+        contracts.sort((a, b) => (a.startDate > b.startDate) ? 1 : ((b.startDate > a.startDate) ? -1 : 0));
+        console.log('contracts after sort', contracts);
+        return contracts;
+      });
       setTimeout(() => {
         subscriber.next(false);
       }, 2000);
