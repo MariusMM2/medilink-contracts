@@ -1,14 +1,91 @@
 <p class="page-title">Statistics</p>
 
-<p>Contracts</p>
-<p>- Active Contracts</p>
-<p>- Expired Contracts</p>
-<p>- Future Contracts</p>
 
-<p>Cost</p>
-<p>- most expensive</p>
-<p>- cheapest</p>
 
-<p>Location</p>
-<p>- DK</p>
-<p>- US</p>
+  <div *ngFor="let contract of contracts$ | async ">
+    <p>{{contract.name}}</p>
+  </div>
+
+<p>{{contracts$}}</p>
+
+<div class="container">
+  <!--  <div *ngFor="let contract of contracts$ | async ">-->
+  <!--&lt;!&ndash;  <div *ngFor="let contract of contracts$ | async | contractPipe: userSearch">&ndash;&gt;-->
+  <!--    <app-contract class="contract"-->
+  <!--                 [contractInput]="contract"-->
+  <!--    ></app-contract>-->
+  <!--  </div>-->
+
+  <ng-container *ngIf=" !(contracts$ | async) && (isLoading$ | async)">
+    <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
+  </ng-container>
+
+  <ng-container *ngIf="!(contracts$ | async) && !(isLoading$ | async)">
+    <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts</mat-card-title>
+  </ng-container>
+</div>
+
+
+<mat-tab-group dynamicHeight mat-align-tabs="center">
+  <mat-tab label="Date">
+    <div class="example-large-box mat-elevation-z4">
+      <div class="list">
+        <h3>Contract Statistics - Date</h3>
+        <p>
+          <span>Active: </span>
+          <span>1</span>
+        </p>
+        <p>
+          <span>Expired: </span>
+          <span>1</span>
+        </p>
+        <p>
+          <span>Future: </span>
+          <span>1</span>
+        </p>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Cost">
+    <div class="example-large-box mat-elevation-z4">
+      <div class="list">
+        <h3>Contract Statistics - Cost</h3>
+        <p>
+          <span>Most Expensive: </span>
+          <span>1</span>
+        </p>
+        <p>
+          <span>Cheapest: </span>
+          <span>1</span>
+        </p>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Location">
+    <div class="example-large-box mat-elevation-z4">
+      <div class="list">
+        <h3>Contract Statistics - Location</h3>
+        <p>
+          <span>Denmark: </span>
+          <span>1</span>
+        </p>
+        <p>
+          <span>Germany: </span>
+          <span>1</span>
+        </p>
+        <p>
+          <span>United Kingdom: </span>
+          <span>1</span>
+        </p>
+        <p>
+          <span>US: </span>
+          <span>1</span>
+        </p>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+

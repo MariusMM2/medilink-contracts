@@ -14,17 +14,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
+// import {MatTabsModule} from '@angular/material/tabs';
 
-import {
-  MatCheckboxModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatMenuModule,
-  MatProgressBarModule, MatProgressSpinnerModule,
-  MatSnackBarModule,
-  MatToolbarModule,
-  MatSortModule
-} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import { ContractComponent } from './contract/contract.component';
 import { ContractListComponent } from './contract-list/contract-list.component';
@@ -39,15 +30,23 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {ContractService} from './services/contract.service';
-// import {MatTableModule} from '@angular/material/table';
-// import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
-import {MatTabsModule} from '@angular/material/tabs';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminChangeRoleComponent } from './admin-change-role/admin-change-role.component';
+import {
+  MatCheckboxModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatMenuModule,
+  MatProgressBarModule, MatProgressSpinnerModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+  MatSortModule,
+  MatTabsModule
+} from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,12 +76,12 @@ import { AdminChangeRoleComponent } from './admin-change-role/admin-change-role.
     ReactiveFormsModule, FormsModule, MatProgressSpinnerModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, MatTableModule, MatSortModule
-  ],
+    AngularFirestoreModule, MatTableModule, MatSortModule,
+    MatTabsModule,
+],
   exports: [
     MatSortModule,
     MatTableModule,
-    MatTabsModule,
   ],
   providers: [ContractService],
   bootstrap: [
