@@ -35,18 +35,5 @@ export class ContractListComponent implements OnInit {
     this.contracts = await this.azureService.getContracts();
 
     this.isLoading = false;
-
-    // this.isLoading = new Observable(subscriber => {
-    //   subscriber.next(true);
-    //
-    //   this.contracts = new Observable(subscriber2 => {
-    //     this.azureService.getContracts().then((value => {
-    //       subscriber2.next(value);
-    //       subscriber.next(false);
-    //
-    //       this.isLoading.subscribe();
-    //     }));
-    //   });
-    // });
   }
 }
