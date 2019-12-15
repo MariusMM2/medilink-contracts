@@ -1,12 +1,8 @@
 export class Contract {
   id: number;
   name: string;
-  description: string;
-  startDate: string;
-  expirationDate: string;
-  type: string;
-  file: string;
-  userId: number;
+  createdDateTime: string;
+  webUrl: string;
 }
 
 // export class Contract {

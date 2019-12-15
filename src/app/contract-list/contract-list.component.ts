@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 import {ContractService} from '../services/contract.service';
 import {Contract} from '../entities/contract';
 import {AzureService} from '../services/azure.service';
@@ -10,27 +9,44 @@ import {AzureService} from '../services/azure.service';
   styleUrls: ['./contract-list.component.css']
 })
 export class ContractListComponent implements OnInit {
-  contracts$: Observable<Contract[]>;
-  isLoading$: Observable<boolean>;
+  contracts: Contract[];
+  isLoading: boolean;
   // userSearch: string;
   // isAdmin$: Observable<boolean>;
 
   constructor(private contractService: ContractService, private azureService: AzureService) {
   }
 
-  ngOnInit() {
-    this.isLoading$ = new Observable(subscriber => {
-      subscriber.next(true);
-
-      this.contracts$ = this.contractService.getContracts();
-
-      setTimeout(() => {
-        subscriber.next(false);
-      }, 2000);
-    });
+  async ngOnInit() {
+    if (this.azureService.authenticated) {
+      await this.getContracts();
+    }
   }
 
-  async loginAzure() {
+  async connectOneDrive() {
     await this.azureService.signIn();
+
+    this.getContracts();
+  }
+
+  private async getContracts() {
+    this.isLoading = true;
+
+    this.contracts = await this.azureService.getContracts();
+
+    this.isLoading = false;
+
+    // this.isLoading = new Observable(subscriber => {
+    //   subscriber.next(true);
+    //
+    //   this.contracts = new Observable(subscriber2 => {
+    //     this.azureService.getContracts().then((value => {
+    //       subscriber2.next(value);
+    //       subscriber.next(false);
+    //
+    //       this.isLoading.subscribe();
+    //     }));
+    //   });
+    // });
   }
 }

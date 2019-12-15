@@ -8,9 +8,9 @@
 
 
   <mat-card-content>
-    <p class="description">Description: {{contractInput.description}}</p>
-    <p class="description">Start Date: {{contractInput.startDate | date: 'dd/MM/yyyy'}}</p>
-    <p class="description">Expiration Date: {{contractInput.expirationDate | date: 'dd/MM/yyyy'}}</p>
+    <p class="description">ID: {{contractInput.id}}</p>
+    <p class="description">Date Created: {{contractInput.createdDateTime | date: 'dd/MM/yyyy'}}</p>
+    <p class="description">URL:</p> <a href="{{contractInput.webUrl}}">{{contractInput.webUrl}}</a>
   </mat-card-content>
 
   <mat-card-actions class="buttons" >
