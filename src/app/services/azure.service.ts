@@ -4,14 +4,15 @@ import {MsalService} from '@azure/msal-angular';
 import {Contract} from '../entities/contract';
 import {Client} from '@microsoft/microsoft-graph-client';
 
+const API_BASE = '/me/drive';
+const CONTRACTS_FOLDER = 'A0526EA1F25CC85E!106526';
+const FILTER_STRING = 'pdf';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AzureService {
 
-  private static readonly CONTRACTS_FOLDER = 'A0526EA1F25CC85E!106526';
-  private static readonly API_BASE = '/me/drive';
-  private static readonly FILTER_STRING: any = 'pdf';
   private graphClient: Client;
   public authenticated: boolean;
 
@@ -68,7 +69,7 @@ export class AzureService {
   async getContracts(): Promise<Contract[]> {
     try {
       let result = await this.graphClient
-        .api(`${AzureService.API_BASE}/items/${AzureService.CONTRACTS_FOLDER}/search(q='${AzureService.FILTER_STRING}')`)
+        .api(`${API_BASE}/items/${CONTRACTS_FOLDER}/search(q='${FILTER_STRING}')`)
         .select('name,id,webUrl,createdDateTime')
         .orderby('name ASC')
         .get();
@@ -83,7 +84,7 @@ export class AzureService {
   async getContract(id: string): Promise<Contract> {
     try {
       return await this.graphClient
-        .api(`${AzureService.API_BASE}/items/${id}`)
+        .api(`${API_BASE}/items/${id}`)
         .select('name,id,webUrl,createdDateTime')
         .get();
     } catch (error) {
