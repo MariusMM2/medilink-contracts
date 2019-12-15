@@ -1,7 +1,7 @@
 <p class="page-title">Contract Details</p>
 
 <mat-card class="example-card">
-  <ng-container *ngIf="contract$ | async as contract">
+  <ng-container *ngIf="contract">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{contract.name}}</mat-card-title>
@@ -10,22 +10,26 @@
     <mat-divider></mat-divider>
 
     <mat-card-content>
-      <p class="description">Description: {{contract.description}}</p>
-      <p class="description">Start Date: {{contract.startDate | date: 'dd/MM/yyyy'}}</p>
-      <p class="description">Expiration Date: {{contract.expirationDate | date: 'dd/MM/yyyy'}}</p>
-      <p class="description">Type: {{contract.type}}</p>
-      <p class="description">File: {{contract.file}}</p>
+      <p class="description">ID: {{contract.id}}</p>
+      <p class="description">Date Created: {{contract.createdDateTime | date: 'dd/MM/yyyy'}}</p>
+      <p class="description">URL:<a href="{{contract.webUrl}}">{{contract.webUrl}}</a></p>
+
+      <!--      <p class="description">Description: {{contract.description}}</p>-->
+      <!--      <p class="description">Start Date: {{contract.startDate | date: 'dd/MM/yyyy'}}</p>-->
+      <!--      <p class="description">Expiration Date: {{contract.expirationDate | date: 'dd/MM/yyyy'}}</p>-->
+      <!--      <p class="description">Type: {{contract.type}}</p>-->
+      <!--      <p class="description">File: {{contract.file}}</p>-->
     </mat-card-content>
 
     <mat-divider></mat-divider>
 
     <mat-card-actions>
-<!--      <button class="updateContract" mat-raised-button color="accent"-->
-<!--              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract-->
-      <button class="updateContract" mat-raised-button color="accent"
+      <!--      <button class="updateContract" mat-raised-button color="accent"-->
+      <!--              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract-->
+      <button class="updateContract" mat-raised-button color="accent" disabled
               routerLink="/dashboard/contract-update/{{contract.id}}">Update Contract
       </button>
-      <button class="deleteContract" mat-raised-button color="warn"
+      <button class="deleteContract" mat-raised-button color="warn" disabled
               (click)="deleteContract()">Delete Contract
       </button>
 <!--      <button *ngIf="isAdmin$ | async" class="updateContract" mat-raised-button color="primary"-->
@@ -34,11 +38,11 @@
     </mat-card-actions>
   </ng-container>
 
-  <ng-container *ngIf=" !(contract$ | async) && (isLoading$ | async)">
+  <ng-container *ngIf=" !contract && isLoading">
     <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
   </ng-container>
 
-  <ng-container *ngIf="!(contract$ | async) && !(isLoading$ | async)">
+  <ng-container *ngIf="!contract && !isLoading">
     <mat-card-title style="margin: auto; text-align: center;">Contract not found</mat-card-title>
   </ng-container>
 </mat-card>

@@ -10,7 +10,7 @@ import {Client} from '@microsoft/microsoft-graph-client';
 export class AzureService {
 
   private static readonly CONTRACTS_FOLDER = 'A0526EA1F25CC85E!106526';
-  private static readonly API_BASE = '/me/drive/items';
+  private static readonly API_BASE = '/me/drive';
   private static readonly FILTER_STRING: any = 'pdf';
   private graphClient: Client;
   public authenticated: boolean;
@@ -78,7 +78,7 @@ export class AzureService {
       //   .orderby('name ASC')
       //   .get();
       let result = await this.graphClient
-        .api(`${AzureService.API_BASE}/${AzureService.CONTRACTS_FOLDER}/search(q='${AzureService.FILTER_STRING}')`)
+        .api(`${AzureService.API_BASE}/items/${AzureService.CONTRACTS_FOLDER}/search(q='${AzureService.FILTER_STRING}')`)
         .select('name,id,webUrl,createdDateTime')
         .orderby('name ASC')
         .get();
@@ -86,6 +86,18 @@ export class AzureService {
       return result.value;
     } catch (error) {
       console.log('Could not get contracts');
+      console.log(JSON.stringify(error, null, 2));
+    }
+  }
+
+  async getContract(id: string): Promise<Contract> {
+    try {
+      return await this.graphClient
+        .api(`${AzureService.API_BASE}/items/${id}`)
+        .select('name,id,webUrl,createdDateTime')
+        .get();
+    } catch (error) {
+      console.log(`Could not get contract with id '${id}'`);
       console.log(JSON.stringify(error, null, 2));
     }
   }
