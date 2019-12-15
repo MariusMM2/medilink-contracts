@@ -1,5 +1,5 @@
 export class Contract {
-  id: number;
+  id: string;
   name: string;
   createdDateTime: string;
   webUrl: string;
