@@ -9,10 +9,11 @@ import {Client} from '@microsoft/microsoft-graph-client';
 })
 export class AzureService {
 
+  private static readonly CONTRACTS_FOLDER = 'A0526EA1F25CC85E!106526';
+  private static readonly API_BASE = '/me/drive/items';
+  private static readonly FILTER_STRING: any = 'pdf';
   private graphClient: Client;
-  private contractsFolderId = 'A0526EA1F25CC85E!106526';
   public authenticated: boolean;
-  private filterString: any = 'pdf';
 
   constructor(private msalService: MsalService) {
     this.authenticated = false;
@@ -76,11 +77,11 @@ export class AzureService {
       //   .select('name,id,webUrl')
       //   .orderby('name ASC')
       //   .get();
-      let [result] = await Promise.all([this.graphClient
-        .api(`/me/drive/items/${this.contractsFolderId}/search(q='${this.filterString}')`)
+      let result = await this.graphClient
+        .api(`${AzureService.API_BASE}/${AzureService.CONTRACTS_FOLDER}/search(q='${AzureService.FILTER_STRING}')`)
         .select('name,id,webUrl,createdDateTime')
         .orderby('name ASC')
-        .get()]);
+        .get();
 
       return result.value;
     } catch (error) {
