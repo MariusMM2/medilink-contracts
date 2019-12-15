@@ -8,11 +8,9 @@ import {MsalService} from '@azure/msal-angular';
 export class AzureService {
 
   public authenticated: boolean;
-  public user: AzureUser;
 
   constructor(private msalService: MsalService) {
     this.authenticated = false;
-    this.user = null;
   }
 
   // Prompt the user to sign in and
@@ -26,17 +24,12 @@ export class AzureService {
 
     if (result) {
       this.authenticated = true;
-      // Temporary placeholder
-      this.user = new AzureUser();
-      this.user.displayName = 'Adele Vance';
-      this.user.email = 'AdeleV@contoso.com';
     }
   }
 
   // Sign out
   signOut(): void {
     this.msalService.logout();
-    this.user = null;
     this.authenticated = false;
   }
 
@@ -54,9 +47,4 @@ export class AzureService {
     }
     return result;
   }
-}
-
-class AzureUser {
-  public displayName: string;
-  public email: string;
 }
