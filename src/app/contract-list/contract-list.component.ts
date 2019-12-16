@@ -23,9 +23,9 @@ export class ContractListComponent implements OnInit, AfterViewInit {
       subscriber.next(true);
       this.contracts$ = this.contractService.getContracts();
       this.contracts$.forEach(contracts => {
-        console.log('contracts before sort', contracts);
+        // console.log('contracts before sort', contracts);
         contracts.sort((a, b) => (a.startDate > b.startDate) ? 1 : ((b.startDate > a.startDate) ? -1 : 0));
-        console.log('contracts after sort', contracts);
+        // console.log('contracts after sort', contracts);
         return contracts;
       });
       setTimeout(() => {

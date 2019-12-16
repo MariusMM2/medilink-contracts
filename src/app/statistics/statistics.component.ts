@@ -11,51 +11,67 @@ import {ContractService} from '../services/contract.service';
 export class StatisticsComponent implements OnInit {
   contracts$: Observable<Contract[]>;
   isLoading$: Observable<boolean>;
-  data$: Array<Contract>;
+  statisticsDateCurrent = 0;
+  statisticsDateExpired = 0;
+  statisticsDateNotStarted = 0;
 
   constructor( private contractService: ContractService) {
   }
 
   ngOnInit() {
-
-    // const entitie$: Observable<Contract[]> = this.myService.filter(2).share(); // 1
-    // let data: [Contract[]] = []; // 2
-    // let count: number = 0; // 3
-
-    // entitie$.subscribe(ent => this.data.push(ent)); // 4
-    // entitie$.reduce((state, curr) => state + 1, 0).subscribe(c => count = c); // 5
-    //
-
-
     this.isLoading$ = new Observable(subscriber => {
       subscriber.next(true);
-
       this.contracts$ = this.contractService.getContracts();
-
       this.contracts$.forEach(contracts => {
-
-        for (let i = 0; i < contracts.length; i++) {
-          console.log('i', i);
-          // contracts[i].expirationDate
-          console.log('contracts[i].expirationDate: ', contracts[i].expirationDate);
-
-        }
+        [this.statisticsDateCurrent, this.statisticsDateExpired, this.statisticsDateNotStarted] =
+          generateDateStatistics(contracts, this.statisticsDateCurrent,
+                                            this.statisticsDateExpired,
+                                            this.statisticsDateNotStarted);
+        // generateCostStatistics(contracts);
+        // generateLocationStatistics(contracts);
       })
-      // this.data$.push(this.contracts$.pipe());
-      console.log('------ this.contracts$ ' + this.contracts$);
-
       setTimeout(() => {
         subscriber.next(false);
       }, 2000);
     });
-
-    // console.log('this.isLoading$ ' + this.isLoading$);
-    // console.log('this.data ' + this.data);
   }
+}
 
+function generateDateStatistics(contracts, statisticsDateCurrent, statisticsDateExpired, statisticsDateNotStarted) {
+  const currentDateString = formatDate(new Date());
+  for (let i = 0; i < contracts.length; i++) {
+    console.log('contracts[i].startDate: ', contracts[i].startDate);
+    console.log('contracts[i].expirationDate: ', contracts[i].expirationDate);
+    console.log('----currentDateString: ', currentDateString);
 
-  // countActiveContracts(){
-  //
-  // }
+    if (contracts[i].startDate < currentDateString && currentDateString < contracts[i].expirationDate) {
+      statisticsDateCurrent ++;
+    }
+    if (contracts[i].expirationDate < currentDateString) {
+      statisticsDateExpired ++;
+    }
+    if ( currentDateString < contracts[i].startDate) {
+      statisticsDateNotStarted ++;
+    }
+  }
+  // console.log('-----------------------------------------------');
+  // console.log('this.statisticsDateCurrent', this.statisticsDateCurrent);
+  // console.log('this.statisticsDateExpired', this.statisticsDateExpired);
+  // console.log('this.statisticsDateNotStarted', this.statisticsDateNotStarted);
+  // console.log('-----------------------------------------------');
+  return [statisticsDateCurrent, statisticsDateExpired, statisticsDateNotStarted];
+}
 
+function formatDate(date) {
+  var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
+
+  return [year, month, day].join('-');
 }

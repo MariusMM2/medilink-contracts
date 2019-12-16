@@ -1,20 +1,7 @@
 <p class="page-title">Statistics</p>
 
 
-
-  <div *ngFor="let contract of contracts$ | async ">
-    <p>{{contract.name}}</p>
-  </div>
-
-<!--<p>{{contracts$}}</p>-->
-
 <div class="container">
-  <!--  <div *ngFor="let contract of contracts$ | async ">-->
-  <!--&lt;!&ndash;  <div *ngFor="let contract of contracts$ | async | contractPipe: userSearch">&ndash;&gt;-->
-  <!--    <app-contract class="contract"-->
-  <!--                 [contractInput]="contract"-->
-  <!--    ></app-contract>-->
-  <!--  </div>-->
 
   <ng-container *ngIf=" !(contracts$ | async) && (isLoading$ | async)">
     <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
@@ -33,15 +20,15 @@
         <h3>Contract Statistics - Date</h3>
         <p>
           <span>Current: </span>
-          <span>1</span>
+          <span>{{statisticsDateCurrent / 2 }}</span>
         </p>
         <p>
           <span>Expired: </span>
-          <span>1</span>
+          <span>{{statisticsDateExpired / 2}}</span>
         </p>
         <p>
           <span>Not yet started: </span>
-          <span>1</span>
+          <span>{{statisticsDateNotStarted / 2}}</span>
         </p>
       </div>
     </div>
