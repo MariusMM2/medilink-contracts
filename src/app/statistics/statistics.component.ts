@@ -14,6 +14,8 @@ export class StatisticsComponent implements OnInit {
   statisticsDateCurrent = 0;
   statisticsDateExpired = 0;
   statisticsDateNotStarted = 0;
+  statisticsMostExpensiveContract = 0;
+  statisticsCheapestContract = 0;
 
   constructor( private contractService: ContractService) {
   }
@@ -27,8 +29,7 @@ export class StatisticsComponent implements OnInit {
           generateDateStatistics(contracts, this.statisticsDateCurrent,
                                             this.statisticsDateExpired,
                                             this.statisticsDateNotStarted);
-        // generateCostStatistics(contracts);
-        // generateLocationStatistics(contracts);
+        [this.statisticsCheapestContract, this.statisticsMostExpensiveContract] = generateCostStatistics(contracts);
       })
       setTimeout(() => {
         subscriber.next(false);
@@ -60,6 +61,17 @@ function generateDateStatistics(contracts, statisticsDateCurrent, statisticsDate
   // console.log('this.statisticsDateNotStarted', this.statisticsDateNotStarted);
   // console.log('-----------------------------------------------');
   return [statisticsDateCurrent, statisticsDateExpired, statisticsDateNotStarted];
+}
+
+function generateCostStatistics(contracts) {
+  console.log('contracts', contracts);
+  contracts.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost)) ? 1 : ((parseInt(b.cost) > parseInt(a.cost)) ? -1 : 0));
+  console.log('contracts', contracts);
+  console.log('-----------------------------------------------');
+  console.log('contracts[0]', contracts[0]);
+  console.log('contracts[contracts.length - 1]', contracts[contracts.length - 1]);
+  console.log('-----------------------------------------------');
+  return [contracts[0].id, contracts[contracts.length - 1].id];
 }
 
 function formatDate(date) {
