@@ -19,7 +19,7 @@ export class ContractPipe implements PipeTransform {
   // }
 
   transform(contracts: Contract[], search?: string): any {
-    console.log(contracts);
+    // console.log(contracts);
 
     // return contracts.filter(contract => {
     //   if (contract.name === undefined || contract.name !== search) {
@@ -30,8 +30,8 @@ export class ContractPipe implements PipeTransform {
 
     // return contractsFilter;
 
-    console.log(contracts);
-    console.log(search);
+    // console.log(contracts);
+    // console.log(search);
     if (search === undefined) {
       return contracts;
     }
