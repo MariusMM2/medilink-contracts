@@ -22,7 +22,8 @@ export class ContractListComponent implements OnInit {
       subscriber.next(true);
       this.contracts$ = this.contractService.getContracts();
       this.contracts$.forEach(contracts => {
-        this.sorted$ = contracts.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost)) ? 1 : ((parseInt(b.cost) > parseInt(a.cost)) ? -1 : 0));
+        // this.sorted$ = contracts.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost)) ? 1 : ((parseInt(b.cost) > parseInt(a.cost)) ? -1 : 0));
+        this.sorted$ = contracts.sort((a, b) => (a.cost > b.cost) ? 1 : (b.cost > a.cost) ? -1 : 0);
         this.sorted$.forEach( function (item, i) {
           item.location = addFlag(item.location);
         });
