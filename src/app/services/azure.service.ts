@@ -69,13 +69,37 @@ export class AzureService {
   async getContracts(): Promise<Contract[]> {
     try {
       let result = await this.graphClient
-        .api(`${API_BASE}/items/${CONTRACTS_FOLDER}/search(q='${FILTER_STRING}')`)
-        .select('name,id,webUrl,createdDateTime')
-        .orderby('name ASC')
+        .api(`${API_BASE}/items/${CONTRACTS_FOLDER}/children`)
+        .select('name,id,webUrl,folder,file')
         .get();
 
-      return result.value;
+      let contracts: Contract[] = [];
+
+      let folders: DriveFolder[] = result.value.filter(value => value.folder);
+
+      console.log(folders);
+
+      for (const folder of folders) {
+        result = await this.graphClient
+          .api(`${API_BASE}/items/${(folder.id)}/search(q='${FILTER_STRING}')`)
+          .select('name,id,webUrl,folder,file')
+          .get();
+
+        let folderContracts: Contract[] = result.value.filter(value => value.file);
+
+        for (const contract of folderContracts) {
+          contract.company = folder.name;
+
+          contracts.push(contract);
+        }
+      }
+
+      console.log(contracts);
+
+      return contracts.sort((a, b) => a.name.localeCompare(b.name));
+
     } catch (error) {
+      console.error(error);
       console.log('Could not get contracts');
       console.log(JSON.stringify(error, null, 2));
     }
@@ -83,12 +107,24 @@ export class AzureService {
 
   async getContract(id: string): Promise<Contract> {
     try {
-      return await this.graphClient
+      let result = await this.graphClient
         .api(`${API_BASE}/items/${id}`)
         .get();
+
+      let contract: Contract = result;
+
+      contract.company = result.parentReference.name;
+
+      return contract;
     } catch (error) {
       console.log(`Could not get contract with id '${id}'`);
       console.log(JSON.stringify(error, null, 2));
     }
   }
+}
+
+class DriveFolder {
+  id: string;
+  name: string;
+  webUrl: string;
 }

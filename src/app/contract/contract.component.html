@@ -6,8 +6,8 @@
 
   <mat-card-content>
     <p class="description">ID: {{contractInput.id}}</p>
-    <p class="description">Date Created: {{contractInput.createdDateTime | date: 'dd/MM/yyyy'}}</p>
-    <p class="description">URL:</p> <a href="{{contractInput.webUrl}}">{{contractInput.webUrl}}</a>
+    <p class="description">Company: {{contractInput.company}}</p>
+    <p class="description">URL: <a href="{{contractInput.webUrl}}" target="_blank">{{contractInput.webUrl}}</a></p>
   </mat-card-content>
 
   <mat-card-actions class="buttons" >

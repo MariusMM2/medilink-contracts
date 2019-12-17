@@ -1,7 +1,7 @@
 export class Contract {
   id: string;
   name: string;
-  createdDateTime: string;
+  company: string;
   webUrl: string;
 }
 
