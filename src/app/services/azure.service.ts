@@ -85,7 +85,6 @@ export class AzureService {
     try {
       return await this.graphClient
         .api(`${API_BASE}/items/${id}`)
-        .select('name,id,webUrl,createdDateTime')
         .get();
     } catch (error) {
       console.log(`Could not get contract with id '${id}'`);

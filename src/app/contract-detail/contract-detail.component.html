@@ -12,7 +12,7 @@
     <mat-card-content>
       <p class="description">ID: {{contract.id}}</p>
       <p class="description">Date Created: {{contract.createdDateTime | date: 'dd/MM/yyyy'}}</p>
-      <p class="description">URL:<a href="{{contract.webUrl}}">{{contract.webUrl}}</a></p>
+      <p class="description">URL: <a href="{{contract.webUrl}}" target="_blank">{{contract.webUrl}}</a></p>
     </mat-card-content>
 
     <mat-divider></mat-divider>
@@ -26,9 +26,12 @@
       <button class="deleteContract" mat-raised-button color="warn" disabled
               (click)="deleteContract()">Delete Contract
       </button>
-<!--      <button *ngIf="isAdmin$ | async" class="updateContract" mat-raised-button color="primary"-->
-<!--              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract-->
-<!--      </button>-->
+      <a class="updateContract" mat-raised-button color="primary"
+         [href]="contract['@microsoft.graph.downloadUrl']" target="_blank">Download
+      </a>
+      <!--      <button *ngIf="isAdmin$ | async" class="updateContract" mat-raised-button color="primary"-->
+      <!--              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract-->
+      <!--      </button>-->
     </mat-card-actions>
   </ng-container>
 
