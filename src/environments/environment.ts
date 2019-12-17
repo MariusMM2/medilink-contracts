@@ -1,4 +1,5 @@
 import {firebaseConfig} from './firebaseCredentials';
+import {azureConfig} from './azureCredentials';
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
@@ -6,7 +7,8 @@ import {firebaseConfig} from './firebaseCredentials';
 
 export const environment = {
   production: false,
-  firebase: firebaseConfig
+  firebase: firebaseConfig,
+  azure: azureConfig
 };
 
 /*

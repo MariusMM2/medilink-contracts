@@ -1,6 +1,8 @@
 export class Contract {
   id: number;
+  id: string;
   name: string;
+  company: string;
   description: string;
   startDate: string;
   expirationDate: string;

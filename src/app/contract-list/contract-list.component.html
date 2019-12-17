@@ -1,6 +1,28 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
 <p class="page-title">Contract List</p>
 
+<div *ngIf="azureService.authenticated; then loadContracts else oneDrivePrompt"></div>
+
+<ng-template #oneDrivePrompt>
+  <button style="margin: auto; align-self: center;" type="button" mat-raised-button color="primary"
+          (click)="connectOneDrive()">Connect OneDrive
+  </button>
+</ng-template>
+
+<ng-template #loadContracts>
+  <div id="search">
+    <mat-form-field>
+      <input matInput placeholder="Search product" value="">
+    </mat-form-field>
+  </div>
+
+  <div class="container">
+    <div *ngFor="let contract of contracts">
+      <!--  <div *ngFor="let contract of contracts$ | async | contractPipe: userSearch">-->
+      <app-contract class="contract"
+                    [contractInput]="contract"
+      ></app-contract>
+    </div>
 <!--<div id="search">-->
 <!--  <mat-form-field>-->
 <!--    <input matInput placeholder="Search product" value="">-->
@@ -96,6 +118,15 @@
 
 </div>
 
+    <ng-container *ngIf=" !contracts && isLoading">
+      <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
+    </ng-container>
+
+    <ng-container *ngIf="!contracts && !isLoading">
+      <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts</mat-card-title>
+    </ng-container>
+  </div>
+</ng-template>
 <!---->
 
 <div class="container">

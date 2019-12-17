@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {delay, tap} from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor() { }
 
-  isLoggedIn = false;
+  isLoggedIn = true;
   redirectUrl: string;
 
   login(): Observable<boolean> {

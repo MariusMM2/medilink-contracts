@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 import {ContractService} from '../services/contract.service';
 import {Contract} from '../entities/contract';
+import {AzureService} from '../services/azure.service';
 
 @Component({
   selector: 'app-contract-list',
@@ -9,14 +9,33 @@ import {Contract} from '../entities/contract';
   styleUrls: ['./contract-list.component.css']
 })
 export class ContractListComponent implements OnInit {
-  contracts$: Observable<Contract[]>;
-  sorted$: Contract[];
-  isLoading$: Observable<boolean>;
+  contracts: Contract[];
+  sorted: Contract[];
+  isLoading: boolean;
   contractSearch: string;
   // isAdmin$: Observable<boolean>;
 
-  constructor( private contractService: ContractService) {
+  constructor(private contractService: ContractService, private azureService: AzureService) {
   }
+
+  async ngOnInit() {
+    if (this.azureService.authenticated) {
+      await this.getContracts();
+    }
+  }
+
+  async connectOneDrive() {
+    await this.azureService.signIn();
+
+    this.getContracts();
+  }
+
+  private async getContracts() {
+    this.isLoading = true;
+
+    this.contracts = await this.azureService.getContracts();
+
+    this.isLoading = false;
   ngOnInit() {
     this.isLoading$ = new Observable(subscriber => {
       subscriber.next(true);
