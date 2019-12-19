@@ -1,14 +1,97 @@
 <p class="page-title">Statistics</p>
 
-<p>Contracts</p>
-<p>- Active Contracts</p>
-<p>- Expired Contracts</p>
-<p>- Future Contracts</p>
+<div class="container">
+  <ng-container *ngIf=" !(contracts$ | async) && (isLoading$ | async)">
+    <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
+  </ng-container>
+  <ng-container *ngIf="!(contracts$ | async) && !(isLoading$ | async)">
+    <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts</mat-card-title>
+  </ng-container>
+</div>
 
-<p>Cost</p>
-<p>- most expensive</p>
-<p>- cheapest</p>
+<mat-tab-group dynamicHeight mat-align-tabs="center">
+  <mat-tab label="Date">
+    <div class="example-large-box mat-elevation-z4">
+      <div class="list">
+        <h3>Contract Statistics - Date</h3>
+        <p>
+          <span>Current: </span>
+          <span>{{statisticsDateCurrent / 2 }}</span>
+        </p>
+        <p>
+          <span>Expired: </span>
+          <span>{{statisticsDateExpired / 2}}</span>
+        </p>
+        <p>
+          <span>Not yet started: </span>
+          <span>{{statisticsDateNotStarted / 2}}</span>
+        </p>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Cost">
+    <div class="example-large-box mat-elevation-z4">
+      <div class="list">
+        <h3>Contract Statistics - Cost</h3>
+        <p>
+          <span>Cheapest: </span>
+        </p>
+          <table matSort>
+            <tr>
+              <th mat-sort-header="name">name</th>
+              <th mat-sort-header="cost">cost</th>
+              <th mat-sort-header="actions">actions</th>
+            </tr>
+            <tr *ngFor="let contract of contracts$ | async ">
+                <td *ngIf="contract.id == statisticsCheapestContract">{{contract.name }}</td>
+                <td *ngIf="contract.id == statisticsCheapestContract">{{contract.cost}}</td>
+                <td *ngIf="contract.id == statisticsCheapestContract"><button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details</button></td>
+            </tr>
+          </table>
 
-<p>Location</p>
-<p>- DK</p>
-<p>- US</p>
+        <p>
+          <span>Most Expensive: </span>
+        </p>
+        <table matSort>
+          <tr>
+            <th mat-sort-header="name">Name</th>
+            <th mat-sort-header="cost">Cost</th>
+            <th mat-sort-header="actions">Actions</th>
+          </tr>
+          <tr *ngFor="let contract of contracts$ | async ">
+            <td *ngIf="contract.id == statisticsMostExpensiveContract">{{contract.name }}</td>
+            <td *ngIf="contract.id == statisticsMostExpensiveContract">{{contract.cost}}</td>
+            <td *ngIf="contract.id == statisticsMostExpensiveContract"><button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </mat-tab>
+<!--  <mat-tab label="Location">-->
+<!--    <div class="example-large-box mat-elevation-z4">-->
+<!--      <div class="list">-->
+<!--        <h3>Contract Statistics - Location</h3>-->
+<!--        <p>-->
+<!--          <span>Denmark: </span>-->
+<!--          <span>1</span>-->
+<!--        </p>-->
+<!--        <p>-->
+<!--          <span>Germany: </span>-->
+<!--          <span>1</span>-->
+<!--        </p>-->
+<!--        <p>-->
+<!--          <span>United Kingdom: </span>-->
+<!--          <span>1</span>-->
+<!--        </p>-->
+<!--        <p>-->
+<!--          <span>US: </span>-->
+<!--          <span>1</span>-->
+<!--        </p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </mat-tab>-->
+</mat-tab-group>
+
+
+
+

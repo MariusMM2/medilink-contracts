@@ -1,0 +1,41 @@
+.example-small-box, .example-large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.example-small-box {
+  height: 100px;
+  width: 100px;
+}
+
+.example-large-box {
+  height: 300px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/**/
+
+table {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*tr {*/
+/*  width: 100%;*/
+/*}*/
+/*td {*/
+/*  width: 100px;*/
+/*}*/
+
+
+/*.ng-star-inserted {*/
+/*  background-color: red;*/
+/*}*/
