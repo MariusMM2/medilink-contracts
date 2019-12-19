@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     const user = this.loginForm.value as User;
     console.log('user: ', user);
     if (this.loginForm.valid) {
-      this.userApi.loginUser(user).subscribe(backendRes => { // arrow function
+      this.userApi.loginUser(user).subscribe(async backendRes => { // arrow function
         console.log('backend response:', backendRes);
 
         if (backendRes.status === 200) {
@@ -69,6 +69,64 @@ export class LoginComponent implements OnInit {
         } else if (backendRes.status === 402) {
 
           alert(backendRes.message);
+
+        } else if (backendRes.status === 403) {
+
+          alert(backendRes.message);
+
+        } else if (backendRes.status === 404) {
+
+          alert(backendRes.message);
+
+          setTimeout(() => {
+            (document.getElementById('loginButton') as HTMLInputElement).disabled = false;
+            }, 300000);
+          (document.getElementById('loginButton') as HTMLInputElement).disabled = true;
+
+          document.getElementById('loginFailedMsg').style.display = 'block';
+
+          // tslint:disable-next-line:no-shadowed-variable
+          function startTimer(duration, display) {
+            let start = Date.now();
+            let diff;
+            let minutes;
+            let seconds;
+            function timer() {
+              // get the number of seconds that have elapsed since
+              // startTimer() was called
+              // tslint:disable-next-line:no-bitwise
+              diff = duration - (((Date.now() - start) / 1000) | 0);
+
+              // does the same job as parseInt truncates the float
+              // tslint:disable-next-line:no-bitwise
+              minutes = (diff / 60) | 0;
+              // tslint:disable-next-line:no-bitwise
+              seconds = (diff % 60) | 0;
+
+              minutes = minutes < 10 ? '0' + minutes : minutes;
+              seconds = seconds < 10 ? '0' + seconds : seconds;
+
+              display.textContent = minutes + ':' + seconds;
+
+              if (diff <= 0) {
+                // add one second so that the count down starts at the full duration
+                // example 05:00 not 04:59
+                start = Date.now() + 1000;
+              }
+            }
+            // we don't want to wait a full second before the timer starts
+            timer();
+            setInterval(timer, 1000);
+          }
+
+          const fiveMinutes = 60 * 5;
+          const display = document.querySelector('#time');
+          startTimer(fiveMinutes, display);
+
+          setTimeout(() => {
+            document.getElementById('loginFailedMsg').style.display = 'none';
+          }, 300000);
+
 
         }
 

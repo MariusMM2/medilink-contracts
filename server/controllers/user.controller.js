@@ -5,7 +5,6 @@ const User = require("../models/user.model");
 const Config = require("../config/config");
 const { sendConfirmEmail, sendForgotPasswordEmail } = require("../emails/mail");
 
-
 function register(req, res) {
   console.log("req.body: ", req.body);
   const email = req.body.email;
@@ -23,6 +22,7 @@ function register(req, res) {
       console.log(req.body);
 
       req.body.notificationEmail = req.body.email;
+      req.body.role = 'User';
 
       User.create(req.body).then(user => {
         console.log("created: ", user);
@@ -63,6 +63,7 @@ function confirmEmail(req, res) {
   const user = jwt.verify(req.params.token, Config.JWT_SECRET);
 
   user.emailVerified = true;
+  user.active = true;
 
   User.update(user, {where: {id: user.id}}).then(() => {
     res.json({
@@ -79,6 +80,7 @@ function confirmEmail(req, res) {
 function login(req, res) {
   console.log("req.body: ", req.body);
   const email = req.body.email;
+
   // find the email from the user's input
   User.findOne({
     where: {
@@ -92,7 +94,7 @@ function login(req, res) {
         console.log("user: ", user);
         console.log("user.dataValues: ", user.dataValues);
 
-        if(user.dataValues.emailVerified === true) {
+        if(user.dataValues.emailVerified === true && user.dataValues.active === true) {
 
           const token = jwt.sign(user.dataValues, Config.JWT_SECRET, {
             expiresIn: 86400 // expires in 24 hours = 86400 seconds
@@ -106,6 +108,8 @@ function login(req, res) {
           //
           // res.header('Authorization', 'Bearer '+ token);
 
+          user.dataValues.loggedTries = 0;
+          User.update(user.dataValues, {where: {id: user.dataValues.id}});
 
           res.json({
             status: 200,
@@ -114,18 +118,45 @@ function login(req, res) {
             token
           });
 
-        } else {
+        } else if(user.dataValues.emailVerified === false) {
           res.json({
             status: 402,
             message: "Email not verified!"
           });
+        } else if(user.dataValues.active === false) {
+          res.json({
+            status: 403,
+            message: "Your account is not active!"
+          });
         }
 
       } else {
-        res.json({
-          status: 400,
-          message: "Incorrect password!"
-        });
+
+        user.dataValues.loggedTries++;
+        console.log("loggedtries: ", user.dataValues.loggedTries);
+        User.update(user.dataValues, {where: {id: user.dataValues.id}});
+
+        if(user.dataValues.loggedTries === 5) {
+          user.dataValues.loggedTries = 0;
+          user.dataValues.active = false;
+          User.update(user.dataValues, {where: {id: user.dataValues.id}});
+
+          setTimeout(function () {
+            user.dataValues.active = true;
+            User.update(user.dataValues, {where: {id: user.dataValues.id}});
+          },300000); // after 5 minutes
+          res.json({
+            status: 404,
+            message: "You have failed to login for 5 times. Now you have to wait!"
+          });
+        } else {
+          res.json({
+            status: 400,
+            message: "Incorrect password!",
+            loggedTries: user.dataValues.loggedTries
+          });
+        }
+
       }
 
     } else {
