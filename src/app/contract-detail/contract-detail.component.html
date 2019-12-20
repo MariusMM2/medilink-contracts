@@ -10,12 +10,10 @@
     <mat-divider></mat-divider>
 
     <mat-card-content>
-      <p class="description">Company: {{contract.company}}</p>
       <p class="description">Description: {{contract.description}}</p>
       <p class="description">Start Date: {{contract.startDate | date: 'dd/MM/yyyy'}}</p>
       <p class="description">Expiration Date: {{contract.expirationDate | date: 'dd/MM/yyyy'}}</p>
       <p class="description">Type: {{contract.type}}</p>
-      <p class="description">File: {{contract.file}}</p>
       <p class="category">Category: {{contract.category}}</p>
       <p class="cost">Cost: {{contract.cost}}</p>
       <p class="location">Location: {{contract.location}}</p>
@@ -24,20 +22,25 @@
     <mat-divider></mat-divider>
 
     <mat-card-actions>
-      <!--      <button class="updateContract" mat-raised-button color="accent"-->
-      <!--              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract-->
-      <button class="updateContract" mat-raised-button color="accent" disabled
+      <button class="updateContract" mat-raised-button color="accent"
               routerLink="/dashboard/contract-update/{{contract.id}}">Update Contract
       </button>
-      <button class="deleteContract" mat-raised-button color="warn" disabled
-              (click)="deleteContract()">Delete Contract
+      <button class="deleteContract" mat-raised-button color="warn" disabled (click)="deleteContract()">Delete Contract
       </button>
-      <a class="updateContract" mat-raised-button color="primary"
-         [href]="contract['@microsoft.graph.downloadUrl']" target="_blank">Download
-      </a>
-      <!--      <button *ngIf="isAdmin$ | async" class="updateContract" mat-raised-button color="primary"-->
-      <!--              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract-->
-      <!--      </button>-->
+      <ng-container *ngIf="contract.driveRef !== undefined; then showButtons else showDisabledButtons"></ng-container>
+
+      <ng-template #showButtons>
+        <a class="updateContract" mat-raised-button color="primary"
+           [href]="contract.driveRef.webUrl" target="_blank">Open
+        </a>
+        <a class="updateContract" mat-raised-button color="primary"
+           [href]="contract.driveRef.downloadUrl" target="_blank">Download
+        </a>
+      </ng-template>
+      <ng-template #showDisabledButtons>
+        <a class="updateContract" mat-raised-button color="primary" disabled>Open</a>
+        <a class="updateContract" mat-raised-button color="primary" disabled>Download</a>
+      </ng-template>
     </mat-card-actions>
   </ng-container>
 
