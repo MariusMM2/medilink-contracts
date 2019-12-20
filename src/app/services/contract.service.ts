@@ -19,7 +19,12 @@ export class ContractService {
   async getContract(id: string): Promise<Contract> {
     let contract = await this.http.get<Contract>(`${this.baseUrl}/${id}`).toPromise();
 
-    contract.driveRef = await this.azureService.getContract(contract.file);
+    try {
+      contract.driveRef = await this.azureService.getContract(contract.file);
+    } catch (error) {
+      console.log(`Could not get DriveItem with id '${contract.file}'`);
+      console.log(JSON.stringify(error, null, 2));
+    }
 
     return contract;
   }
