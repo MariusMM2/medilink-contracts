@@ -16,6 +16,11 @@
     </mat-form-field>
   </div>
 
+  <button style="margin: auto; align-self: center;" type="button" mat-raised-button color="primary"
+          [disabled]="isLoading"
+          (click)="refresh()">Refresh
+  </button>
+
   <div class="container">
     <!--    <div *ngFor="let contract of contracts">-->
     <!--      &lt;!&ndash;  <div *ngFor="let contract of contracts$ | async | contractPipe: userSearch">&ndash;&gt;-->
@@ -116,11 +121,11 @@
 
   </div>
 
-  <ng-container *ngIf=" !contracts && isLoading">
+  <ng-container *ngIf="isLoading">
     <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
   </ng-container>
 
-  <ng-container *ngIf="!contracts && !isLoading">
+  <ng-container *ngIf="(contracts.length === 0) && !isLoading">
     <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts</mat-card-title>
   </ng-container>
   <!--  </div>-->

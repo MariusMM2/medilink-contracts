@@ -16,6 +16,7 @@ export class ContractListComponent implements OnInit {
   // isAdmin$: Observable<boolean>;
 
   constructor(private contractService: ContractService, private azureService: AzureService) {
+    this.contracts = [];
   }
 
   async ngOnInit() {
@@ -28,6 +29,14 @@ export class ContractListComponent implements OnInit {
     this.isLoading = true;
 
     await this.azureService.signIn();
+
+    this.getContracts();
+  }
+
+  async refresh() {
+    this.contracts.length = 0;
+    this.isLoading = true;
+
     await this.contractService.syncContracts();
 
     this.getContracts();
