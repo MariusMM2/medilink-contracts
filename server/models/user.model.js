@@ -59,6 +59,10 @@ const User = db.define("users", {
     allowNull: false,
     defaultValue: false
   },
+  loggedTries: {
+    type: Sequelize.INTEGER,
+    defaultValue: '0'
+  }
 }, {
   timestamps: false
 });

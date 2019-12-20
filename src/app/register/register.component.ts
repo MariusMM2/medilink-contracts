@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
         if (backendRes.status === 200) {
           this.router.navigate([''])
             .then(() => {
-              console.log('Successfully logged in!');
+              console.log('Successfully registered!');
             })
             .catch(e => {
               console.log('An error occurred: ', e);
