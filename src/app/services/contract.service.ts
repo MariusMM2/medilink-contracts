@@ -1,34 +1,88 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Contract } from '../entities/contract';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Contract, DriveContract} from '../entities/contract';
+import {AzureService} from './azure.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractService {
-  private baseUrl = 'http://localhost:3000/api/contracts/';
+  private baseUrl = 'http://localhost:3000/api/contracts';
 
-  constructor( private http: HttpClient ) { }
-
-  addContract(contract: Contract): Observable<any> {
-    return this.http.post<Contract>(this.baseUrl + 'create', contract);
+  constructor(private http: HttpClient, private azureService: AzureService) {
   }
 
-  getContract(id: string): Observable<Contract> {
-    return this.http.get<Contract>(this.baseUrl + `${id}`);
+  addContract(contract: Contract): Promise<any> {
+    return this.http.post<Contract>(`${this.baseUrl}/create`, contract).toPromise();
   }
 
-  getContracts(): Observable<Contract[]> {
-    return this.http.get<Contract[]>(this.baseUrl);
+  async getContract(id: string): Promise<Contract> {
+    let contract = await this.http.get<Contract>(`${this.baseUrl}/${id}`).toPromise();
+
+    contract.driveRef = await this.azureService.getContract(contract.file);
+
+    return contract;
   }
 
-  updateContract(contract: Contract): Observable<any> {
-    return this.http.put<Contract>(this.baseUrl + `${contract.id}`, contract);
+  async getContracts(): Promise<Contract[]> {
+    let contracts = await this.http.get<Contract[]>(this.baseUrl).toPromise();
+
+    for (const contract of contracts) {
+      try {
+        contract.driveRef = await this.azureService.getContract(contract.file);
+      } catch (error) {
+        console.log(`Could not get DriveItem with id '${contract.file}'`);
+        console.log(JSON.stringify(error, null, 2));
+      }
+    }
+
+    return contracts;
   }
 
-  deleteContract(id: string): Observable<any> {
-    return this.http.delete<Contract>(this.baseUrl + `${id}`);
+  async syncContracts(): Promise<any> {
+    console.log('syncing contracts');
+    let contracts: Contract[] = await this.http.get<Contract[]>(this.baseUrl).toPromise();
+    let driveContracts: DriveContract[] = await this.azureService.getContracts();
+
+    for (let driveContract of driveContracts) {
+      let contract: Contract = contracts.find(value => value.file === driveContract.id);
+      let isNewContract: boolean = contract === undefined;
+
+      if (isNewContract) {
+        contract = {
+          id: undefined,
+          name: driveContract.name,
+          file: driveContract.id,
+          description: '-',
+          startDate: '',
+          expirationDate: '',
+          type: '-',
+          category: '-',
+          cost: 0,
+          location: '-',
+          userId: -1
+        };
+      }
+
+      contract.name = driveContract.name;
+      contract.description = driveContract.company;
+
+      if (isNewContract) {
+        console.log('adding contract: ', contract);
+        await this.addContract(contract);
+      } else {
+        console.log('updating contract: ', contract);
+        await this.updateContract(contract);
+      }
+    }
+  }
+
+  updateContract(contract: Contract): Promise<any> {
+    return this.http.put<Contract>(`${this.baseUrl}/${contract.id}`, contract).toPromise();
+  }
+
+  deleteContract(id: string): Promise<any> {
+    return this.http.delete<Contract>(`${this.baseUrl}/${id}`).toPromise();
   }
 
 }

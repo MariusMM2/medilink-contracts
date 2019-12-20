@@ -27,7 +27,7 @@ export class ContractDetailComponent implements OnInit {
 
       const id = this.route.snapshot.paramMap.get('id');
 
-      this.contract = await this.azureService.getContract(id);
+      this.contract = await this.contractService.getContract(id);
 
       console.log(this.contract);
 
@@ -37,23 +37,18 @@ export class ContractDetailComponent implements OnInit {
     }
   }
 
-  deleteContract() {
+  async deleteContract() {
     // Get the id from the url
     const id = this.route.snapshot.paramMap.get('id');
-    this.contractService.deleteContract(id)
-      .subscribe(backendRes => {
-        console.log('backend response:', backendRes);
+    let backendRes = await this.contractService.deleteContract(id);
+    console.log('backend response:', backendRes);
 
-        if (backendRes.status === 200) {
-          this.snackBar.open(`Contract ${id} has been deleted`, 'Dismiss', {duration: 2000}).afterDismissed().subscribe(() => {
-            this.router.navigate(['../dashboard/contract-list']);
-          });
-        } else if (backendRes.status === 400) {
-
-          alert(backendRes.message);
-
-        }
-
+    if (backendRes.status === 200) {
+      this.snackBar.open(`Contract ${id} has been deleted`, 'Dismiss', {duration: 2000}).afterDismissed().subscribe(() => {
+        this.router.navigate(['../dashboard/contract-list']);
       });
+    } else if (backendRes.status === 400) {
+      alert(backendRes.message);
+    }
   }
 }

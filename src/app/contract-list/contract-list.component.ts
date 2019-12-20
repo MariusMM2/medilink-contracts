@@ -20,12 +20,15 @@ export class ContractListComponent implements OnInit {
 
   async ngOnInit() {
     if (this.azureService.authenticated) {
-      await this.getContracts();
+      this.getContracts();
     }
   }
 
   async connectOneDrive() {
+    this.isLoading = true;
+
     await this.azureService.signIn();
+    await this.contractService.syncContracts();
 
     this.getContracts();
   }
@@ -33,33 +36,24 @@ export class ContractListComponent implements OnInit {
   private async getContracts() {
     this.isLoading = true;
 
-    this.contracts = await this.azureService.getContracts();
+    this.contracts = await this.contractService.getContracts();
+
+    // this.sorted$ = contracts.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost)) ? 1 : ((parseInt(b.cost) > parseInt(a.cost)) ? -1 : 0));
+    this.sorted = this.contracts.sort((a, b) => (a.cost > b.cost) ? 1 : (b.cost > a.cost) ? -1 : 0);
+    this.sorted.forEach((item) => item.location = addFlag(item.location));
+    console.log('- this.sorted$ after sort', this.sorted);
 
     this.isLoading = false;
-  ngOnInit() {
-    this.isLoading$ = new Observable(subscriber => {
-      subscriber.next(true);
-      this.contracts$ = this.contractService.getContracts();
-      this.contracts$.forEach(contracts => {
-        // this.sorted$ = contracts.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost)) ? 1 : ((parseInt(b.cost) > parseInt(a.cost)) ? -1 : 0));
-        this.sorted$ = contracts.sort((a, b) => (a.cost > b.cost) ? 1 : (b.cost > a.cost) ? -1 : 0);
-        this.sorted$.forEach( function (item, i) {
-          item.location = addFlag(item.location);
-        });
-        console.log('- this.sorted$ after sort', this.sorted$);
-      });
-      setTimeout(() => {
-        subscriber.next(false);
-      }, 2000);
-    });
   }
-
 }
+
+
 function addFlag(myCountry) {
   interface Flag {
     country: string;
     flag: string;
   }
+
   const flagDb: Flag[] = [
     {country: 'Denmark', flag: '🇩🇰'},
     {country: 'DK', flag: '🇩🇰'},

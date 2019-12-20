@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {MsalService} from '@azure/msal-angular';
-import {Contract} from '../entities/contract';
+import {DriveContract} from '../entities/contract';
 import {Client} from '@microsoft/microsoft-graph-client';
 
 const API_BASE = '/me/drive';
@@ -66,14 +66,14 @@ export class AzureService {
     }
   }
 
-  async getContracts(): Promise<Contract[]> {
+  async getContracts(): Promise<DriveContract[]> {
     try {
       let result = await this.graphClient
         .api(`${API_BASE}/items/${CONTRACTS_FOLDER}/children`)
         .select('name,id,webUrl,folder,file')
         .get();
 
-      let contracts: Contract[] = [];
+      let contracts: DriveContract[] = [];
 
       let folders: DriveFolder[] = result.value.filter(value => value.folder);
 
@@ -85,7 +85,7 @@ export class AzureService {
           .select('name,id,webUrl,folder,file')
           .get();
 
-        let folderContracts: Contract[] = result.value.filter(value => value.file);
+        let folderContracts: DriveContract[] = result.value.filter(value => value.file);
 
         for (const contract of folderContracts) {
           contract.company = folder.name;
@@ -105,13 +105,24 @@ export class AzureService {
     }
   }
 
-  async getContract(id: string): Promise<Contract> {
+  async getContract(id: string): Promise<DriveContract> {
+    if (id.length !== CONTRACTS_FOLDER.length) {
+      return new Promise((resolve, reject) => {
+        reject(Error(`Invalid DriveItem ID (${id})`));
+      });
+    }
     try {
       let result = await this.graphClient
         .api(`${API_BASE}/items/${id}`)
         .get();
 
-      let contract: Contract = result;
+      let contract: DriveContract = {
+        id: result.id,
+        name: result.name,
+        company: result.parentReference.name,
+        webUrl: result.weburl,
+        downloadUrl: result['@microsoft.graph.downloadUrl']
+      };
 
       contract.company = result.parentReference.name;
 
@@ -119,6 +130,7 @@ export class AzureService {
     } catch (error) {
       console.log(`Could not get contract with id '${id}'`);
       console.log(JSON.stringify(error, null, 2));
+      return null;
     }
   }
 }

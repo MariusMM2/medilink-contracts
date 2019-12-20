@@ -1,8 +1,6 @@
 export class Contract {
   id: number;
-  id: string;
   name: string;
-  company: string;
   description: string;
   startDate: string;
   expirationDate: string;
@@ -12,6 +10,15 @@ export class Contract {
   cost: number;
   location: string;
   userId: number;
+  driveRef?: DriveContract;
+}
+
+export class DriveContract {
+  id: string;
+  name: string;
+  company: string;
+  webUrl: string;
+  downloadUrl: string;
 }
 
 // export class Contract {

@@ -1,10 +1,10 @@
 <p class="page-title">Statistics</p>
 
 <div class="container">
-  <ng-container *ngIf=" !(contracts$ | async) && (isLoading$ | async)">
+  <ng-container *ngIf=" !contracts && isLoading">
     <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
   </ng-container>
-  <ng-container *ngIf="!(contracts$ | async) && !(isLoading$ | async)">
+  <ng-container *ngIf="!contracts && !isLoading">
     <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts</mat-card-title>
   </ng-container>
 </div>
@@ -36,18 +36,22 @@
         <p>
           <span>Cheapest: </span>
         </p>
-          <table matSort>
-            <tr>
-              <th mat-sort-header="name">name</th>
-              <th mat-sort-header="cost">cost</th>
-              <th mat-sort-header="actions">actions</th>
-            </tr>
-            <tr *ngFor="let contract of contracts$ | async ">
-                <td *ngIf="contract.id == statisticsCheapestContract">{{contract.name }}</td>
-                <td *ngIf="contract.id == statisticsCheapestContract">{{contract.cost}}</td>
-                <td *ngIf="contract.id == statisticsCheapestContract"><button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details</button></td>
-            </tr>
-          </table>
+        <table matSort>
+          <tr>
+            <th mat-sort-header="name">name</th>
+            <th mat-sort-header="cost">cost</th>
+            <th mat-sort-header="actions">actions</th>
+          </tr>
+          <tr *ngFor="let contract of contracts">
+            <td *ngIf="contract.id == statisticsCheapestContract">{{contract.name }}</td>
+            <td *ngIf="contract.id == statisticsCheapestContract">{{contract.cost}}</td>
+            <td *ngIf="contract.id == statisticsCheapestContract">
+              <button class="showContract" mat-raised-button color="primary"
+                      routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details
+              </button>
+            </td>
+          </tr>
+        </table>
 
         <p>
           <span>Most Expensive: </span>
@@ -58,38 +62,42 @@
             <th mat-sort-header="cost">Cost</th>
             <th mat-sort-header="actions">Actions</th>
           </tr>
-          <tr *ngFor="let contract of contracts$ | async ">
+          <tr *ngFor="let contract of contracts">
             <td *ngIf="contract.id == statisticsMostExpensiveContract">{{contract.name }}</td>
             <td *ngIf="contract.id == statisticsMostExpensiveContract">{{contract.cost}}</td>
-            <td *ngIf="contract.id == statisticsMostExpensiveContract"><button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details</button></td>
+            <td *ngIf="contract.id == statisticsMostExpensiveContract">
+              <button class="showContract" mat-raised-button color="primary"
+                      routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details
+              </button>
+            </td>
           </tr>
         </table>
       </div>
     </div>
   </mat-tab>
-<!--  <mat-tab label="Location">-->
-<!--    <div class="example-large-box mat-elevation-z4">-->
-<!--      <div class="list">-->
-<!--        <h3>Contract Statistics - Location</h3>-->
-<!--        <p>-->
-<!--          <span>Denmark: </span>-->
-<!--          <span>1</span>-->
-<!--        </p>-->
-<!--        <p>-->
-<!--          <span>Germany: </span>-->
-<!--          <span>1</span>-->
-<!--        </p>-->
-<!--        <p>-->
-<!--          <span>United Kingdom: </span>-->
-<!--          <span>1</span>-->
-<!--        </p>-->
-<!--        <p>-->
-<!--          <span>US: </span>-->
-<!--          <span>1</span>-->
-<!--        </p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </mat-tab>-->
+  <!--  <mat-tab label="Location">-->
+  <!--    <div class="example-large-box mat-elevation-z4">-->
+  <!--      <div class="list">-->
+  <!--        <h3>Contract Statistics - Location</h3>-->
+  <!--        <p>-->
+  <!--          <span>Denmark: </span>-->
+  <!--          <span>1</span>-->
+  <!--        </p>-->
+  <!--        <p>-->
+  <!--          <span>Germany: </span>-->
+  <!--          <span>1</span>-->
+  <!--        </p>-->
+  <!--        <p>-->
+  <!--          <span>United Kingdom: </span>-->
+  <!--          <span>1</span>-->
+  <!--        </p>-->
+  <!--        <p>-->
+  <!--          <span>US: </span>-->
+  <!--          <span>1</span>-->
+  <!--        </p>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </mat-tab>-->
 </mat-tab-group>
 
 

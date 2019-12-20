@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
 import {Contract} from '../entities/contract';
 import {ContractService} from '../services/contract.service';
 
@@ -12,7 +11,7 @@ import {ContractService} from '../services/contract.service';
   styleUrls: ['./contract-update.component.css']
 })
 export class ContractUpdateComponent implements OnInit {
-  contract: Observable<Contract>;
+  contract: Contract;
   contractForm: FormGroup;
 
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private router: Router,
@@ -21,8 +20,7 @@ export class ContractUpdateComponent implements OnInit {
   }
 
 
-
-  ngOnInit() {
+  async ngOnInit() {
     this.contractForm = this.fb.group({
       id: [''],
       name: ['', [Validators.required, Validators.maxLength(15)]],
@@ -37,33 +35,27 @@ export class ContractUpdateComponent implements OnInit {
     });
 
     const id = this.route.snapshot.paramMap.get('id');
-    this.contract = this.contractService.getContract(id);
+    this.contract = await this.contractService.getContract(id);
   }
 
   clearErrorMessage() {
     document.getElementById('nameErrMsg').innerHTML = '';
   }
 
-  updateContract() {
+  async updateContract() {
     const contract = this.contractForm.value as Contract;
 
     if (this.contractForm.valid) {
-      this.contractService.updateContract(contract)
-        .subscribe(backendRes => {
-          console.log('backend response:', backendRes);
+      let backendRes = await this.contractService.updateContract(contract);
+      console.log('backend response:', backendRes);
 
-          if (backendRes.status === 200) {
-            this.snackBar.open('Contract updated', '', {duration: 500}).afterDismissed().subscribe(() => {
-              this.router.navigate(['../dashboard/contract-list']);
-            });
-          } else if (backendRes.status === 400) {
-
-            // document.getElementById('nameErrMsg').innerHTML = backendRes.message + '<br><br>';
-            alert(backendRes.message);
-
-          }
+      if (backendRes.status === 200) {
+        this.snackBar.open('Contract updated', '', {duration: 500}).afterDismissed().subscribe(() => {
+          this.router.navigate(['../dashboard/contract-list']);
         });
-
+      } else if (backendRes.status === 400) {
+        alert(backendRes.message);
+      }
     } else {
       console.log('Invalid form!');
     }

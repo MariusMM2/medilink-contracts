@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
@@ -12,6 +12,7 @@ import {ContractService} from '../services/contract.service';
 })
 export class ContractCreateComponent implements OnInit {
   contractForm: FormGroup;
+
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder,
               private router: Router, private contractService: ContractService) {
   }
@@ -34,32 +35,24 @@ export class ContractCreateComponent implements OnInit {
     document.getElementById('nameErrMsg').innerHTML = '';
   }
 
-  saveContract() {
+  async saveContract() {
     console.log(this.contractForm);
 
     const contract = this.contractForm.value as Contract;
     console.log('contract: ', contract);
 
     if (this.contractForm.valid) {
-      this.contractService.addContract(contract)
-        .subscribe(backendRes => {
-          console.log('backend response:', backendRes);
+      let backendRes = await this.contractService.addContract(contract);
+      console.log('backend response:', backendRes);
 
-          if (backendRes.status === 200) {
-
-            this.contractForm.reset();
-            this.snackBar.open('contract added', '', {duration: 500}).afterDismissed().subscribe(() => {
-              this.router.navigate(['../dashboard/contract-list']);
-            });
-
-          } else if (backendRes.status === 400) {
-
-            // document.getElementById('nameErrMsg').innerHTML = backendRes.message + '<br><br>';
-            alert(backendRes.message);
-          }
-
+      if (backendRes.status === 200) {
+        this.contractForm.reset();
+        this.snackBar.open('contract added', '', {duration: 500}).afterDismissed().subscribe(() => {
+          this.router.navigate(['../dashboard/contract-list']);
         });
-
+      } else if (backendRes.status === 400) {
+        alert(backendRes.message);
+      }
     } else {
       console.log('Invalid form!');
     }

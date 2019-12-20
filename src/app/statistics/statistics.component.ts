@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
 import {Contract} from '../entities/contract';
 import {ContractService} from '../services/contract.service';
 
@@ -9,32 +8,31 @@ import {ContractService} from '../services/contract.service';
   styleUrls: ['./statistics.component.css']
 })
 export class StatisticsComponent implements OnInit {
-  contracts$: Observable<Contract[]>;
-  isLoading$: Observable<boolean>;
+  contracts: Contract[];
+  isLoading: boolean;
   statisticsDateCurrent = 0;
   statisticsDateExpired = 0;
   statisticsDateNotStarted = 0;
   statisticsMostExpensiveContract = 0;
   statisticsCheapestContract = 0;
 
-  constructor( private contractService: ContractService) {
+  constructor(private contractService: ContractService) {
   }
 
-  ngOnInit() {
-    this.isLoading$ = new Observable(subscriber => {
-      subscriber.next(true);
-      this.contracts$ = this.contractService.getContracts();
-      this.contracts$.forEach(contracts => {
-        [this.statisticsDateCurrent, this.statisticsDateExpired, this.statisticsDateNotStarted] =
-          generateDateStatistics(contracts, this.statisticsDateCurrent,
-                                            this.statisticsDateExpired,
-                                            this.statisticsDateNotStarted);
-        [this.statisticsCheapestContract, this.statisticsMostExpensiveContract] = generateCostStatistics(contracts);
-      })
-      setTimeout(() => {
-        subscriber.next(false);
-      }, 2000);
+  async ngOnInit() {
+    this.isLoading = true;
+
+    this.contracts = await this.contractService.getContracts();
+
+    this.contracts.forEach(contracts => {
+      [this.statisticsDateCurrent, this.statisticsDateExpired, this.statisticsDateNotStarted] =
+        generateDateStatistics(contracts, this.statisticsDateCurrent,
+          this.statisticsDateExpired,
+          this.statisticsDateNotStarted);
+      [this.statisticsCheapestContract, this.statisticsMostExpensiveContract] = generateCostStatistics(contracts);
     });
+
+    this.isLoading = false;
   }
 }
 
@@ -46,13 +44,13 @@ function generateDateStatistics(contracts, statisticsDateCurrent, statisticsDate
     console.log('----currentDateString: ', currentDateString);
 
     if (contracts[i].startDate < currentDateString && currentDateString < contracts[i].expirationDate) {
-      statisticsDateCurrent ++;
+      statisticsDateCurrent++;
     }
     if (contracts[i].expirationDate < currentDateString) {
-      statisticsDateExpired ++;
+      statisticsDateExpired++;
     }
-    if ( currentDateString < contracts[i].startDate) {
-      statisticsDateNotStarted ++;
+    if (currentDateString < contracts[i].startDate) {
+      statisticsDateNotStarted++;
     }
   }
   // console.log('-----------------------------------------------');
@@ -80,10 +78,12 @@ function formatDate(date) {
     day = '' + d.getDate(),
     year = d.getFullYear();
 
-  if (month.length < 2)
+  if (month.length < 2) {
     month = '0' + month;
-  if (day.length < 2)
+  }
+  if (day.length < 2) {
     day = '0' + day;
+  }
 
   return [year, month, day].join('-');
 }
