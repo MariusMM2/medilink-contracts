@@ -120,7 +120,7 @@ export class AzureService {
         id: result.id,
         name: result.name,
         company: result.parentReference.name,
-        webUrl: result.weburl,
+        webUrl: result.webUrl,
         downloadUrl: result['@microsoft.graph.downloadUrl']
       };
 
