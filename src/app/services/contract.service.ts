@@ -44,17 +44,22 @@ export class ContractService {
     return contracts;
   }
 
+  /**
+   * Synchronise the server-side database with the OneDrive folder
+   */
   async syncContracts(): Promise<any> {
-    console.log('syncing contracts');
-    let contracts: Contract[] = await this.http.get<Contract[]>(this.baseUrl).toPromise();
+    let dbContracts: Contract[] = await this.http.get<Contract[]>(this.baseUrl).toPromise();
     let driveContracts: DriveContract[] = await this.azureService.getContracts();
 
     for (let driveContract of driveContracts) {
-      let contract: Contract = contracts.find(value => value.file === driveContract.id);
-      let isNewContract: boolean = contract === undefined;
+      let dbContract: Contract = dbContracts.find(
+        contract => contract.file === driveContract.id);
+      let isNewContract: boolean = dbContract === undefined;
 
-      if (isNewContract) {
-        contract = {
+      if (isNewContract)
+        // Create a new Contract object with default fields
+      {
+        dbContract = {
           id: undefined,
           name: driveContract.name,
           file: driveContract.id,
@@ -69,15 +74,18 @@ export class ContractService {
         };
       }
 
-      contract.name = driveContract.name;
-      contract.description = driveContract.company;
+      let isModified = dbContract.name !== driveContract.name ||
+        dbContract.description !== driveContract.company;
+
+      dbContract.name = driveContract.name;
+      dbContract.description = driveContract.company;
 
       if (isNewContract) {
-        console.log('adding contract: ', contract);
-        await this.addContract(contract);
+        this.addContract(dbContract);
       } else {
-        console.log('updating contract: ', contract);
-        await this.updateContract(contract);
+        if (isModified) {
+          this.updateContract(dbContract);
+        }
       }
     }
   }
