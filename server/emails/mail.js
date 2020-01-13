@@ -27,4 +27,4 @@ const sendForgotPasswordEmail = (email, name, link) => {
 module.exports = {
   sendConfirmEmail,
   sendForgotPasswordEmail
-}
+};

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 import {ContractService} from '../services/contract.service';
 import {Contract} from '../entities/contract';
-import {AzureService} from '../services/azure.service';
 
 @Component({
   selector: 'app-contract-list',
@@ -9,51 +9,43 @@ import {AzureService} from '../services/azure.service';
   styleUrls: ['./contract-list.component.css']
 })
 export class ContractListComponent implements OnInit {
-  contracts: Contract[];
-  sorted: Contract[];
-  isLoading: boolean;
+  contracts$: Observable<Contract[]>;
+  sorted$: Contract[]; // todo eliminate $
+  isLoading$: Observable<boolean>;
   contractSearch: string;
   // isAdmin$: Observable<boolean>;
 
-  constructor(private contractService: ContractService, private azureService: AzureService) {
+  constructor( private contractService: ContractService) {
+  }
+  ngOnInit() {
+    this.isLoading$ = new Observable(subscriber => {
+      subscriber.next(true);
+      this.contracts$ = this.contractService.getContracts();
+      this.contracts$.forEach(contracts => {
+        // tslint:disable-next-line:max-line-length
+        // this.sorted$ = contracts.sort((a, b) => (parseInt(a.cost > parseInt(b.cost, 10)) ? 1 : ((parseInt(b.cost, 10) > parseInt(a.cost, 10)) ? -1 : 0));
+        // tslint:disable-next-line:max-line-length
+        this.sorted$ = contracts.sort((a, b) => (parseInt(String(a.cost), 10) > parseInt(String(b.cost), 10)) ? 1 : ((parseInt(String(b.cost), 10) > parseInt(String(a.cost), 10)) ? -1 : 0));
+        // this.sorted$ = contracts.sort((a, b) => (a.cost > b.cost) ? 1 : (b.cost > a.cost) ? -1 : 0);
+        // this.sorted$.forEach( function (item, i) {
+        this.sorted$.forEach(  (item, i) => {
+          item.location = addFlag(item.location);
+        });
+        // }
+        console.log('- this.sorted$ after sort', this.sorted$);
+      });
+      setTimeout(() => {
+        subscriber.next(false);
+      }, 2000);
+    });
   }
 
-  async ngOnInit() {
-    if (this.azureService.authenticated) {
-      this.getContracts();
-    }
-  }
-
-  async connectOneDrive() {
-    this.isLoading = true;
-
-    await this.azureService.signIn();
-    await this.contractService.syncContracts();
-
-    this.getContracts();
-  }
-
-  private async getContracts() {
-    this.isLoading = true;
-
-    this.contracts = await this.contractService.getContracts();
-
-    // this.sorted$ = contracts.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost)) ? 1 : ((parseInt(b.cost) > parseInt(a.cost)) ? -1 : 0));
-    this.sorted = this.contracts.sort((a, b) => (a.cost > b.cost) ? 1 : (b.cost > a.cost) ? -1 : 0);
-    this.sorted.forEach((item) => item.location = addFlag(item.location));
-    console.log('- this.sorted$ after sort', this.sorted);
-
-    this.isLoading = false;
-  }
 }
-
-
 function addFlag(myCountry) {
   interface Flag {
     country: string;
     flag: string;
   }
-
   const flagDb: Flag[] = [
     {country: 'Denmark', flag: '🇩🇰'},
     {country: 'DK', flag: '🇩🇰'},

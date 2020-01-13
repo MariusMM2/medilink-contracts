@@ -45,8 +45,8 @@ export class RegisterComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.email]],
       // check if there is at least one uppercase char, one lowercase char, one number and a special character
-      // tslint:disable-next-line:max-line-length
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-])/)]],
+      password: ['', [Validators.required, Validators.minLength(8),
+        Validators.maxLength(30), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-])/)]],
       confirmPassword: ['', [Validators.required]]
     }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -58,13 +58,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.registerForm);
     const user = this.registerForm.value as User;
-    console.log('user: ', user);
     if (this.registerForm.valid) {
       this.userApi.createUser(user).subscribe(backendRes => { // arrow function
-        console.log('backend response:', backendRes);
-
         if (backendRes.status === 200) {
           this.router.navigate([''])
             .then(() => {
@@ -74,10 +70,7 @@ export class RegisterComponent implements OnInit {
               console.log('An error occurred: ', e);
             });
         } else if (backendRes.status === 400) {
-
-          // document.getElementById('emailErrMsg').innerHTML = backendRes.message + '<br><br>';
           alert(backendRes.message);
-
         }
       }, error => {
         console.log('Error: ', error);
@@ -86,5 +79,4 @@ export class RegisterComponent implements OnInit {
       console.log('Invalid form!');
     }
   }
-
 }

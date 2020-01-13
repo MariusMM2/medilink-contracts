@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Contract, DriveContract} from '../entities/contract';
 import {AzureService} from './azure.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ContractService {
   }
 
   async getContract(id: string): Promise<Contract> {
-    let contract = await this.http.get<Contract>(`${this.baseUrl}/${id}`).toPromise();
+    const contract = await this.http.get<Contract>(`${this.baseUrl}/${id}`).toPromise();
 
     try {
       contract.driveRef = await this.azureService.getContract(contract.file);
@@ -30,7 +31,7 @@ export class ContractService {
   }
 
   async getContracts(): Promise<Contract[]> {
-    let contracts = await this.http.get<Contract[]>(this.baseUrl).toPromise();
+    const contracts = await this.http.get<Contract[]>(this.baseUrl).toPromise();
 
     for (const contract of contracts) {
       try {
@@ -46,12 +47,12 @@ export class ContractService {
 
   async syncContracts(): Promise<any> {
     console.log('syncing contracts');
-    let contracts: Contract[] = await this.http.get<Contract[]>(this.baseUrl).toPromise();
-    let driveContracts: DriveContract[] = await this.azureService.getContracts();
+    const contracts: Contract[] = await this.http.get<Contract[]>(this.baseUrl).toPromise();
+    const driveContracts: DriveContract[] = await this.azureService.getContracts();
 
-    for (let driveContract of driveContracts) {
+    for (const driveContract of driveContracts) {
       let contract: Contract = contracts.find(value => value.file === driveContract.id);
-      let isNewContract: boolean = contract === undefined;
+      const isNewContract: boolean = contract === undefined;
 
       if (isNewContract) {
         contract = {
@@ -91,56 +92,3 @@ export class ContractService {
   }
 
 }
-
-
-// import {Injectable} from '@angular/core';
-// import {AngularFirestore} from '@angular/fire/firestore';
-// import {Contract} from '../entities/contract';
-// import {config} from '../app.config';
-// import {Observable} from 'rxjs';
-//
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ContractService {
-//
-//   constructor(private db: AngularFirestore) {
-//   }
-//
-//   addContract(contract: Contract): Promise<void> {
-//     const id = this.db.createId();
-//     const contractDoc = this.getContractDoc(id);
-//     contract._id = id;
-//     console.log(contract);
-//     return contractDoc.set(contract);
-//   }
-//
-//   getContracts(): Observable<Contract[]> {
-//     console.log('getContracts()');
-//     return this.db
-//       .collection(config.contracts_endpoint)
-//       .valueChanges() as Observable<Contract[]>;
-//   }
-//
-//   getContract(id: string): Observable<Contract> {
-//     console.log('Retrieving contract with id ' + id);
-//     const contractDoc = this.getContractDoc(id);
-//     return contractDoc.valueChanges();
-//   }
-//
-//   updateContract(contract: Contract): Promise<void> {
-//     console.log('updating contract');
-//     console.log(contract);
-//     const contractDoc = this.getContractDoc(contract._id);
-//     return contractDoc.update(contract);
-//   }
-//
-//   deleteContract(id: string): Promise<void> {
-//     // this.cartService.removeProduct(id);
-//     return this.getContractDoc(id).delete();
-//   }
-//
-//   private getContractDoc(id: string) {
-//     return this.db.doc <Contract>(`${config.contracts_endpoint}/${id}`);
-//   }
-// }

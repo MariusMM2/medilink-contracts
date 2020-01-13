@@ -6,7 +6,6 @@ const Config = require("../config/config");
 const { sendConfirmEmail, sendForgotPasswordEmail } = require("../emails/mail");
 
 function register(req, res) {
-  console.log("req.body: ", req.body);
   const email = req.body.email;
   // search if a user with that email already exists in the database
   User.findOne({
@@ -19,8 +18,6 @@ function register(req, res) {
       // hash the password
       const hashedPassword = bcrypt.hashSync(req.body.password, 8);
       req.body.password = hashedPassword;
-      console.log(req.body);
-
       req.body.notificationEmail = req.body.email;
       req.body.role = 'User';
 
@@ -78,7 +75,6 @@ function confirmEmail(req, res) {
 }
 
 function login(req, res) {
-  console.log("req.body: ", req.body);
   const email = req.body.email;
 
   // find the email from the user's input
@@ -91,22 +87,12 @@ function login(req, res) {
     if(user) {
       // verify if the password from the user's input is the same with the hashed password from the database
       if(bcrypt.compareSync(req.body.password, user.password)) {
-        console.log("user: ", user);
-        console.log("user.dataValues: ", user.dataValues);
 
         if(user.dataValues.emailVerified === true && user.dataValues.active === true) {
 
           const token = jwt.sign(user.dataValues, Config.JWT_SECRET, {
             expiresIn: 86400 // expires in 24 hours = 86400 seconds
           });
-
-          // res.cookie("token", token, {
-          //   expire: Date.now() + 43200000,  // 43200000 milliseconds = 12 hours
-          //   secure: false, // set to true if your using https
-          //   httpOnly: true
-          // });
-          //
-          // res.header('Authorization', 'Bearer '+ token);
 
           user.dataValues.loggedTries = 0;
           User.update(user.dataValues, {where: {id: user.dataValues.id}});
@@ -156,9 +142,7 @@ function login(req, res) {
             loggedTries: user.dataValues.loggedTries
           });
         }
-
       }
-
     } else {
       res.json({
         status: 401,
@@ -173,10 +157,7 @@ function login(req, res) {
 }
 
 function forgotPassword(req, res) {
-
-  console.log("req.body: ", req.body);
   const email = req.body.email;
-
   // find the email from the user's input
   User.findOne({
     where: {
@@ -186,14 +167,11 @@ function forgotPassword(req, res) {
     // if a user is found
     if(user) {
       console.log("user", user);
-
       const token = jwt.sign(user.dataValues, Config.JWT_SECRET, {
         expiresIn: 86400 // expires in 24 hours = 86400 seconds
       });
-
       const url = `http://localhost:3000/api/users/resetPwd/${token}`;
       sendForgotPasswordEmail(user.dataValues.email, `${user.dataValues.firstName} ${user.dataValues.lastName}`, url);
-
     } else {
       res.json({
         status: 401,
@@ -209,14 +187,9 @@ function forgotPassword(req, res) {
 }
 
 function changePassword(req, res) {
-
-  console.log("req.body: ", req.body);
   const newPassword = req.body.password;
-
   const user = jwt.verify(req.params.token, Config.JWT_SECRET);
-
   user.password = newPassword;
-
   User.update(user, {where: {id: user.id}}).then(() => {
     res.json({
       status: 200,
@@ -231,16 +204,15 @@ function changePassword(req, res) {
 }
 
 function readUser(req, res) {
-  // find a contract in the database based on the id from the url
+  // find a user in the database based on the id from the url
   User.findOne({
     where: {
       id: req.params.id
     }}).then(user => {
-    // console.log(contract);
     if(!user) {
       res.json({
         status: 400,
-        message: "There is no contract with this id in the database!"
+        message: "There is no user with this id in the database!"
       });
     }
     res.send(user);
@@ -253,11 +225,10 @@ function readUser(req, res) {
 
 function readAllUsers(req, res) {
   User.findAll().then(users => {
-    // console.log("contracts: ", contracts);
     if(!users) {
       res.json({
         status: 400,
-        message: "There are no contracts in the database!"
+        message: "There are no users in the database!"
       });
     }
     res.send(users);
@@ -267,20 +238,12 @@ function readAllUsers(req, res) {
     });
   });
 }
-function updateUser(req, res) {
-  console.log("--------------updateUser: ");
-  console.log("req.body: ", req.body);
 
-  // check if there is already a contract with the same name in the database
-  User.findOne({
-    where: {
-      id: req.body.id
-    }
-  }).then(user => {
+function updateUser(req, res) {
     User.update(req.body, {where: {id: req.params.id}}).then(() => {
       res.json({
         status: 200,
-        message: "Successfully updated!"
+        message: "Successfully updated user!"
       });
     }).catch((err) => {
       res.json({
@@ -289,12 +252,8 @@ function updateUser(req, res) {
         error: err
       });
     });
-  }).catch((err) => {
-    res.send({
-      error: err
-    });
-  });
 }
+
 module.exports = {
   register,
   confirmEmail,

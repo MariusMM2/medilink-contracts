@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
     // login form validators
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      // tslint:disable-next-line:max-line-length
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-])/)]],
+      password: ['', [Validators.required, Validators.minLength(8),
+        Validators.maxLength(30), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-])/)]],
     });
   }
 

@@ -26,7 +26,6 @@ export class ProfileComponent implements OnInit {
     const user = this.userForm.value as User;
 
     this.userService.updateUser(user)
-    // .then(() => {
       .subscribe(() => {
         console.log('user updated!');
         this.snackBar.open('User updated', '', {duration: 500}).afterDismissed().subscribe(() => {
@@ -37,7 +36,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      // _id: [''],
       id: [''],
       email: [''],
       firstName: [''],
