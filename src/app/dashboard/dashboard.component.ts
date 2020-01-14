@@ -8,14 +8,18 @@ import {Observable} from 'rxjs';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  currentUserId;
+  currentUser;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     // console.log(user.id);
 
-    this.currentUserId = localStorage.getItem('currentUserId');
-    console.log('this.currentUserId', this.currentUserId);
+    // this.currentUser = localStorage.getItem('currentUser');
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
+    console.log('this.currentUser', this.currentUser);
+    console.log('this.currentUserId', this.currentUser.id);
+    console.log('this.currentUserFirstName', this.currentUser.firstName);
+    console.log('this.currentUserLastName', this.currentUser.lastName);
 
     // this.userRole$ = new Observable(subscriber => {
     //   subscriber.next(true);
@@ -30,5 +34,6 @@ export class DashboardComponent implements OnInit {
 
   onLogoutClick() {
     this.authService.logout();
+    localStorage.setItem('currentUser', '');
   }
 }

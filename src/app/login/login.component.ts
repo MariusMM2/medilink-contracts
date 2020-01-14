@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.userApi.loginUser(user).subscribe(async backendRes => { // arrow function
         console.log('backend response:', backendRes);
-        console.log('backendRes.user.id', backendRes.user.id);
-        // localStorage.setItem('currentUserId', JSON.stringify({ id: backendRes.user.id}));
-        localStorage.setItem('currentUserId', backendRes.user.id);
+        // localStorage.setItem('currentUserId', backendRes.user.id);
+        localStorage.setItem('currentUser', JSON.stringify({ user: backendRes.user }));
+        // localStorage.setItem('currentUser', backendRes.user);
 
         if (backendRes.status === 200) {
           this.authService.isLoggedIn = true;

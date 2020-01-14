@@ -6,16 +6,18 @@
     <button mat-button routerLink="/dashboard/contract-list">Contract List</button>
     <button mat-button routerLink="/dashboard/contract-create" *ngIf="true">Create Contract</button>
     <button mat-button routerLink="/dashboard/statistics">Statistics</button>
-    <button mat-button routerLink="/dashboard/profile/{{currentUserId}}">Profile</button>
+    <button mat-button routerLink="/dashboard/profile/{{currentUser.id}}">Profile</button>
     <button mat-button routerLink="/dashboard/admin-panel">Admin Panel</button>
     <button mat-button (click)="onLogoutClick()" routerLink="/">Log out</button>
   </p>
+
 
 <!--  <p *ngIf="true">User</p>-->
 <!--  <p *ngIf="isAdmin$ | async">ADMIN</p>-->
 <!--  <p *ngIf="!(isAdmin$ | async)">USER</p>-->
 
 </mat-toolbar>
+<span>Logged in as: {{currentUser.firstName}} {{currentUser.lastName}}</span>
 
 <!-- for Routing -->
 <router-outlet></router-outlet>
