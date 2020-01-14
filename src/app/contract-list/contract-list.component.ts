@@ -9,6 +9,7 @@ import {Contract} from '../entities/contract';
   styleUrls: ['./contract-list.component.css']
 })
 export class ContractListComponent implements OnInit {
+
   contracts$: Observable<Contract[]>;
   sorted$: Contract[]; // todo eliminate $
   isLoading$: Observable<boolean>;
