@@ -14,11 +14,15 @@
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input type="text" id="email" matInput formControlName="email" [ngModel]="user.email" placeholder='email'>
+        <input type="text" id="email" matInput formControlName="email" [ngModel]="user.email" placeholder='email' readonly>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input type="text" id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='role'>
+      <select matNativeControl id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='proposed role'>
+        <option>Member</option>
+        <option>Admin</option>
+        <option>SuperAdmin</option>
+      </select>
       </mat-form-field>
       <br>
       <mat-form-field>
