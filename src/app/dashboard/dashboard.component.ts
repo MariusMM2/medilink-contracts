@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {Observable} from 'rxjs';
+import {AdminService} from '../admin/admin.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,7 @@ import {Observable} from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
   currentUser;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private adminService: AdminService) { }
 
   ngOnInit() {
     // console.log(user.id);
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit {
 
   onLogoutClick() {
     this.authService.logout();
+    this.adminService.logout();
     localStorage.setItem('currentUser', '');
   }
 }

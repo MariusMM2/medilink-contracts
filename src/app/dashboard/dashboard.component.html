@@ -4,22 +4,16 @@
   <span>MediLink - Contract Manager</span>
   <p class="nav-buttons">
     <button mat-button routerLink="/dashboard/contract-list">Contracts</button>
-<!--    <button mat-button routerLink="/dashboard/contract-create"-->
-<!--            *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Create Contract</button>-->
     <button mat-button routerLink="/dashboard/statistics">Statistics</button>
-<!--    <button mat-button routerLink="/dashboard/profile/{{currentUser.id}}">Profile</button>-->
-    <button mat-button routerLink="/dashboard/profile/2">Profile</button>
-    <button mat-button routerLink="/dashboard/admin-panel">Admin Panel</button>
+    <button mat-button routerLink="/dashboard/profile/{{currentUser.id}}">Profile</button>
+<!--    <button mat-button routerLink="/dashboard/profile/2">Profile</button>-->
+    <button mat-button routerLink="/dashboard/admin-panel"
+            *ngIf="currentUser.role == 'SuperAdmin'">Admin Panel</button>
     <button mat-button (click)="onLogoutClick()" routerLink="/">Log out</button>
   </p>
 
-
-<!--  <p *ngIf="true">User</p>-->
-<!--  <p *ngIf="isAdmin$ | async">ADMIN</p>-->
-<!--  <p *ngIf="!(isAdmin$ | async)">USER</p>-->
-
 </mat-toolbar>
-<span class="loggedIn">Logged in as: {{currentUser.firstName}} {{currentUser.lastName}}</span>
+<span class="loggedIn">Logged in as {{currentUser.role}}: {{currentUser.firstName}} {{currentUser.lastName}}</span>
 
 <!-- for Routing -->
 <router-outlet></router-outlet>
