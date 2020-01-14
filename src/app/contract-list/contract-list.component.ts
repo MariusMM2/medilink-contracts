@@ -10,7 +10,7 @@ import {Contract} from '../entities/contract';
 })
 export class ContractListComponent implements OnInit {
   contracts$: Observable<Contract[]>;
-  sorted$: Contract[];
+  sorted$: Contract[]; // todo eliminate $
   isLoading$: Observable<boolean>;
   contractSearch: string;
   // isAdmin$: Observable<boolean>;
@@ -22,11 +22,14 @@ export class ContractListComponent implements OnInit {
       subscriber.next(true);
       this.contracts$ = this.contractService.getContracts();
       this.contracts$.forEach(contracts => {
-        // this.sorted$ = contracts.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost)) ? 1 : ((parseInt(b.cost) > parseInt(a.cost)) ? -1 : 0));
-        this.sorted$ = contracts.sort((a, b) => (a.cost > b.cost) ? 1 : (b.cost > a.cost) ? -1 : 0);
-        this.sorted$.forEach( function (item, i) {
-          item.location = addFlag(item.location);
-        });
+        // this.sorted$ = contracts.sort((a, b) => (parseInt(a.cost > parseInt(b.cost, 10)) ? 1 : ((parseInt(b.cost, 10) > parseInt(a.cost, 10)) ? -1 : 0));
+        this.sorted$ = contracts.sort((a, b) => (parseInt(String(a.cost), 10) > parseInt(String(b.cost), 10)) ? 1 : ((parseInt(String(b.cost), 10) > parseInt(String(a.cost), 10)) ? -1 : 0));
+        // this.sorted$ = contracts.sort((a, b) => (a.cost > b.cost) ? 1 : (b.cost > a.cost) ? -1 : 0);
+        // this.sorted$.forEach( function (item, i) {
+        this.sorted$.forEach(  (item, i) => {
+            item.location = addFlag(item.location);
+          });
+        // }
         console.log('- this.sorted$ after sort', this.sorted$);
       });
       setTimeout(() => {

@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   // used for validation of the values from the login form
   loginForm: FormGroup;
+  loggedTries: 0;
 
   // form builder is used to create instances of the form group
   // router is used for navigation after the form is successfully submitted
@@ -42,6 +43,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.userApi.loginUser(user).subscribe(async backendRes => { // arrow function
         console.log('backend response:', backendRes);
+        console.log('backendRes.user.id', backendRes.user.id);
+        // localStorage.setItem('currentUserId', JSON.stringify({ id: backendRes.user.id}));
+        localStorage.setItem('currentUserId', backendRes.user.id);
 
         if (backendRes.status === 200) {
           this.authService.isLoggedIn = true;
@@ -65,6 +69,13 @@ export class LoginComponent implements OnInit {
 
           // document.getElementById('passwordErrMsg').innerHTML = backendRes.message + '<br><br>';
           alert(backendRes.message);
+
+          // loggedTries: 1
+          this.loggedTries = backendRes.loggedTries;
+
+          console.log('this.loggedTries', this.loggedTries);
+          console.log('backendRes', backendRes);
+
 
         } else if (backendRes.status === 402) {
 

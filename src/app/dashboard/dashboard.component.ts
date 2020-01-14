@@ -8,10 +8,15 @@ import {Observable} from 'rxjs';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  currentUserId;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    // console.log(user.id);
+
+    this.currentUserId = localStorage.getItem('currentUserId');
+    console.log('this.currentUserId', this.currentUserId);
+
     // this.userRole$ = new Observable(subscriber => {
     //   subscriber.next(true);
     //

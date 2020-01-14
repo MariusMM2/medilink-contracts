@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.user = this.userService.getUser(id);
     console.log('-- this.user', this.user);
+
   }
 
 }

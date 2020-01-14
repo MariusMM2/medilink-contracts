@@ -45,6 +45,7 @@ function generateDateStatistics(contracts, statisticsDateCurrent, statisticsDate
     console.log('contracts[i].expirationDate: ', contracts[i].expirationDate);
     console.log('----currentDateString: ', currentDateString);
 
+    // if (contracts[i].startDate <= currentDateString && currentDateString <= contracts[i].expirationDate) {
     if (contracts[i].startDate < currentDateString && currentDateString < contracts[i].expirationDate) {
       statisticsDateCurrent ++;
     }
