@@ -3,8 +3,9 @@
 <mat-toolbar color="primary">
   <span>MediLink - Contract Manager</span>
   <p class="nav-buttons">
-    <button mat-button routerLink="/dashboard/contract-list">Contract List</button>
-    <button mat-button routerLink="/dashboard/contract-create" *ngIf="true">Create Contract</button>
+    <button mat-button routerLink="/dashboard/contract-list">Contracts</button>
+<!--    <button mat-button routerLink="/dashboard/contract-create"-->
+<!--            *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Create Contract</button>-->
     <button mat-button routerLink="/dashboard/statistics">Statistics</button>
 <!--    <button mat-button routerLink="/dashboard/profile/{{currentUser.id}}">Profile</button>-->
     <button mat-button routerLink="/dashboard/profile/2">Profile</button>

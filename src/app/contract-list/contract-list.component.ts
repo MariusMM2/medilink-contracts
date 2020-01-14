@@ -14,11 +14,13 @@ export class ContractListComponent implements OnInit {
   sorted$: Contract[]; // todo eliminate $
   isLoading$: Observable<boolean>;
   contractSearch: string;
+  currentUser;
   // isAdmin$: Observable<boolean>;
 
   constructor( private contractService: ContractService) {
   }
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
     this.isLoading$ = new Observable(subscriber => {
       subscriber.next(true);
       this.contracts$ = this.contractService.getContracts();

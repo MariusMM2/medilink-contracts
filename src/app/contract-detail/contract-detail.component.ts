@@ -14,6 +14,7 @@ export class ContractDetailComponent implements OnInit {
 
   contract$: Observable<Contract>;
   isLoading$: Observable<boolean>;
+  currentUser;
   // isAdmin$: Observable<boolean>;
 
   constructor(private snackBar: MatSnackBar, private contractService: ContractService,
@@ -21,6 +22,7 @@ export class ContractDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
     this.isLoading$ = new Observable(subscriber => {
       subscriber.next(true);
       this.retrieveContract();

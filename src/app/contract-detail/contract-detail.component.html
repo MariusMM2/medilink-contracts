@@ -26,9 +26,11 @@
 <!--      <button class="updateContract" mat-raised-button color="accent"-->
 <!--              routerLink="/dashboard/contract-update/{{contract._id}}">Update Contract-->
       <button class="updateContract" mat-raised-button color="accent"
-              routerLink="/dashboard/contract-update/{{contract.id}}">Update Contract
+              routerLink="/dashboard/contract-update/{{contract.id}}"
+              *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Update Contract
       </button>
       <button class="deleteContract" mat-raised-button color="warn"
+              *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'"
               (click)="deleteContract()">Delete Contract
       </button>
 <!--      <button *ngIf="isAdmin$ | async" class="updateContract" mat-raised-button color="primary"-->

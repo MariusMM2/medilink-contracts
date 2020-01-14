@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(user)
     // .then(() => {
       .subscribe(() => {
+        localStorage.setItem('currentUser', JSON.stringify({ user }));
         console.log('user updated!');
         this.snackBar.open('User updated', '', {duration: 500}).afterDismissed().subscribe(() => {
           this.router.navigate(['../dashboard/contract-list']);
