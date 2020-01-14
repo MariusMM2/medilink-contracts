@@ -16,9 +16,12 @@
       <mat-form-field>
         <input type="text" id="email" matInput formControlName="email" [ngModel]="user.email" placeholder='email' readonly>
       </mat-form-field>
+      <mat-form-field>
+        <input type="text" id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='role' readonly>
+      </mat-form-field>
       <br>
       <mat-form-field>
-      <select matNativeControl id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='proposed role'>
+      <select matNativeControl id="proposedRole" matInput formControlName="proposedRole" [ngModel]="user.proposedRole" placeholder='proposed role'>
         <option>Member</option>
         <option>Admin</option>
         <option>SuperAdmin</option>
@@ -33,7 +36,7 @@
       <input type="hidden" formControlName="password" [ngModel]="user.password">
       <input type="hidden" formControlName="emailVerified" [ngModel]="user.emailVerified">
       <input type="hidden" formControlName="active" [ngModel]="user.active">
-      <input type="hidden" formControlName="confirmedRole" [ngModel]="user.confirmedRole">
+<!--      <input type="hidden" formControlName="proposedRole" [ngModel]="user.proposedRole">-->
 
     </div>
     <button id="updateButton" mat-raised-button color="primary">Update</button>

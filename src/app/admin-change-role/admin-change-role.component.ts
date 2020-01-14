@@ -38,7 +38,6 @@ export class AdminChangeRoleComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      // _id: [''],
       id: [''],
       email: [''],
       firstName: [''],
@@ -48,7 +47,7 @@ export class AdminChangeRoleComponent implements OnInit {
       active: [''],
       role: [''],
       notificationEmail: [''],
-      confirmedRole: [''],
+      proposedRole: [''],
     });
 
     const id = this.route.snapshot.paramMap.get('id');

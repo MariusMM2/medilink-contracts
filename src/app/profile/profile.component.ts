@@ -30,14 +30,13 @@ export class ProfileComponent implements OnInit {
       .subscribe(() => {
         console.log('user updated!');
         this.snackBar.open('User updated', '', {duration: 500}).afterDismissed().subscribe(() => {
-          this.router.navigate(['../dashboard/profile/4']);
+          this.router.navigate(['../dashboard/contract-list']);
         });
       });
   }
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      // _id: [''],
       id: [''],
       email: [''],
       firstName: [''],
@@ -47,7 +46,7 @@ export class ProfileComponent implements OnInit {
       active: [''],
       role: [''],
       notificationEmail: [''],
-      confirmedRole: [''],
+      proposedRole: [''],
     });
 
     const id = this.route.snapshot.paramMap.get('id');

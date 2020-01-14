@@ -22,7 +22,7 @@ function register(req, res) {
       console.log(req.body);
 
       req.body.notificationEmail = req.body.email;
-      req.body.role = 'User';
+      // req.body.role = 'Member';
 
       User.create(req.body).then(user => {
         console.log("created: ", user);

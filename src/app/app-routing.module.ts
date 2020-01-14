@@ -27,28 +27,28 @@ const routes: Routes = [
   },
 
   {
-    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
-      {path: 'contract-list', component: ContractListComponent, canActivate: [AuthGuard]},
-      {path: 'contract-create', component: ContractCreateComponent, canActivate: [AuthGuard]},
-      {path: 'contract-detail/:id', component: ContractDetailComponent, canActivate: [AuthGuard]},
-      {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
-      {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard]},
-      {path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
-      {path: 'admin-panel', component: AdminPanelComponent, canActivate: [AuthGuard]},
-      {path: 'admin-change-role/:id', component: AdminChangeRoleComponent, canActivate: [AuthGuard]},
-      // {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
-    ]
-    // path: 'dashboard', component: DashboardComponent, children: [
-    //   {path: 'contract-list', component: ContractListComponent /*, canActivate: [AuthGuard]*/ },
-    //   {path: 'contract-create', component: ContractCreateComponent /*, canActivate: [AuthGuard]*/},
-    //   {path: 'contract-detail/:id', component: ContractDetailComponent /*, canActivate: [AuthGuard]*/},
-    //   {path: 'contract-update/:id', component: ContractUpdateComponent /*, canActivate: [AuthGuard]*/},
-    //   {path: 'statistics', component: StatisticsComponent /*, canActivate: [AuthGuard]*/},
-    //   {path: 'profile/:id', component: ProfileComponent /*, canActivate: [AuthGuard]*/},
-    //   {path: 'admin-panel', component: AdminPanelComponent /*, canActivate: [AuthGuard]*/},
-    //   {path: 'admin-change-role/:id', component: AdminChangeRoleComponent /*, canActivate: [AuthGuard]*/},
+    // path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
+    //   {path: 'contract-list', component: ContractListComponent, canActivate: [AuthGuard]},
+    //   {path: 'contract-create', component: ContractCreateComponent, canActivate: [AuthGuard]},
+    //   {path: 'contract-detail/:id', component: ContractDetailComponent, canActivate: [AuthGuard]},
+    //   {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
+    //   {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard]},
+    //   {path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
+    //   {path: 'admin-panel', component: AdminPanelComponent, canActivate: [AuthGuard]},
+    //   {path: 'admin-change-role/:id', component: AdminChangeRoleComponent, canActivate: [AuthGuard]},
     //   // {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
     // ]
+    path: 'dashboard', component: DashboardComponent, children: [
+      {path: 'contract-list', component: ContractListComponent /*, canActivate: [AuthGuard]*/ },
+      {path: 'contract-create', component: ContractCreateComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'contract-detail/:id', component: ContractDetailComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'contract-update/:id', component: ContractUpdateComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'statistics', component: StatisticsComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'profile/:id', component: ProfileComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'admin-panel', component: AdminPanelComponent /*, canActivate: [AuthGuard]*/},
+      {path: 'admin-change-role/:id', component: AdminChangeRoleComponent /*, canActivate: [AuthGuard]*/},
+      // {path: 'contract-update/:id', component: ContractUpdateComponent, canActivate: [AuthGuard]},
+    ]
   },
 
   {path: '**', component: PageNotFoundComponent},
