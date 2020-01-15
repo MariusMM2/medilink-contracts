@@ -13,7 +13,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
-import {ContractComponent} from './contract/contract.component';
 import {ContractListComponent} from './contract-list/contract-list.component';
 import {ContractCreateComponent} from './contract-create/contract-create.component';
 import {ContractUpdateComponent} from './contract-update/contract-update.component';
@@ -50,7 +49,6 @@ import {MsalModule} from '@azure/msal-angular';
   declarations: [
     AppComponent,
     LoginComponent,
-    ContractComponent,
     ContractListComponent,
     ContractCreateComponent,
     ContractUpdateComponent,
