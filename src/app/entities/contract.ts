@@ -2,8 +2,8 @@ export class Contract {
   id: number;
   name: string;
   description: string;
-  startDate: string;
-  expirationDate: string;
+  startDate: Date;
+  expirationDate: Date;
   type: string;
   file: string;
   category: string;
