@@ -22,24 +22,17 @@ export class ContractListComponent implements OnInit {
   async ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
 
-    if (this.azureService.authenticated) {
-      this.getContracts();
-    }
-  }
-
-  async connectOneDrive() {
-    this.isLoading = true;
-
-    await this.azureService.signIn();
-
     this.getContracts();
   }
 
   async refresh() {
-    //TODO: Restrict Sync to Admins & SuperAdmins only
     this.contracts.length = 0;
     this.isLoading = true;
 
+
+    if (!this.azureService.authenticated) {
+      await this.azureService.signIn();
+    }
     await this.contractService.syncContracts();
 
     this.getContracts();
@@ -50,8 +43,7 @@ export class ContractListComponent implements OnInit {
 
     this.contracts = await this.contractService.getContracts();
 
-    // this.sorted$ = contracts.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost)) ? 1 : ((parseInt(b.cost) > parseInt(a.cost)) ? -1 : 0));
-    this.sorted = this.contracts.sort((a, b) => (a.cost > b.cost) ? 1 : (b.cost > a.cost) ? -1 : 0);
+    this.sorted = this.contracts.sort((a, b) => (parseInt(String(a.cost)) > parseInt(String(b.cost))) ? 1 : ((parseInt(String(b.cost)) > parseInt(String(a.cost))) ? -1 : 0));
     this.sorted.forEach((item) => item.location = addFlag(item.location));
     console.log('- this.sorted$ after sort', this.sorted);
 
@@ -59,7 +51,7 @@ export class ContractListComponent implements OnInit {
   }
 }
 
-function addFlag(myCountry) {
+function addFlag(myCountry: string) {
   interface Flag {
     country: string;
     flag: string;
@@ -75,7 +67,7 @@ function addFlag(myCountry) {
   ];
 
   for (let i = 0; i <= flagDb.length - 1; i++) {
-    if (myCountry.includes(flagDb[i].country)) {
+    if (myCountry.toLowerCase().includes(flagDb[i].country.toLowerCase())) {
       return myCountry + ' - ' + flagDb[i].flag;
     }
   }

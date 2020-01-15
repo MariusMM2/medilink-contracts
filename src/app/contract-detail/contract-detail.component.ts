@@ -29,7 +29,7 @@ export class ContractDetailComponent implements OnInit {
 
       this.contract = await this.contractService.getContract(id);
 
-      console.log(this.contract);
+      console.log('contract:', this.contract);
 
       this.isLoading = false;
     } else {

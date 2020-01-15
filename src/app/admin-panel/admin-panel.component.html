@@ -2,17 +2,17 @@
 
 <div>
 
-  <table matSort>
+  <table *ngIf="users && !isLoading">
     <tr>
-      <th mat-sort-header="firstName">firstName</th>
-      <th mat-sort-header="lastName">lastName</th>
-      <th mat-sort-header="email">email</th>
-      <th mat-sort-header="role">role</th>
-      <th mat-sort-header="proposedRole">proposedRole</th>
-      <th mat-sort-header="actions">actions</th>
+      <th>firstName</th>
+      <th>lastName</th>
+      <th>email</th>
+      <th>role</th>
+      <th>proposedRole</th>
+      <th>actions</th>
     </tr>
 
-    <tr *ngFor="let user of users$ | async ">
+    <tr *ngFor="let user of users">
 
       <td>{{user.firstName}}</td>
       <td>{{user.lastName}}</td>
@@ -35,20 +35,23 @@
         </div>
       </td>
 
-      <td><button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/admin-change-role/{{user.id}}">Show Details</button></td>
+      <td>
+        <button class="showContract" mat-raised-button color="primary"
+                routerLink="/dashboard/admin-change-role/{{user.id}}">Show Details
+        </button>
+      </td>
     </tr>
   </table>
 
-</div>
 
+  <div class="container">
+    <ng-container *ngIf=" !users && isLoading">
+      <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
+    </ng-container>
 
-<div class="container">
-  <ng-container *ngIf=" !(users$ | async) && (isLoading$ | async)">
-    <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
-  </ng-container>
-
-  <ng-container *ngIf="!(users$ | async) && !(isLoading$ | async)">
-    <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve users</mat-card-title>
-  </ng-container>
+    <ng-container *ngIf="!users && !isLoading">
+      <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve users</mat-card-title>
+    </ng-container>
+  </div>
 </div>
 

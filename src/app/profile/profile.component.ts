@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../entities/user';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
@@ -12,31 +11,17 @@ import {UserService} from '../services/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
-
-  user: Observable<User>;
+  user: User;
   userForm: FormGroup;
+  isLoading: boolean;
 
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private router: Router,
               private userService: UserService,
               private route: ActivatedRoute) {
   }
 
-  updateUser() {
-    const user = this.userForm.value as User;
-
-    this.userService.updateUser(user)
-    // .then(() => {
-      .subscribe(() => {
-        localStorage.setItem('currentUser', JSON.stringify({ user }));
-        console.log('user updated!');
-        this.snackBar.open('User updated', '', {duration: 500}).afterDismissed().subscribe(() => {
-          this.router.navigate(['../dashboard/contract-list']);
-        });
-      });
-  }
-
-  ngOnInit() {
+  async ngOnInit() {
+    this.isLoading = true;
     this.userForm = this.fb.group({
       id: [''],
       email: [''],
@@ -51,9 +36,22 @@ export class ProfileComponent implements OnInit {
     });
 
     const id = this.route.snapshot.paramMap.get('id');
-    this.user = this.userService.getUser(id);
-    console.log('-- this.user', this.user);
+    this.user = await this.userService.getUser(id).toPromise();
+    console.log('-- user: ', this.user);
 
+    this.isLoading = false;
   }
 
+  updateUser() {
+    const user = this.userForm.value as User;
+
+    this.userService.updateUser(user)
+      .subscribe(() => {
+        localStorage.setItem('currentUser', JSON.stringify({user}));
+        console.log('user updated!');
+        this.snackBar.open('User updated', '', {duration: 500}).afterDismissed().subscribe(() => {
+          this.router.navigate(['../dashboard/contract-list']);
+        });
+      });
+  }
 }

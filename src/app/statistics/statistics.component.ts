@@ -13,8 +13,6 @@ export class StatisticsComponent implements OnInit {
   statisticsDateCurrent = 0;
   statisticsDateExpired = 0;
   statisticsDateNotStarted = 0;
-  statisticsMostExpensiveContract = 0;
-  statisticsCheapestContract = 0;
 
   constructor(private contractService: ContractService) {
   }
@@ -24,67 +22,48 @@ export class StatisticsComponent implements OnInit {
 
     this.contracts = await this.contractService.getContracts();
 
-    this.contracts.forEach(contracts => {
-      [this.statisticsDateCurrent, this.statisticsDateExpired, this.statisticsDateNotStarted] =
-        generateDateStatistics(contracts, this.statisticsDateCurrent,
-          this.statisticsDateExpired,
-          this.statisticsDateNotStarted);
-      [this.statisticsCheapestContract, this.statisticsMostExpensiveContract] = generateCostStatistics(contracts);
-    });
+    this.generateDateStatistics();
+    this.generateCostStatistics();
 
     this.isLoading = false;
   }
-}
 
-function generateDateStatistics(contracts, statisticsDateCurrent, statisticsDateExpired, statisticsDateNotStarted) {
-  const currentDateString = formatDate(new Date());
-  for (let i = 0; i < contracts.length; i++) {
-    console.log('contracts[i].startDate: ', contracts[i].startDate);
-    console.log('contracts[i].expirationDate: ', contracts[i].expirationDate);
-    console.log('----currentDateString: ', currentDateString);
+  private generateDateStatistics() {
+    const currentDate = this.formatDate(new Date());
+    for (let i = 0; i < this.contracts.length; i++) {
+      let startDate = this.formatDate(this.contracts[i].startDate);
+      let expirationDate = this.formatDate(this.contracts[i].expirationDate);
+      if (currentDate >= startDate && currentDate <= expirationDate) {
+        this.statisticsDateCurrent++;
+      }
 
-    // if (contracts[i].startDate <= currentDateString && currentDateString <= contracts[i].expirationDate) {
-    if (contracts[i].startDate < currentDateString && currentDateString < contracts[i].expirationDate) {
-      statisticsDateCurrent++;
-    }
-    if (contracts[i].expirationDate < currentDateString) {
-      statisticsDateExpired++;
-    }
-    if (currentDateString < contracts[i].startDate) {
-      statisticsDateNotStarted++;
+      if (currentDate > expirationDate) {
+        this.statisticsDateExpired++;
+      }
+
+      if (currentDate < startDate) {
+        this.statisticsDateNotStarted++;
+      }
     }
   }
-  // console.log('-----------------------------------------------');
-  // console.log('this.statisticsDateCurrent', this.statisticsDateCurrent);
-  // console.log('this.statisticsDateExpired', this.statisticsDateExpired);
-  // console.log('this.statisticsDateNotStarted', this.statisticsDateNotStarted);
-  // console.log('-----------------------------------------------');
-  return [statisticsDateCurrent, statisticsDateExpired, statisticsDateNotStarted];
-}
 
-function generateCostStatistics(contracts) {
-  console.log('contracts', contracts);
-  contracts.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost)) ? 1 : ((parseInt(b.cost) > parseInt(a.cost)) ? -1 : 0));
-  console.log('contracts', contracts);
-  console.log('-----------------------------------------------');
-  console.log('contracts[0]', contracts[0]);
-  console.log('contracts[contracts.length - 1]', contracts[contracts.length - 1]);
-  console.log('-----------------------------------------------');
-  return [contracts[0].id, contracts[contracts.length - 1].id];
-}
-
-function formatDate(date) {
-  var d = new Date(date),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
-
-  if (month.length < 2) {
-    month = '0' + month;
-  }
-  if (day.length < 2) {
-    day = '0' + day;
+  private generateCostStatistics() {
+    this.contracts = this.contracts.sort((a, b) => (parseInt(String(a.cost)) > parseInt(String(b.cost))) ? 1 : ((parseInt(String(b.cost)) > parseInt(String(a.cost))) ? -1 : 0));
   }
 
-  return [year, month, day].join('-');
+  formatDate(date: Date) {
+    let d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+
+    return [year, month, day].join('-');
+  }
 }

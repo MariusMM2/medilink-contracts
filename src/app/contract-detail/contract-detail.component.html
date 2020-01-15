@@ -1,7 +1,7 @@
-<p class="page-title">Contract Details</p>
+<p class="page-title">Details</p>
 
 <mat-card class="example-card">
-  <ng-container *ngIf="contract">
+  <ng-container *ngIf="contract && !isLoading">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{contract.name}}</mat-card-title>

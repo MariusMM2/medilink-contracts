@@ -1,51 +1,56 @@
 <p class="page-title">Update User Profile</p>
 
 <mat-card class="example-card">
-  <form *ngIf="user | async as user" [formGroup]="userForm" (ngSubmit)="updateUser()">
+  <form *ngIf="user" [formGroup]="userForm" (ngSubmit)="updateUser()">
     <mat-card-title id="update">Your Profile</mat-card-title>
     <div>
 
       <mat-form-field>
-        <input type="text" id="firstName" matInput formControlName="firstName" [ngModel]="user.firstName" placeholder='firstName'>
+        <input type="text" id="firstName" matInput formControlName="firstName" [ngModel]="user.firstName"
+               placeholder='First Name'>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input type="text" id="lastName" matInput formControlName="lastName" [ngModel]="user.lastName" placeholder='lastName'>
+        <input type="text" id="lastName" matInput formControlName="lastName" [ngModel]="user.lastName"
+               placeholder='Last Name'>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input type="text" id="email" matInput formControlName="email" [ngModel]="user.email" placeholder='email' readonly>
+        <input type="text" id="email" matInput formControlName="email" [ngModel]="user.email" placeholder='Email'
+               readonly>
       </mat-form-field>
       <mat-form-field>
-        <input type="text" id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='role' readonly>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-      <select matNativeControl id="proposedRole" matInput formControlName="proposedRole" [ngModel]="user.proposedRole" placeholder='proposed role'>
-        <option>Member</option>
-        <option>Admin</option>
-        <option>SuperAdmin</option>
-      </select>
+        <input type="text" id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='Role' readonly>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input type="text" id="notificationEmail" matInput formControlName="notificationEmail" [ngModel]="user.notificationEmail" placeholder='notificationEmail'>
+        <select matNativeControl id="proposedRole" matInput formControlName="proposedRole" [ngModel]="user.proposedRole"
+                placeholder='Proposed Role'>
+          <option>Member</option>
+          <option>Admin</option>
+          <option>SuperAdmin</option>
+        </select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="notificationEmail" matInput formControlName="notificationEmail"
+               [ngModel]="user.notificationEmail" placeholder='Notification Email'>
       </mat-form-field>
       <br>
       <input type="hidden" formControlName="id" [ngModel]="user.id">
       <input type="hidden" formControlName="password" [ngModel]="user.password">
       <input type="hidden" formControlName="emailVerified" [ngModel]="user.emailVerified">
       <input type="hidden" formControlName="active" [ngModel]="user.active">
-<!--      <input type="hidden" formControlName="proposedRole" [ngModel]="user.proposedRole">-->
-
     </div>
     <button id="updateButton" mat-raised-button color="primary">Update</button>
   </form>
-  <mat-card-title *ngIf="!(user | async)">User not found</mat-card-title>
+
+
+  <ng-container *ngIf=" !user && isLoading">
+    <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
+  </ng-container>
+
+  <ng-container *ngIf="!user && !isLoading">
+    <mat-card-title style="margin: auto; text-align: center;">User not found</mat-card-title>
+  </ng-container>
 </mat-card>
-
-
-<!--<p>Update User Profile</p>-->
-<!--<p> - Name</p>-->
-<!--<p> - Email</p>-->
-<!--<p> - Notification - email</p>-->

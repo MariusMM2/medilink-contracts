@@ -1,55 +1,55 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
 <p class="page-title">Contracts</p>
 
-<div *ngIf="azureService.authenticated; then loadContracts else oneDrivePrompt"></div>
+<div>
+  <div *ngIf="!isLoading && contracts.length !== 0">
 
-<ng-template #oneDrivePrompt>
-  <button style="margin: auto; align-self: center;" type="button" mat-raised-button color="primary"
-          (click)="connectOneDrive()">Connect OneDrive
-  </button>
-</ng-template>
+    <div id="search">
+      <mat-form-field>
+        <input matInput placeholder="Search contract" value="" [(ngModel)]="contractSearch">
+      </mat-form-field>
+    </div>
+    <button id="create-button" mat-raised-button color="primary" routerLink="/dashboard/contract-create"
+            *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Create Contract
+    </button>
 
-<ng-template #loadContracts>
-  <div id="search">
-    <mat-form-field>
-      <input matInput placeholder="Search contract" value="" [(ngModel)]="contractSearch">
-    </mat-form-field>
+    <button *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'"
+            style="margin: auto; align-self: center;" type="button" mat-raised-button
+            color="primary"
+            [disabled]="isLoading"
+            (click)="refresh()">Refresh
+    </button>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>Expiration Date</th>
+        <th>Category</th>
+        <th>Cost</th>
+        <th>Location</th>
+        <th>Actions</th>
+      </tr>
+
+      <tr *ngFor="let contract of sorted | contractPipe: contractSearch">
+        <td>{{contract.name.substring(0, 20)}}
+          <span *ngIf="contract.name.length > 20"> ... </span>
+        </td>
+        <td>{{contract.description}}</td>
+        <td>{{contract.startDate}}</td>
+        <td>{{contract.expirationDate}}</td>
+        <td>{{contract.category}}</td>
+        <td>{{contract.cost}}</td>
+        <td>{{contract.location}}</td>
+        <td>
+          <button class="showContract" mat-raised-button
+                  routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
-  <button id="create-button" mat-raised-button color="primary" routerLink="/dashboard/contract-create"
-          *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Create Contract</button>
-
-  <button style="margin: auto; align-self: center;" type="button" mat-raised-button color="primary"
-          [disabled]="isLoading"
-          (click)="refresh()">Refresh
-  </button>
-
-  <table matSort>
-    <tr>
-      <th mat-sort-header="name">name</th>
-      <th mat-sort-header="company">company</th>
-      <th mat-sort-header="startDate">startDate</th>
-      <th mat-sort-header="expirationDate">expirationDate</th>
-      <th mat-sort-header="category">category</th>
-      <th mat-sort-header="cost">cost</th>
-      <th mat-sort-header="location">location</th>
-      <th mat-sort-header="actions">actions</th>
-    </tr>
-
-    <tr *ngFor="let contract of sorted | contractPipe: contractSearch">
-      <td>{{contract.name }}</td>
-      <td>{{contract.description}}</td>
-      <td>{{contract.startDate}}</td>
-      <td>{{contract.expirationDate}}</td>
-      <td>{{contract.category}}</td>
-      <td>{{contract.cost}}</td>
-      <td>{{contract.location}}</td>
-      <td>
-        <button class="showContract" mat-raised-button
-                routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details
-        </button>
-      </td>
-    </tr>
-  </table>
 
   <div class="container">
     <ng-container *ngIf="isLoading">
@@ -61,4 +61,4 @@
       <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts</mat-card-title>
     </ng-container>
   </div>
-</ng-template>
+</div>

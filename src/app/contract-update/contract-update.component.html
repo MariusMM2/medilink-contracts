@@ -1,116 +1,128 @@
-<p class="page-title">Update Contract</p>
+<p class="page-title">Update</p>
 
 <mat-card class="example-card">
-  <form *ngIf="contract | async as contract" [formGroup]="contractForm" (ngSubmit)="updateContract()">
-    <mat-card-title id="update">Contract</mat-card-title>
-    <div>
-      <input type="hidden" formControlName="id" [ngModel]="contract.id">
-    </div>
-
-    <div>
-
-      <mat-form-field>
-        <input type="text" id="name" matInput formControlName="name" [ngModel]="contract.name" (click)="clearErrorMessage()">
-      </mat-form-field>
-
-      <div *ngIf="contractForm.controls.name.errors?.required && contractForm.controls.name.touched">
-        You must fill out the contract name!
+  <ng-container *ngIf="contract && !isLoading">
+    <form *ngIf="contract" [formGroup]="contractForm" (ngSubmit)="updateContract()">
+      <mat-card-title id="update">Contract</mat-card-title>
+      <div>
+        <input type="hidden" formControlName="id" [ngModel]="contract.id">
       </div>
 
-      <div *ngIf="contractForm.controls.name.errors?.maxlength && contractForm.controls.name.touched">
-        The contract name must contain maximum 15 characters!
+      <div>
+
+        <mat-form-field>
+          <input type="text" id="name" matInput formControlName="name" [ngModel]="contract.name"
+                 (click)="clearErrorMessage()">
+        </mat-form-field>
+
+        <div *ngIf="contractForm.controls.name.errors?.required && contractForm.controls.name.touched">
+          You must fill out the contract name!
+        </div>
+
+        <div *ngIf="contractForm.controls.name.errors?.maxlength && contractForm.controls.name.touched">
+          The contract name must contain maximum 15 characters!
+        </div>
+
+        <div id="nameErrMsg"></div>
+
       </div>
-
-      <div id="nameErrMsg"></div>
-
-    </div>
       <br>
-    <div>
+      <div>
 
-      <mat-form-field>
-        <input type="text" id="description" matInput formControlName="description" [ngModel]="contract.description">
-      </mat-form-field>
+        <mat-form-field>
+          <input type="text" id="description" matInput formControlName="description" [ngModel]="contract.description">
+        </mat-form-field>
 
-      <div *ngIf="contractForm.controls.description.errors?.required && contractForm.controls.description.touched">
-        You must fill out the contract description!
+        <div *ngIf="contractForm.controls.description.errors?.required && contractForm.controls.description.touched">
+          You must fill out the contract description!
+        </div>
+
+        <div *ngIf="contractForm.controls.description.errors?.maxlength && contractForm.controls.description.touched">
+          The contract description must contain maximum 20 characters!
+        </div>
+
       </div>
-
-      <div *ngIf="contractForm.controls.description.errors?.maxlength && contractForm.controls.description.touched">
-        The contract description must contain maximum 20 characters!
-      </div>
-
-    </div>
       <br>
-    <div>
+      <div>
 
-      <mat-form-field>
-        <input type="date" id="startDate" matInput formControlName="startDate" [ngModel]="contract.startDate">
-      </mat-form-field>
+        <mat-form-field>
+          <input type="date" id="startDate" matInput formControlName="startDate" [ngModel]="contract.startDate">
+        </mat-form-field>
 
-      <div *ngIf="contractForm.controls.startDate.errors?.required && contractForm.controls.startDate.touched">
-        You must fill out the contract start date!
+        <div *ngIf="contractForm.controls.startDate.errors?.required && contractForm.controls.startDate.touched">
+          You must fill out the contract start date!
+        </div>
+
       </div>
-
-    </div>
       <br>
-    <div>
+      <div>
 
-      <mat-form-field>
-        <input type="date" id="expirationDate" matInput formControlName="expirationDate" [ngModel]="contract.expirationDate">
-      </mat-form-field>
+        <mat-form-field>
+          <input type="date" id="expirationDate" matInput formControlName="expirationDate"
+                 [ngModel]="contract.expirationDate">
+        </mat-form-field>
 
-      <div *ngIf="contractForm.controls.expirationDate.errors?.required && contractForm.controls.expirationDate.touched">
-        You must fill out the contract expiration date!
+        <div
+          *ngIf="contractForm.controls.expirationDate.errors?.required && contractForm.controls.expirationDate.touched">
+          You must fill out the contract expiration date!
+        </div>
+
       </div>
-
-    </div>
       <br>
-    <div>
+      <div>
 
-      <mat-form-field>
-        <input type="text" id="type" matInput formControlName="type" [ngModel]="contract.type">
-      </mat-form-field>
+        <mat-form-field>
+          <input type="text" id="type" matInput formControlName="type" [ngModel]="contract.type">
+        </mat-form-field>
 
-      <div *ngIf="contractForm.controls.type.errors?.required && contractForm.controls.type.touched">
-        You must fill out the contract type!
+        <div *ngIf="contractForm.controls.type.errors?.required && contractForm.controls.type.touched">
+          You must fill out the contract type!
+        </div>
+
+        <div *ngIf="contractForm.controls.type.errors?.maxlength && contractForm.controls.type.touched">
+          The contract type must contain maximum 20 characters!
+        </div>
+
       </div>
-
-      <div *ngIf="contractForm.controls.type.errors?.maxlength && contractForm.controls.type.touched">
-        The contract type must contain maximum 20 characters!
-      </div>
-
-    </div>
       <br>
-    <div>
+      <div>
 
+        <mat-form-field>
+          <input type="text" id="file" matInput formControlName="file" [ngModel]="contract.file">
+        </mat-form-field>
+
+        <div *ngIf="contractForm.controls.file.errors?.required && contractForm.controls.file.touched">
+          You must fill out the contract file!
+        </div>
+
+        <div *ngIf="contractForm.controls.file.errors?.maxlength && contractForm.controls.file.touched">
+          The contract file must contain maximum 20 characters!
+        </div>
+
+      </div>
+
+      <br>
       <mat-form-field>
-        <input type="text" id="file" matInput formControlName="file" [ngModel]="contract.file">
+        <input type="text" id="category" matInput formControlName="category" [ngModel]="contract.category">
       </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="cost" matInput formControlName="cost" [ngModel]="contract.cost">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input type="text" id="location" matInput formControlName="location" [ngModel]="contract.location">
+      </mat-form-field>
+      <br>
+      <button id="updateButton" mat-raised-button color="primary">Update</button>
+    </form>
+  </ng-container>
 
-      <div *ngIf="contractForm.controls.file.errors?.required && contractForm.controls.file.touched">
-        You must fill out the contract file!
-      </div>
+  <ng-container *ngIf=" !contract && isLoading">
+    <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
+  </ng-container>
 
-      <div *ngIf="contractForm.controls.file.errors?.maxlength && contractForm.controls.file.touched">
-        The contract file must contain maximum 20 characters!
-      </div>
-
-    </div>
-
-    <br>
-    <mat-form-field>
-      <input type="text" id="category" matInput formControlName="category" [ngModel]="contract.category">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <input type="text" id="cost" matInput formControlName="cost" [ngModel]="contract.cost">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <input type="text" id="location" matInput formControlName="location" [ngModel]="contract.location">
-    </mat-form-field>
-    <br>
-    <button id="updateButton" mat-raised-button color="primary">Update</button>
-  </form>
-  <mat-card-title *ngIf="!(contract | async)">Contract not found</mat-card-title>
+  <ng-container *ngIf="!contract && !isLoading">
+    <mat-card-title style="margin: auto; text-align: center;">Contract not found</mat-card-title>
+  </ng-container>
 </mat-card>

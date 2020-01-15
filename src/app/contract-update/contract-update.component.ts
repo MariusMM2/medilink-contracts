@@ -13,6 +13,7 @@ import {ContractService} from '../services/contract.service';
 export class ContractUpdateComponent implements OnInit {
   contract: Contract;
   contractForm: FormGroup;
+  isLoading: boolean;
 
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private router: Router,
               private contractService: ContractService,
@@ -21,6 +22,7 @@ export class ContractUpdateComponent implements OnInit {
 
 
   async ngOnInit() {
+    this.isLoading = true;
     this.contractForm = this.fb.group({
       id: [''],
       name: ['', [Validators.required, Validators.maxLength(15)]],
@@ -36,6 +38,8 @@ export class ContractUpdateComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('id');
     this.contract = await this.contractService.getContract(id);
+
+    this.isLoading = false;
   }
 
   clearErrorMessage() {
