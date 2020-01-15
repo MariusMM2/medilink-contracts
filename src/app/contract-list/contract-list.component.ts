@@ -36,6 +36,7 @@ export class ContractListComponent implements OnInit {
   }
 
   async refresh() {
+    //TODO: Restrict Sync to Admins & SuperAdmins only
     this.contracts.length = 0;
     this.isLoading = true;
 
