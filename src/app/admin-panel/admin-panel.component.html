@@ -8,7 +8,7 @@
       <th mat-sort-header="lastName">lastName</th>
       <th mat-sort-header="email">email</th>
       <th mat-sort-header="role">role</th>
-      <th mat-sort-header="confirmedRole">confirmedRole</th>
+      <th mat-sort-header="proposedRole">proposedRole</th>
       <th mat-sort-header="actions">actions</th>
     </tr>
 
@@ -17,8 +17,24 @@
       <td>{{user.firstName}}</td>
       <td>{{user.lastName}}</td>
       <td>{{user.email}}</td>
-      <td>{{user.role}}</td>
-      <td>{{user.confirmedRole}}</td>
+
+      <td>
+        <div *ngIf="user.role !== user.proposedRole">
+          <button mat-raised-button color="warn">{{user.role}}</button>
+        </div>
+        <div *ngIf="user.role == user.proposedRole">
+          {{user.role}}
+        </div>
+      </td>
+      <td>
+        <div *ngIf="user.role !== user.proposedRole">
+          <button mat-raised-button color="warn">{{user.proposedRole}}</button>
+        </div>
+        <div *ngIf="user.role == user.proposedRole">
+          {{user.proposedRole}}
+        </div>
+      </td>
+
       <td><button class="showContract" mat-raised-button color="primary" routerLink="/dashboard/admin-change-role/{{user.id}}">Show Details</button></td>
     </tr>
   </table>
@@ -27,13 +43,6 @@
 
 
 <div class="container">
-  <!--  <div *ngFor="let contract of contracts$ | async ">-->
-  <!--&lt;!&ndash;  <div *ngFor="let contract of contracts$ | async | contractPipe: userSearch">&ndash;&gt;-->
-  <!--    <app-contract class="contract"-->
-  <!--                 [contractInput]="contract"-->
-  <!--    ></app-contract>-->
-  <!--  </div>-->
-
   <ng-container *ngIf=" !(users$ | async) && (isLoading$ | async)">
     <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
   </ng-container>
@@ -42,10 +51,4 @@
     <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve users</mat-card-title>
   </ng-container>
 </div>
-
-
-
-<!--<p>Display Users</p>-->
-<!--<p>Update users</p>-->
-<!--<p>Verify users</p>-->
 

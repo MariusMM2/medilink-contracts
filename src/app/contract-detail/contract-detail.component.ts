@@ -14,8 +14,7 @@ export class ContractDetailComponent implements OnInit {
 
   contract: Contract;
   isLoading: boolean;
-
-  // isAdmin$: Observable<boolean>;
+  currentUser;
 
   constructor(private snackBar: MatSnackBar, private contractService: ContractService, private azureService: AzureService,
               private router: Router, private route: ActivatedRoute) {
@@ -24,6 +23,7 @@ export class ContractDetailComponent implements OnInit {
   async ngOnInit() {
     if (this.azureService.authenticated) {
       this.isLoading = true;
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
 
       const id = this.route.snapshot.paramMap.get('id');
 

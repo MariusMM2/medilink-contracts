@@ -13,12 +13,23 @@
         <input type="text" id="lastName" matInput formControlName="lastName" [ngModel]="user.lastName" placeholder='lastName' readonly>
       </mat-form-field>
       <br>
+<!--      <mat-form-field>-->
+<!--        <input type="text" id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='role'>-->
+<!--      </mat-form-field>-->
+
+<!--      [ngClass]="{'highlight-color': user.role == user.proposedRole}"-->
       <mat-form-field>
-        <input type="text" id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='role'>
+        <select matNativeControl id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='role'>
+          <option>Member</option>
+          <option>Admin</option>
+          <option>SuperAdmin</option>
+        </select>
       </mat-form-field>
+
+
       <br>
       <mat-form-field>
-        <input type="text" id="confirmedRole" matInput formControlName="confirmedRole" [ngModel]="user.confirmedRole" placeholder='confirmedRole'>
+        <input type="text" id="proposedRole" matInput formControlName="proposedRole" [ngModel]="user.proposedRole" placeholder='proposedRole' readonly>
       </mat-form-field>
       <br>
       <input type="hidden" formControlName="id" [ngModel]="user.id">

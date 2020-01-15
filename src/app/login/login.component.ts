@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {User} from '../entities/user';
 import {AuthService} from '../auth/auth.service';
+import {AdminService} from '../admin/admin.service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,12 @@ export class LoginComponent implements OnInit {
 
   // used for validation of the values from the login form
   loginForm: FormGroup;
+  loggedTries: 0;
 
   // form builder is used to create instances of the form group
   // router is used for navigation after the form is successfully submitted
   // tslint:disable-next-line:max-line-length
-  constructor(private formBuilder: FormBuilder, private router: Router, private userApi: UserService, private authService: AuthService ) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private userApi: UserService, private authService: AuthService, private adminService: AdminService) {
   }
 
   ngOnInit() {
@@ -42,15 +44,19 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.userApi.loginUser(user).subscribe(async backendRes => { // arrow function
         console.log('backend response:', backendRes);
+        localStorage.setItem('currentUser', JSON.stringify({ user: backendRes.user }));
 
         if (backendRes.status === 200) {
           this.authService.isLoggedIn = true;
           this.authService.login();
-          window.localStorage.setItem('token', backendRes.token);
-          // document.cookie = `token=${backendRes.token}`;
+          if (backendRes.user.role === 'Admin') {
+            this.adminService.isAdmin = true;
+          } else if (backendRes.user.role === 'SuperAdmin') {
+            this.adminService.isSuperAdmin = true;
+          }
+
           this.router.navigate(['../dashboard/contract-list'])
             .then(() => {
-
               console.log('Successfully logged in!');
             })
             .catch(e => {
@@ -58,13 +64,16 @@ export class LoginComponent implements OnInit {
             });
         } else if (backendRes.status === 401) {
 
-          // document.getElementById('emailErrMsg').innerHTML = backendRes.message + '<br><br>';
           alert(backendRes.message);
 
         } else if (backendRes.status === 400) {
 
-          // document.getElementById('passwordErrMsg').innerHTML = backendRes.message + '<br><br>';
           alert(backendRes.message);
+
+          // loggedTries: 1
+          this.loggedTries = backendRes.loggedTries;
+          console.log('this.loggedTries', this.loggedTries);
+          console.log('backendRes', backendRes);
 
         } else if (backendRes.status === 402) {
 

@@ -13,13 +13,15 @@ export class ContractListComponent implements OnInit {
   sorted: Contract[];
   isLoading: boolean;
   contractSearch: string;
-  // isAdmin$: Observable<boolean>;
+  currentUser;
 
   constructor(private contractService: ContractService, private azureService: AzureService) {
     this.contracts = [];
   }
 
   async ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
+
     if (this.azureService.authenticated) {
       this.getContracts();
     }
@@ -55,7 +57,6 @@ export class ContractListComponent implements OnInit {
     this.isLoading = false;
   }
 }
-
 
 function addFlag(myCountry) {
   interface Flag {

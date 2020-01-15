@@ -23,9 +23,12 @@
 
     <mat-card-actions>
       <button class="updateContract" mat-raised-button color="accent"
-              routerLink="/dashboard/contract-update/{{contract.id}}">Update Contract
+              routerLink="/dashboard/contract-update/{{contract.id}}"
+              *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Update Contract
       </button>
-      <button class="deleteContract" mat-raised-button color="warn" disabled (click)="deleteContract()">Delete Contract
+      <button class="deleteContract" mat-raised-button color="warn"
+              *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'"
+              (click)="deleteContract()">Delete Contract
       </button>
       <ng-container *ngIf="contract.driveRef !== undefined; then showButtons else showDisabledButtons"></ng-container>
 

@@ -29,6 +29,7 @@ export class AdminChangeRoleComponent implements OnInit {
     this.userService.updateUser(user)
     // .then(() => {
       .subscribe(() => {
+        localStorage.setItem('currentUser', JSON.stringify({ user }));
         console.log('user updated!');
         this.snackBar.open('User updated', '', {duration: 500}).afterDismissed().subscribe(() => {
           this.router.navigate(['../dashboard/admin-panel']);
@@ -38,7 +39,6 @@ export class AdminChangeRoleComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      // _id: [''],
       id: [''],
       email: [''],
       firstName: [''],
@@ -48,7 +48,7 @@ export class AdminChangeRoleComponent implements OnInit {
       active: [''],
       role: [''],
       notificationEmail: [''],
-      confirmedRole: [''],
+      proposedRole: [''],
     });
 
     const id = this.route.snapshot.paramMap.get('id');
