@@ -20,10 +20,14 @@ export class ContractService {
     let contract = await this.http.get<Contract>(`${this.baseUrl}/${id}`).toPromise();
 
     try {
-      contract.driveRef = await this.azureService.getContract(contract.file);
+      let driveRef = await this.azureService.getContract(contract.file);
+      if (driveRef !== null) {
+        contract.driveRef = driveRef;
+      }
     } catch (error) {
-      console.log(`Could not get DriveItem with id '${contract.file}'`);
-      console.log(JSON.stringify(error, null, 2));
+      console.error(error);
+      console.error(`Could not get DriveItem with id '${contract.file}'`);
+      console.error(JSON.stringify(error, null, 2));
     }
 
     return contract;
