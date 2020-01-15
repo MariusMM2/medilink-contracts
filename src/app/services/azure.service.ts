@@ -5,8 +5,7 @@ import {DriveContract} from '../entities/contract';
 import {Client} from '@microsoft/microsoft-graph-client';
 
 const API_BASE = '/me/drive';
-const CONTRACTS_FOLDER = 'A0526EA1F25CC85E!106526';
-const FILTER_STRING = 'pdf';
+const CONTRACTS_FOLDER = '9FA91B410245C428%21113';
 
 @Injectable({
   providedIn: 'root'
@@ -77,11 +76,11 @@ export class AzureService {
 
       let folders: DriveFolder[] = result.value.filter(value => value.folder);
 
-      console.log(folders);
+      console.log('contract folders:', folders);
 
       for (const folder of folders) {
         result = await this.graphClient
-          .api(`${API_BASE}/items/${(folder.id)}/search(q='${FILTER_STRING}')`)
+          .api(`${API_BASE}/items/${folder.id}/children`)
           .select('name,id,webUrl,folder,file')
           .get();
 
@@ -100,8 +99,10 @@ export class AzureService {
 
     } catch (error) {
       console.error(error);
-      console.log('Could not get contracts');
-      console.log(JSON.stringify(error, null, 2));
+      console.error('Could not get contracts');
+      console.error(JSON.stringify(error, null, 2));
+
+      return null;
     }
   }
 
