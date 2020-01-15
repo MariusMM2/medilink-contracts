@@ -46,7 +46,6 @@ export class ContractCreateComponent implements OnInit {
       console.log('backend response:', backendRes);
 
       if (backendRes.status === 200) {
-        this.contractForm.reset();
         this.snackBar.open('contract added', '', {duration: 500}).afterDismissed().subscribe(() => {
           this.router.navigate(['../dashboard/contract-list']);
         });
