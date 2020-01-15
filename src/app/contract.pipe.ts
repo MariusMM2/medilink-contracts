@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import {Contract} from './entities/contract';
 
 @Pipe({
@@ -6,71 +6,41 @@ import {Contract} from './entities/contract';
 })
 export class ContractPipe implements PipeTransform {
 
-  // transform(value: any, ...args: any[]): any {
-  //   return null;
-  // }
-
-
-  // transform(contracts: Contract[], search?: string): any {
-  //   return contracts.filter(contract => {
-  //     contract.name.toLowerCase().includes(search.toLowerCase());
-  //     // contract.location.toLowerCase().includes(search.toLowerCase());
-  //   });
-  // }
-
-  transform(contracts: Contract[], search?: string): any {
-    // console.log(contracts);
-
-    // return contracts.filter(contract => {
-    //   if (contract.name === undefined || contract.name !== search) {
-    //     return false;
-    //   }
-    //   return true;
-    // });
-
-    // return contractsFilter;
-
-    // console.log(contracts);
-    // console.log(search);
-    if (search === undefined) {
-      return contracts;
+  transform(contracts: Contract[], search?: string): Set<Contract> {
+    if (search === undefined || search === '') {
+      return new Set(contracts);
     }
 
+    const searchString = search.toLowerCase();
 
-    const searchResult1 =  contracts.filter(
-      contract => contract.name.toLowerCase().includes(search.toLowerCase())
+    const searchName = contracts.filter(
+      contract => contract.name.toLowerCase().includes(searchString)
     );
-    const searchResult2 =  contracts.filter(
-      contract => contract.location.toLowerCase().includes(search.toLowerCase())
+    const searchDescription = contracts.filter(
+      contract => contract.description.toLowerCase().includes(searchString)
     );
-    const searchResult3 =  contracts.filter(
-      contract => contract.category.toLowerCase().includes(search.toLowerCase())
+    const searchStartDate = contracts.filter(
+      contract => contract.startDate.toString().includes(searchString)
     );
-    const searchResult4 =  contracts.filter(
-      contract => contract.expirationDate.toLowerCase().includes(search.toLowerCase())
+    const searchExpiration = contracts.filter(
+      contract => contract.expirationDate.toString().includes(searchString)
     );
-    const searchResult5 =  contracts.filter(
-      contract => contract.startDate.toLowerCase().includes(search.toLowerCase())
+    const searchCategory = contracts.filter(
+      contract => contract.category.toLowerCase().includes(searchString)
+    );
+    const searchCost = contracts.filter(
+      contract => contract.cost.toString().includes(searchString)
+    );
+    const searchLocation = contracts.filter(
+      contract => contract.location.toLowerCase().includes(searchString)
     );
 
-    console.log('searchResult1', searchResult1);
+    let searchResult: Contract[] = searchName.concat(searchDescription, searchStartDate, searchExpiration, searchCategory, searchCost, searchLocation);
 
-
-    if (searchResult1.length !== 0) {
-      return searchResult1;
-    } else if (searchResult2.length !== 0) {
-      return searchResult2;
-    } else if (searchResult3.length !== 0) {
-      return searchResult3;
-    } else if (searchResult4.length !== 0) {
-      return searchResult4;
-    } else if (searchResult5.length !== 0) {
-      return searchResult5;
+    if (searchResult.length > 0) {
+      return new Set(searchResult);
+    } else {
+      return new Set();
     }
-    // return (searchResult && searchResult2);
-
-    // return contracts.filter(
-    //   contract => contract.name.toLowerCase().includes(search.toLowerCase())
-    // );
   }
 }
