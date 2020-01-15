@@ -107,11 +107,6 @@ export class AzureService {
   }
 
   async getContract(id: string): Promise<DriveContract> {
-    if (id.length !== CONTRACTS_FOLDER.length) {
-      return new Promise((resolve, reject) => {
-        reject(Error(`Invalid DriveItem ID (${id})`));
-      });
-    }
     try {
       let result = await this.graphClient
         .api(`${API_BASE}/items/${id}`)
