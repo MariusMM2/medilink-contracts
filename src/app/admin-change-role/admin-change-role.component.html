@@ -36,7 +36,7 @@
       <input type="hidden" formControlName="notificationEmail" [ngModel]="user.notificationEmail">
 
     </div>
-    <button id="updateButton" mat-raised-button color="primary">Update</button>
+    <button id="updateButton" class="update-btn" mat-raised-button color="primary">Update</button>
   </form>
   <mat-card-title *ngIf="!(user | async)">User not found</mat-card-title>
 </mat-card>
