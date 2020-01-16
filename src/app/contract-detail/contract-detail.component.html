@@ -47,7 +47,7 @@
               routerLink="/dashboard/contract-update/{{contract.id}}"
               *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Update Contract
       </button>
-      <button class="action-button delete-btn" mat-raised-button color="warn"
+      <button class="action-button delete-btn" mat-raised-button color="warn" [disabled]="pendingRedirect"
               *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'"
               (click)="deleteContract()">Delete Contract
       </button>
