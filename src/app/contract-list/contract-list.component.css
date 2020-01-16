@@ -14,6 +14,7 @@
   margin-bottom: 30px;
   margin-left: auto;
   margin-right: auto;
+  font-size: 16px;
 }
 
 #create-button {
@@ -22,10 +23,11 @@
   height: 50px;
   display: block;
   margin-top: -10px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
   background-color: #26c44d;
+  font-size: 16px;
 }
 
 #refresh-button {
@@ -38,6 +40,13 @@
   margin-left: auto;
   margin-right: auto;
   background-color: #4896eb;
+  font-size: 16px;
+}
+
+#refresh-button:disabled,
+#create-button:disabled {
+  background-color: #cccccc;
+  color: #666666;
 }
 
 .showContract {
@@ -51,6 +60,8 @@
   padding-left: 10px;
   background-color: #fa8e3c;
   color: #fff;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .createProduct {
@@ -63,6 +74,7 @@ table {
   width: 70%;
   margin-left: auto;
   margin-right: auto;
+
 }
 
 .table-header {
@@ -86,10 +98,17 @@ th.mat-sort-header-sorted {
   background: red;
 }
 
-table {
-  width: 100%;
+.table {
+  width: 90%  !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 60px;
 }
 
 th.mat-sort-header-sorted {
   color: black;
 }
+
+
+

@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
 <p class="page-title">Contracts</p>
 
-<button
+<button id="refresh-button"
   type="button" mat-raised-button
   color="primary"
   [disabled]="isLoading"
@@ -18,17 +18,17 @@
   </mat-form-field>
 </div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Start Date</th>
-    <th>Expiration Date</th>
-    <th>Category</th>
-    <th>Cost</th>
-    <th>Location</th>
-    <th>Actions</th>
-  </tr>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>Expiration Date</th>
+        <th>Category</th>
+        <th>Cost</th>
+        <th>Location</th>
+        <th>Actions</th>
+      </tr>
 
   <ng-container *ngIf="!isLoading && contracts.length !== 0 && azureService.token !== undefined">
     <tr *ngFor="let contract of sorted | contractPipe: contractSearch">
