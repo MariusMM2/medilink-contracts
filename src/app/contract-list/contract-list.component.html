@@ -42,7 +42,10 @@
       <td>{{contract.cost}}</td>
       <td>{{contract.location}}</td>
       <td>
-        <button class="showContract" mat-raised-button
+        <button *ngIf="contract.driveRef" class="showContract" mat-raised-button
+                routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details
+        </button>
+        <button *ngIf="contract.driveRef === null" class="showContract noFile" mat-raised-button
                 routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details
         </button>
       </td>
