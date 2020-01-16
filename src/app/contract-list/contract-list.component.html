@@ -56,7 +56,7 @@
     <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
   </ng-container>
 
-  <ng-container *ngIf="(contracts.length === 0) && !isLoading">
+  <ng-container *ngIf="(contracts.length === 0) && !isLoading && azureService.token === undefined">
     <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts, try refreshing
     </mat-card-title>
   </ng-container>
