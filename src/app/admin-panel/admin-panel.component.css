@@ -16,12 +16,6 @@
   margin-right: auto;
 }
 
-table {
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .table-header {
   background: rgba(2, 188, 212, 0.9);
 }
@@ -30,7 +24,6 @@ table {
   color: #ffffff;
   font-size: 16px;
 }
-
 .button {
   margin-left: 5px;
   margin-right: 5px;
@@ -45,10 +38,29 @@ th.mat-sort-header-sorted {
   background: red;
 }
 
-table {
-  width: 100%;
-}
-
 th.mat-sort-header-sorted {
   color: black;
 }
+
+.table {
+  width: 70%  !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.showContract {
+  text-align: center;
+  width: 100px;
+  height: 35px;
+  display: block;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: #fa8e3c;
+  color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
