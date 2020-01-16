@@ -20,7 +20,7 @@ export class AzureService {
 
     this.graphClient = Client.init({
       authProvider: async (done) => {
-        let token = await this.getAccessToken()
+        const token = await this.getAccessToken()
           .catch(reason => {
             done(reason, null);
           });
@@ -38,7 +38,7 @@ export class AzureService {
   // grant consent to the requested permission scopes
   async signIn(): Promise<void> {
     try {
-      let result = await this.msalService.loginPopup(environment.azure.scopes);
+      const result = await this.msalService.loginPopup(environment.azure.scopes);
 
       if (result) {
         this.authenticated = true;
@@ -72,9 +72,9 @@ export class AzureService {
         .select('name,id,webUrl,folder,file')
         .get();
 
-      let contracts: DriveContract[] = [];
+      const contracts: DriveContract[] = [];
 
-      let folders: DriveFolder[] = result.value.filter(value => value.folder);
+      const folders: DriveFolder[] = result.value.filter(value => value.folder);
 
       console.log('contract folders:', folders);
 
@@ -84,7 +84,7 @@ export class AzureService {
           .select('name,id,webUrl,folder,file')
           .get();
 
-        let folderContracts: DriveContract[] = result.value.filter(value => value.file);
+        const folderContracts: DriveContract[] = result.value.filter(value => value.file);
 
         for (const contract of folderContracts) {
           contract.company = folder.name;
@@ -108,11 +108,11 @@ export class AzureService {
 
   async getContract(id: string): Promise<DriveContract> {
     try {
-      let result = await this.graphClient
+      const result = await this.graphClient
         .api(`${API_BASE}/items/${id}`)
         .get();
 
-      let contract: DriveContract = {
+      const contract: DriveContract = {
         id: result.id,
         name: result.name,
         company: result.parentReference.name,

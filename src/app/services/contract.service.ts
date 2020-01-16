@@ -17,10 +17,10 @@ export class ContractService {
   }
 
   async getContract(id: string): Promise<Contract> {
-    let contract = await this.http.get<Contract>(`${this.baseUrl}/${id}`).toPromise();
+    const contract = await this.http.get<Contract>(`${this.baseUrl}/${id}`).toPromise();
 
     try {
-      let driveRef = await this.azureService.getContract(contract.file);
+      const driveRef = await this.azureService.getContract(contract.file);
       if (driveRef !== null) {
         contract.driveRef = driveRef;
       }
@@ -34,7 +34,7 @@ export class ContractService {
   }
 
   async getContracts(): Promise<Contract[]> {
-    let contracts = await this.http.get<Contract[]>(this.baseUrl).toPromise();
+    const contracts = await this.http.get<Contract[]>(this.baseUrl).toPromise();
 
     for (const contract of contracts) {
       try {
@@ -52,17 +52,16 @@ export class ContractService {
    * Synchronise the server-side database with the OneDrive folder
    */
   async syncContracts(): Promise<any> {
-    let dbContracts: Contract[] = await this.http.get<Contract[]>(this.baseUrl).toPromise();
-    let driveContracts: DriveContract[] = await this.azureService.getContracts();
+    const dbContracts: Contract[] = await this.http.get<Contract[]>(this.baseUrl).toPromise();
+    const driveContracts: DriveContract[] = await this.azureService.getContracts();
 
-    for (let driveContract of driveContracts) {
+    for (const driveContract of driveContracts) {
       let dbContract: Contract = dbContracts.find(
         contract => contract.file === driveContract.id);
       const isNewContract: boolean = dbContract === undefined;
 
-      if (isNewContract)
+      if (isNewContract) {
         // Create a new Contract object with default fields
-      {
         dbContract = {
           id: undefined,
           name: driveContract.name,
@@ -73,8 +72,7 @@ export class ContractService {
           type: '-',
           category: '-',
           cost: 0,
-          location: '-',
-          userId: -1
+          location: '-'
         };
       }
 
