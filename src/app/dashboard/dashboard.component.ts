@@ -13,9 +13,6 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService, private adminService: AdminService) { }
 
   ngOnInit() {
-    // console.log(user.id);
-
-    // this.currentUser = localStorage.getItem('currentUser');
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
 
     // this.userRole$ = new Observable(subscriber => {
