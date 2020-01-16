@@ -53,10 +53,6 @@
   color: #fff;
 }
 
-/*.ng-star-inserted {*/
-/*  display: inline-block;*/
-/*}*/
-
 .createProduct {
   width: 180px;
   display: block;
@@ -74,28 +70,21 @@ table {
 }
 
 .mat-header-cell {
-  /*color: #ffffff;*/
   font-size: 16px;
-  /*text-align: center;*/
 }
 .button {
   margin-left: 5px;
   margin-right: 5px;
 }
 
-
-/**/
-
 th.mat-sort-header-sorted {
   color: black;
 }
-
 
 .mat-sort-header-container {
   align-items: center;
   background: red;
 }
-
 
 table {
   width: 100%;
@@ -104,6 +93,3 @@ table {
 th.mat-sort-header-sorted {
   color: black;
 }
-
-
-

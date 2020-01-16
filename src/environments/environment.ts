@@ -1,4 +1,3 @@
-import {firebaseConfig} from './firebaseCredentials';
 import {azureConfig} from './azureCredentials';
 
 // This file can be replaced during build by using the `fileReplacements` array.
@@ -7,7 +6,6 @@ import {azureConfig} from './azureCredentials';
 
 export const environment = {
   production: false,
-  firebase: firebaseConfig,
   azure: azureConfig
 };
 

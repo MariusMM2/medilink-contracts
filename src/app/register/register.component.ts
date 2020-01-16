@@ -53,10 +53,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  clearErrorMessage() {
-    document.getElementById('emailErrMsg').innerHTML = '';
-  }
-
   onSubmit() {
     console.log(this.registerForm);
     const user = this.registerForm.value as User;
@@ -75,7 +71,6 @@ export class RegisterComponent implements OnInit {
             });
         } else if (backendRes.status === 400) {
 
-          // document.getElementById('emailErrMsg').innerHTML = backendRes.message + '<br><br>';
           alert(backendRes.message);
 
         }

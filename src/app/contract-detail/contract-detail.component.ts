@@ -22,7 +22,7 @@ export class ContractDetailComponent implements OnInit {
 
   async ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
-    // if (this.azureService.authenticated) {
+
     this.isLoading = true;
 
     const id = this.route.snapshot.paramMap.get('id');
@@ -32,9 +32,7 @@ export class ContractDetailComponent implements OnInit {
     console.log('contract:', this.contract);
 
     this.isLoading = false;
-    // } else {
-    //   await this.router.navigate(['../dashboard/contract-list'], {replaceUrl: true});
-    // }
+
   }
 
   async deleteContract() {

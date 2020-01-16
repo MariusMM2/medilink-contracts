@@ -22,7 +22,6 @@ function register(req, res) {
       console.log(req.body);
 
       req.body.notificationEmail = req.body.email;
-      // req.body.role = 'Member';
 
       User.create(req.body).then(user => {
         console.log("created: ", user);
@@ -99,14 +98,6 @@ function login(req, res) {
           const token = jwt.sign(user.dataValues, Config.JWT_SECRET, {
             expiresIn: 86400 // expires in 24 hours = 86400 seconds
           });
-
-          // res.cookie("token", token, {
-          //   expire: Date.now() + 43200000,  // 43200000 milliseconds = 12 hours
-          //   secure: false, // set to true if your using https
-          //   httpOnly: true
-          // });
-          //
-          // res.header('Authorization', 'Bearer '+ token);
 
           user.dataValues.loggedTries = 0;
           User.update(user.dataValues, {where: {id: user.dataValues.id}});
@@ -209,14 +200,10 @@ function forgotPassword(req, res) {
 }
 
 function changePassword(req, res) {
-
-  console.log("req.body: ", req.body);
   const newPassword = req.body.password;
-
   const user = jwt.verify(req.params.token, Config.JWT_SECRET);
 
   user.password = newPassword;
-
   User.update(user, {where: {id: user.id}}).then(() => {
     res.json({
       status: 200,
@@ -236,7 +223,6 @@ function readUser(req, res) {
     where: {
       id: req.params.id
     }}).then(user => {
-    // console.log(contract);
     if(!user) {
       res.json({
         status: 400,
@@ -253,7 +239,6 @@ function readUser(req, res) {
 
 function readAllUsers(req, res) {
   User.findAll().then(users => {
-    // console.log("contracts: ", contracts);
     if(!users) {
       res.json({
         status: 400,

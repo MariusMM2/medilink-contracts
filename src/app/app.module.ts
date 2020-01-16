@@ -21,7 +21,6 @@ import {ContractDetailComponent} from './contract-detail/contract-detail.compone
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HomeComponent} from './home/home.component';
 import {HttpClientModule} from '@angular/common/http';
-import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {ContractService} from './services/contract.service';
@@ -73,7 +72,6 @@ import {MsalModule} from '@azure/msal-angular';
     BrowserModule,
     ReactiveFormsModule, FormsModule, MatProgressSpinnerModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, MatTableModule, MatSortModule,
     MatTabsModule,
     MsalModule.forRoot({
@@ -90,6 +88,3 @@ import {MsalModule} from '@azure/msal-angular';
 })
 export class AppModule {
 }
-
-// platformBrowserDynamic().bootstrapModule(AppModule)
-//   .catch(err => console.error(err));
