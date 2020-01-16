@@ -107,14 +107,14 @@
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input type="text" id="cost" matInput formControlName="cost" [ngModel]="contract.cost" placeholder="Cost">
+        <input type="number" id="cost" matInput formControlName="cost" [ngModel]="contract.cost" placeholder="Cost">
       </mat-form-field>
       <br>
       <mat-form-field>
         <input type="text" id="location" matInput formControlName="location" [ngModel]="contract.location"  placeholder="Location">
       </mat-form-field>
       <br>
-      <button id="updateButton" class="update-btn" mat-raised-button color="primary">Update</button>
+      <button id="updateButton" class="update-btn" mat-raised-button color="primary" [disabled]="pendingRedirect">Update</button>
     </form>
   </ng-container>
 
