@@ -16,6 +16,7 @@ export class ContractCreateComponent implements OnInit {
 
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder,
               private router: Router, private contractService: ContractService) {
+    this.pendingRedirect = false;
   }
 
   ngOnInit() {

@@ -15,9 +15,11 @@ export class ContractDetailComponent implements OnInit {
   contract: Contract;
   isLoading: boolean;
   currentUser;
+  pendingRedirect: boolean;
 
   constructor(private snackBar: MatSnackBar, private contractService: ContractService, private azureService: AzureService,
               private router: Router, private route: ActivatedRoute) {
+    this.pendingRedirect = false;
   }
 
   async ngOnInit() {
@@ -38,6 +40,7 @@ export class ContractDetailComponent implements OnInit {
   }
 
   async deleteContract() {
+    this.pendingRedirect = true;
     // Get the id from the url
     const id = this.route.snapshot.paramMap.get('id');
     const backendRes = await this.contractService.deleteContract(id);
@@ -49,6 +52,7 @@ export class ContractDetailComponent implements OnInit {
       });
     } else if (backendRes.status === 400) {
       alert(backendRes.message);
+      this.pendingRedirect = false;
     }
   }
 }
