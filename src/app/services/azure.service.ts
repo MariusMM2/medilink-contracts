@@ -14,6 +14,7 @@ export class AzureService {
 
   private graphClient: Client;
   public authenticated: boolean;
+  public token: string;
 
   constructor(private msalService: MsalService) {
     this.authenticated = false;
@@ -32,6 +33,9 @@ export class AzureService {
         }
       }
     });
+    this.getAccessToken()
+      .then(value => this.token = value)
+      .catch(reason => this.token = undefined);
   }
 
   // Prompt the user to sign in and
@@ -62,6 +66,7 @@ export class AzureService {
       return await this.msalService.acquireTokenSilent(environment.azure.scopes);
     } catch (error) {
       console.log(JSON.stringify(error, null, 2));
+      return new Promise((resolve) => resolve(undefined));
     }
   }
 
