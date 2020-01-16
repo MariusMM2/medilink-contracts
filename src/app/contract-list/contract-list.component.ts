@@ -43,7 +43,8 @@ export class ContractListComponent implements OnInit {
 
     this.contracts = await this.contractService.getContracts();
 
-    this.sorted = this.contracts.sort((a, b) => (parseInt(String(a.cost)) > parseInt(String(b.cost))) ? 1 : ((parseInt(String(b.cost)) > parseInt(String(a.cost))) ? -1 : 0));
+    // tslint:disable-next-line:radix max-line-length
+    this.sorted = this.contracts.sort((a, b) => (parseInt(String(a.cost), 10) > parseInt(String(b.cost), 10)) ? 1 : ((parseInt(String(b.cost), 10) > parseInt(String(a.cost), 10)) ? -1 : 0));
     this.sorted.forEach((item) => item.location = addFlag(item.location));
     console.log('- this.sorted$ after sort', this.sorted);
 
@@ -71,5 +72,5 @@ function addFlag(myCountry: string) {
       return myCountry + ' - ' + flagDb[i].flag;
     }
   }
-  return myCountry + ' - Flag';
+  return myCountry;
 }

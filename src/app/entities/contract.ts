@@ -9,7 +9,6 @@ export class Contract {
   category: string;
   cost: number;
   location: string;
-  userId: number;
   driveRef?: DriveContract;
 }
 

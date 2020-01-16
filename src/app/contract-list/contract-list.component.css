@@ -28,6 +28,18 @@
   background-color: #26c44d;
 }
 
+#refresh-button {
+  text-align: center;
+  width: 200px;
+  height: 50px;
+  display: block;
+  margin-top: -10px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #4896eb;
+}
+
 .showContract {
   text-align: center;
   width: 100px;

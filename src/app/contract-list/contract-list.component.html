@@ -13,7 +13,7 @@
             *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Create Contract
     </button>
 
-    <button *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'"
+    <button id="refresh-button" *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'"
             style="margin: auto; align-self: center;" type="button" mat-raised-button
             color="primary"
             [disabled]="isLoading"

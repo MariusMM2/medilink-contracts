@@ -51,12 +51,6 @@ const Contract = db.define("contracts", {
     type: Sequelize.STRING,
     allowNull: true,
     trim: true
-  },
-  userId: {
-    type: Sequelize.INTEGER,
-    defaultValue: 1
-    // allowNull: false,
-    // required: true
   }
 }, {
   timestamps: false
