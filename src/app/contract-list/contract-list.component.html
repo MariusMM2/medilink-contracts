@@ -1,64 +1,63 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
 <p class="page-title">Contracts</p>
 
-<div>
-  <div *ngIf="!isLoading && contracts.length !== 0">
+<button
+  type="button" mat-raised-button
+  color="primary"
+  [disabled]="isLoading"
+  (click)="refresh()">Refresh
+</button>
 
-    <div id="search">
-      <mat-form-field>
-        <input matInput placeholder="Search contract" value="" [(ngModel)]="contractSearch">
-      </mat-form-field>
-    </div>
-    <button id="create-button" mat-raised-button color="primary" routerLink="/dashboard/contract-create"
-            *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Create Contract
-    </button>
+<button id="create-button" mat-raised-button color="primary" routerLink="/dashboard/contract-create"
+        *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'" [disabled]="isLoading">Create Contract
+</button>
 
-    <button id="refresh-button" *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'"
-            style="margin: auto; align-self: center;" type="button" mat-raised-button
-            color="primary"
-            [disabled]="isLoading"
-            (click)="refresh()">Refresh
-    </button>
+<div id="search">
+  <mat-form-field>
+    <input matInput placeholder="Search contract" value="" [(ngModel)]="contractSearch" [disabled]="isLoading">
+  </mat-form-field>
+</div>
 
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>Expiration Date</th>
-        <th>Category</th>
-        <th>Cost</th>
-        <th>Location</th>
-        <th>Actions</th>
-      </tr>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Start Date</th>
+    <th>Expiration Date</th>
+    <th>Category</th>
+    <th>Cost</th>
+    <th>Location</th>
+    <th>Actions</th>
+  </tr>
 
-      <tr *ngFor="let contract of sorted | contractPipe: contractSearch">
-        <td>{{contract.name.substring(0, 20)}}
-          <span *ngIf="contract.name.length > 20"> ... </span>
-        </td>
-        <td>{{contract.description}}</td>
-        <td>{{contract.startDate}}</td>
-        <td>{{contract.expirationDate}}</td>
-        <td>{{contract.category}}</td>
-        <td>{{contract.cost}}</td>
-        <td>{{contract.location}}</td>
-        <td>
-          <button class="showContract" mat-raised-button
-                  routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
+  <ng-container *ngIf="!isLoading && contracts.length !== 0 && azureService.token !== undefined">
+    <tr *ngFor="let contract of sorted | contractPipe: contractSearch">
+      <td>{{contract.name.substring(0, 20)}}
+        <span *ngIf="contract.name.length > 20"> ... </span>
+      </td>
+      <td>{{contract.description}}</td>
+      <td>{{contract.startDate}}</td>
+      <td>{{contract.expirationDate}}</td>
+      <td>{{contract.category}}</td>
+      <td>{{contract.cost}}</td>
+      <td>{{contract.location}}</td>
+      <td>
+        <button class="showContract" mat-raised-button
+                routerLink="/dashboard/contract-detail/{{contract.id}}">Show Details
+        </button>
+      </td>
+    </tr>
+  </ng-container>
+</table>
 
-  <div class="container">
-    <ng-container *ngIf="isLoading">
-      <div class="container"></div>
-      <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
-    </ng-container>
+<div class="container">
+  <ng-container *ngIf="isLoading">
+    <div class="container"></div>
+    <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
+  </ng-container>
 
-    <ng-container *ngIf="(contracts.length === 0) && !isLoading">
-      <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts</mat-card-title>
-    </ng-container>
-  </div>
+  <ng-container *ngIf="(contracts.length === 0) && !isLoading">
+    <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts, try refreshing
+    </mat-card-title>
+  </ng-container>
 </div>

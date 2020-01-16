@@ -68,7 +68,7 @@ export class AzureService {
   async getContracts(): Promise<DriveContract[]> {
     try {
       let result = await this.graphClient
-        .api(`${API_BASE}/items/${CONTRACTS_FOLDER}/children`)
+        .api(`${API_BASE}/items/${CONTRACTS_FOLDER}/search(q='.pdf')`)
         .select('name,id,webUrl,folder,file')
         .get();
 
