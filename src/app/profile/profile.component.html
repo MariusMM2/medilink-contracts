@@ -2,7 +2,7 @@
 
 <mat-card class="example-card">
   <form *ngIf="user" [formGroup]="userForm" (ngSubmit)="updateUser()">
-    <mat-card-title id="update">Your Profile</mat-card-title>
+<!--    <mat-card-title id="update">Your Profile</mat-card-title>-->
     <div>
 
       <mat-form-field>
@@ -42,7 +42,7 @@
       <input type="hidden" formControlName="emailVerified" [ngModel]="user.emailVerified">
       <input type="hidden" formControlName="active" [ngModel]="user.active">
     </div>
-    <button id="updateButton" mat-raised-button color="primary">Update</button>
+    <button id="updateButton" class="update-btn" mat-raised-button color="primary">Update</button>
   </form>
 
 
