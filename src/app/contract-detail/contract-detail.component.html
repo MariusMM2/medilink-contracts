@@ -10,39 +10,60 @@
     <mat-divider></mat-divider>
 
     <mat-card-content>
-      <p class="description">Description: {{contract.description}}</p>
-      <p class="description">Start Date: {{contract.startDate | date: 'dd/MM/yyyy'}}</p>
-      <p class="description">Expiration Date: {{contract.expirationDate | date: 'dd/MM/yyyy'}}</p>
-      <p class="description">Type: {{contract.type}}</p>
-      <p class="category">Category: {{contract.category}}</p>
-      <p class="cost">Cost: {{contract.cost}}</p>
-      <p class="location">Location: {{contract.location}}</p>
+      <p class="row">
+        <span class="title">Description: </span>
+        <span class="text">{{contract.description}}</span>
+      </p>
+      <p class="row">
+        <span class="title">Start Date: </span>
+        <span class="text">{{contract.startDate | date: 'dd/MM/yyyy'}}</span>
+      </p>
+      <p class="row">
+        <span class="title">Expiration Date: </span>
+        <span class="text">{{contract.expirationDate | date: 'dd/MM/yyyy'}}</span>
+      </p>
+      <p class="row">
+        <span class="title">Type: </span>
+        <span class="text">{{contract.type}}</span>
+      </p>
+      <p class="row">
+        <span class="title">Category: </span>
+        <span class="text">{{contract.category}}</span>
+      </p>
+      <p class="row">
+        <span class="title">Cost: </span>
+        <span class="text">{{contract.cost}}</span>
+      </p>
+      <p class="row">
+        <span class="title">Location: </span>
+        <span class="text">{{contract.location}}</span>
+      </p>
     </mat-card-content>
 
     <mat-divider></mat-divider>
 
     <mat-card-actions>
-      <button class="updateContract" mat-raised-button color="accent"
+      <button class="action-button update-btn" mat-raised-button color="accent"
               routerLink="/dashboard/contract-update/{{contract.id}}"
               *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Update Contract
       </button>
-      <button class="deleteContract" mat-raised-button color="warn"
+      <button class="action-button delete-btn" mat-raised-button color="warn"
               *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'"
               (click)="deleteContract()">Delete Contract
       </button>
       <ng-container *ngIf="contract.driveRef !== undefined; then showButtons else showDisabledButtons"></ng-container>
 
       <ng-template #showButtons>
-        <a class="updateContract" mat-raised-button color="primary"
+        <a class="action-button open-btn" mat-raised-button color="primary"
            [href]="contract.driveRef.webUrl" target="_blank">Open
         </a>
-        <a class="updateContract" mat-raised-button color="primary"
+        <a class="action-button download-btn" mat-raised-button color="primary"
            [href]="contract.driveRef.downloadUrl" target="_blank">Download
         </a>
       </ng-template>
       <ng-template #showDisabledButtons>
-        <a class="updateContract" mat-raised-button color="primary" disabled>Open</a>
-        <a class="updateContract" mat-raised-button color="primary" disabled>Download</a>
+        <a class="action-button open-btn" mat-raised-button color="primary" disabled>Open</a>
+        <a class="action-button download-btn" mat-raised-button color="primary" disabled>Download</a>
       </ng-template>
     </mat-card-actions>
   </ng-container>
