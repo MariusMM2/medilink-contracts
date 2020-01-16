@@ -78,7 +78,6 @@ export class AzureService {
         .get();
 
       const contracts: DriveContract[] = [];
-
       const folders: DriveFolder[] = result.value.filter(value => value.folder);
 
       console.log('contract folders:', folders);
@@ -93,13 +92,10 @@ export class AzureService {
 
         for (const contract of folderContracts) {
           contract.company = folder.name;
-
           contracts.push(contract);
         }
       }
-
       console.log(contracts);
-
       return contracts.sort((a, b) => a.name.localeCompare(b.name));
 
     } catch (error) {
@@ -124,7 +120,6 @@ export class AzureService {
         webUrl: result.webUrl,
         downloadUrl: result['@microsoft.graph.downloadUrl']
       };
-
       contract.company = result.parentReference.name;
 
       return contract;

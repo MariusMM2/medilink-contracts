@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
@@ -26,10 +26,10 @@ export class AdminChangeRoleComponent implements OnInit {
 
     this.userService.updateUser(user)
       .subscribe(() => {
-        localStorage.setItem('currentUser', JSON.stringify({ user }));
+        localStorage.setItem('currentUser', JSON.stringify({user}));
         console.log('user updated!');
         this.snackBar.open('User updated', '', {duration: 500}).afterDismissed().subscribe(() => {
-           this.router.navigate(['../dashboard/admin-panel']);
+          this.router.navigate(['../dashboard/admin-panel']);
         });
       });
   }
@@ -52,5 +52,4 @@ export class AdminChangeRoleComponent implements OnInit {
     this.user = this.userService.getUser(id);
     console.log('-- this.user', this.user);
   }
-
 }

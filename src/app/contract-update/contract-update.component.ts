@@ -22,7 +22,6 @@ export class ContractUpdateComponent implements OnInit {
     this.pendingRedirect = false;
   }
 
-
   async ngOnInit() {
     this.isLoading = true;
     this.contractForm = this.fb.group({
@@ -40,7 +39,6 @@ export class ContractUpdateComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('id');
     this.contract = await this.contractService.getContract(id);
-
     this.isLoading = false;
   }
 

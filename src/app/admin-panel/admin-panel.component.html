@@ -1,7 +1,6 @@
 <p class="page-title">Admin Panel</p>
 
 <div>
-
   <table *ngIf="users && !isLoading" class="table">
     <tr>
       <th>First Name</th>
@@ -13,7 +12,6 @@
     </tr>
 
     <tr *ngFor="let user of users">
-
       <td>{{user.firstName}}</td>
       <td>{{user.lastName}}</td>
       <td>{{user.email}}</td>

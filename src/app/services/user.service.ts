@@ -31,5 +31,4 @@ export class UserService {
     console.log('-----------** ', user);
     return this.http.put<User>(this.baseUrl + `${user.id}`, user);
   }
-
 }

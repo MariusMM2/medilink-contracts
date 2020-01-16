@@ -28,7 +28,6 @@ export class ContractDetailComponent implements OnInit {
       this.isLoading = true;
 
       const id = this.route.snapshot.paramMap.get('id');
-
       this.contract = await this.contractService.getContract(id);
 
       console.log('contract:', this.contract);

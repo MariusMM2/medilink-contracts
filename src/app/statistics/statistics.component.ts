@@ -49,8 +49,8 @@ export class StatisticsComponent implements OnInit {
   }
 
   private generateCostStatistics() {
-    // tslint:disable-next-line:max-line-length radix
-    this.contracts = this.contracts.sort((a, b) => (parseInt(String(a.cost)) > parseInt(String(b.cost))) ? 1 : ((parseInt(String(b.cost)) > parseInt(String(a.cost))) ? -1 : 0));
+    this.contracts = this.contracts.sort((a, b) => (parseInt(String(a.cost), 10) > parseInt(String(b.cost), 10)) ? 1 :
+                                                              ((parseInt(String(b.cost), 10) > parseInt(String(a.cost), 10)) ? -1 : 0));
   }
 
   formatDate(date: Date) {
@@ -65,8 +65,6 @@ export class StatisticsComponent implements OnInit {
     if (day.length < 2) {
       day = '0' + day;
     }
-
     return [year, month, day].join('-');
-
   }
 }

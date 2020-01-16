@@ -45,8 +45,8 @@ export class RegisterComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.email]],
       // check if there is at least one uppercase char, one lowercase char, one number and a special character
-      // tslint:disable-next-line:max-line-length
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-])/)]],
+      password: ['', [Validators.required, Validators.minLength(8),
+                      Validators.maxLength(30), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-])/)]],
       confirmPassword: ['', [Validators.required]]
     }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -72,7 +72,6 @@ export class RegisterComponent implements OnInit {
         } else if (backendRes.status === 400) {
 
           alert(backendRes.message);
-
         }
       }, error => {
         console.log('Error: ', error);

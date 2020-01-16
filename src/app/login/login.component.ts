@@ -19,16 +19,16 @@ export class LoginComponent implements OnInit {
 
   // form builder is used to create instances of the form group
   // router is used for navigation after the form is successfully submitted
-  // tslint:disable-next-line:max-line-length
-  constructor(private formBuilder: FormBuilder, private router: Router, private userApi: UserService, private authService: AuthService, private adminService: AdminService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private userApi: UserService,
+              private authService: AuthService, private adminService: AdminService) {
   }
 
   ngOnInit() {
     // login form validators
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      // tslint:disable-next-line:max-line-length
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-])/)]],
+      password: ['', [Validators.required, Validators.minLength(8),
+        Validators.maxLength(30), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*-])/)]],
     });
   }
 
@@ -128,10 +128,7 @@ export class LoginComponent implements OnInit {
           setTimeout(() => {
             document.getElementById('loginFailedMsg').style.display = 'none';
           }, 300000);
-
-
         }
-
       }, error => {
         console.log('Error: ', error);
       });
@@ -139,5 +136,4 @@ export class LoginComponent implements OnInit {
       console.log('Invalid form!');
     }
   }
-
 }

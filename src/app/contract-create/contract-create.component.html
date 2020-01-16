@@ -3,9 +3,6 @@
 <mat-card>
 
   <form [formGroup]="contractForm" (ngSubmit)="saveContract()">
-
-<!--    <mat-card-title id="create">New Contract</mat-card-title>-->
-
     <div>
       <mat-form-field>
         <input type="text" id="name" matInput placeholder="Contract Name" formControlName="name" (click)="clearErrorMessage()">

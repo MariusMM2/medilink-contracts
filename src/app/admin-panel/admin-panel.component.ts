@@ -16,11 +16,7 @@ export class AdminPanelComponent implements OnInit {
 
   async ngOnInit() {
     this.isLoading = true;
-
     this.users = await this.userService.getUsers().toPromise();
-
-    console.log('users: ', this.users);
-
     this.isLoading = false;
   }
 }

@@ -10,9 +10,7 @@
       <mat-card-content>
 
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
           <div>
-
             <mat-form-field>
               <input id="firstName" matInput type="text" formControlName="firstName" placeholder="First Name">
             </mat-form-field>
@@ -32,7 +30,6 @@
           </div>
 
           <div>
-
             <mat-form-field>
               <input id="lastName" matInput type="text" formControlName="lastName" placeholder="Last Name">
             </mat-form-field>
@@ -52,7 +49,6 @@
           </div>
 
           <div>
-
             <mat-form-field>
               <input id="email" matInput type="email" formControlName="email" placeholder="Email">
             </mat-form-field>
@@ -70,7 +66,6 @@
           </div>
 
           <div>
-
             <mat-form-field>
               <input id="password" matInput type="password" formControlName="password" placeholder="Password">
             </mat-form-field>
@@ -90,11 +85,9 @@
             <div *ngIf="registerForm.controls.password.errors?.pattern && registerForm.controls.password.touched">
               The password must contain at least one uppercase letter, one lowercase letter, one number and a special character!
             </div>
-
           </div>
 
           <div>
-
             <mat-form-field>
               <input id="confirmPassword" matInput type="password" formControlName="confirmPassword" placeholder="Confirm Password">
             </mat-form-field>
@@ -106,7 +99,6 @@
             <div *ngIf="registerForm.controls.confirmPassword.errors?.mustMatch && registerForm.controls.confirmPassword.touched">
               Passwords must match!
             </div>
-
           </div>
 
           <button id="registerButton" type="submit" mat-raised-button color="primary">Register</button>
@@ -114,15 +106,11 @@
           <br><br>
 
           <mat-card-actions>
-
             <mat-divider></mat-divider>
             <br><br>
-
             <mat-card-subtitle>You already have an account?</mat-card-subtitle>
             <button type="button" mat-raised-button color="accent" routerLink="../login">Login</button>
-
           </mat-card-actions>
-
         </form>
 
       </mat-card-content>

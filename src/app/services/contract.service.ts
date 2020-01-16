@@ -29,7 +29,6 @@ export class ContractService {
       console.error(`Could not get DriveItem with id '${contract.file}'`);
       console.error(JSON.stringify(error, null, 2));
     }
-
     return contract;
   }
 
@@ -44,7 +43,6 @@ export class ContractService {
         console.log(JSON.stringify(error, null, 2));
       }
     }
-
     return contracts;
   }
 

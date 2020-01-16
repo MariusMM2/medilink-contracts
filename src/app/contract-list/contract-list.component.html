@@ -32,8 +32,8 @@
 
   <ng-container *ngIf="!isLoading && contracts.length !== 0 && azureService.token !== undefined">
     <tr *ngFor="let contract of sorted | contractPipe: contractSearch">
-      <td>{{contract.name.substring(0, 20)}}
-        <span *ngIf="contract.name.length > 20"> ... </span>
+      <td>{{contract.name.substring(0, 30)}}
+        <span *ngIf="contract.name.length > 30"> ... </span>
       </td>
       <td>{{contract.description}}</td>
       <td>{{contract.startDate}}</td>

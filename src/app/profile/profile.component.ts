@@ -37,8 +37,6 @@ export class ProfileComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('id');
     this.user = await this.userService.getUser(id).toPromise();
-    console.log('-- user: ', this.user);
-
     this.isLoading = false;
   }
 

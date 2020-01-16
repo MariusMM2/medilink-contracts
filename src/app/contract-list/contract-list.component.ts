@@ -43,8 +43,8 @@ export class ContractListComponent implements OnInit {
 
     this.contracts = await this.contractService.getContracts();
 
-    // tslint:disable-next-line:radix max-line-length
-    this.sorted = this.contracts.sort((a, b) => (parseInt(String(a.cost), 10) > parseInt(String(b.cost), 10)) ? 1 : ((parseInt(String(b.cost), 10) > parseInt(String(a.cost), 10)) ? -1 : 0));
+    this.sorted = this.contracts.sort((a, b) => (parseInt(String(a.cost), 10) > parseInt(String(b.cost), 10)) ? 1 :
+                                                          ((parseInt(String(b.cost), 10) > parseInt(String(a.cost), 10)) ? -1 : 0));
     this.sorted.forEach((item) => item.location = addFlag(item.location));
     console.log('- this.sorted$ after sort', this.sorted);
 
