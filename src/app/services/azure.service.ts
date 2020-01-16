@@ -66,7 +66,7 @@ export class AzureService {
       return await this.msalService.acquireTokenSilent(environment.azure.scopes);
     } catch (error) {
       console.log(JSON.stringify(error, null, 2));
-      return new Promise((resolve) => resolve(undefined));
+      return await new Promise((resolve) => resolve(undefined));
     }
   }
 
