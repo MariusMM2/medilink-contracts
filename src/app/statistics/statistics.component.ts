@@ -30,9 +30,10 @@ export class StatisticsComponent implements OnInit {
 
   private generateDateStatistics() {
     const currentDate = this.formatDate(new Date());
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.contracts.length; i++) {
-      let startDate = this.formatDate(this.contracts[i].startDate);
-      let expirationDate = this.formatDate(this.contracts[i].expirationDate);
+      const startDate = this.formatDate(this.contracts[i].startDate);
+      const expirationDate = this.formatDate(this.contracts[i].expirationDate);
       if (currentDate >= startDate && currentDate <= expirationDate) {
         this.statisticsDateCurrent++;
       }
@@ -48,14 +49,15 @@ export class StatisticsComponent implements OnInit {
   }
 
   private generateCostStatistics() {
+    // tslint:disable-next-line:max-line-length radix
     this.contracts = this.contracts.sort((a, b) => (parseInt(String(a.cost)) > parseInt(String(b.cost))) ? 1 : ((parseInt(String(b.cost)) > parseInt(String(a.cost))) ? -1 : 0));
   }
 
   formatDate(date: Date) {
-    let d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
 
     if (month.length < 2) {
       month = '0' + month;
@@ -65,5 +67,6 @@ export class StatisticsComponent implements OnInit {
     }
 
     return [year, month, day].join('-');
+
   }
 }

@@ -14,7 +14,7 @@
           <div>
 
             <mat-form-field>
-              <input matInput type="email" formControlName="email" placeholder="Email" id="email" (click)="clearErrorMessage()">
+              <input matInput type="email" formControlName="email" placeholder="Email" id="email">
             </mat-form-field>
 
             <div *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched">
@@ -32,7 +32,7 @@
           <div>
 
             <mat-form-field>
-              <input matInput type="password" formControlName="password" placeholder="Password" id="password" (click)="clearErrorMessage()">
+              <input matInput type="password" formControlName="password" placeholder="Password" id="password">
             </mat-form-field>
 
             <div *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">

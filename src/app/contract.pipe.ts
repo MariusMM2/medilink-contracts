@@ -35,7 +35,8 @@ export class ContractPipe implements PipeTransform {
       contract => contract.location.toLowerCase().includes(searchString)
     );
 
-    let searchResult: Contract[] = searchName.concat(searchDescription, searchStartDate, searchExpiration, searchCategory, searchCost, searchLocation);
+    // tslint:disable-next-line:max-line-length
+    const searchResult: Contract[] = searchName.concat(searchDescription, searchStartDate, searchExpiration, searchCategory, searchCost, searchLocation);
 
     if (searchResult.length > 0) {
       return new Set(searchResult);

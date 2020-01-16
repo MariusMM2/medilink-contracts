@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth/auth.service';
-import {Observable} from 'rxjs';
 import {AdminService} from '../admin/admin.service';
 
 @Component({
@@ -14,16 +13,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
-
-    // this.userRole$ = new Observable(subscriber => {
-    //   subscriber.next(true);
-    //
-    //   this.products$ = this.productService.getProducts();
-    //
-    //   setTimeout(()=>{
-    //     subscriber.next(false);
-    //   }, 2000)
-    // });
   }
 
   onLogoutClick() {

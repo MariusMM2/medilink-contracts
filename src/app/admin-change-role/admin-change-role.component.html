@@ -13,11 +13,7 @@
         <input type="text" id="lastName" matInput formControlName="lastName" [ngModel]="user.lastName" placeholder='lastName' readonly>
       </mat-form-field>
       <br>
-<!--      <mat-form-field>-->
-<!--        <input type="text" id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='role'>-->
-<!--      </mat-form-field>-->
 
-<!--      [ngClass]="{'highlight-color': user.role == user.proposedRole}"-->
       <mat-form-field>
         <select matNativeControl id="role" matInput formControlName="role" [ngModel]="user.role" placeholder='role'>
           <option>Member</option>

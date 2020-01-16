@@ -42,7 +42,7 @@ export class ContractCreateComponent implements OnInit {
     console.log('contract: ', contract);
 
     if (this.contractForm.valid) {
-      let backendRes = await this.contractService.addContract(contract);
+      const backendRes = await this.contractService.addContract(contract);
       console.log('backend response:', backendRes);
 
       if (backendRes.status === 200) {

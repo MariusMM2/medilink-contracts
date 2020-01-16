@@ -32,11 +32,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  clearErrorMessage() {
-    document.getElementById('emailErrMsg').innerHTML = '';
-    document.getElementById('passwordErrMsg').innerHTML = '';
-  }
-
   onSubmit() {
     console.log(this.loginForm);
     const user = this.loginForm.value as User;
@@ -70,10 +65,8 @@ export class LoginComponent implements OnInit {
 
           alert(backendRes.message);
 
-          // loggedTries: 1
           this.loggedTries = backendRes.loggedTries;
           console.log('this.loggedTries', this.loggedTries);
-          console.log('backendRes', backendRes);
 
         } else if (backendRes.status === 402) {
 

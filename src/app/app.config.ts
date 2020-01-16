@@ -1,4 +1,5 @@
+// tslint:disable-next-line:class-name
 export class config {
-  static contracts_endpoint: string = 'contracts';
-  // static shopping_carts_endpoint: string = 'shopping-carts';
+  // tslint:disable-next-line:variable-name
+  static contracts_endpoint = 'contracts';
 }
