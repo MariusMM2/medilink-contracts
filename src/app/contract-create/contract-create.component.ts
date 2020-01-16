@@ -12,6 +12,7 @@ import {ContractService} from '../services/contract.service';
 })
 export class ContractCreateComponent implements OnInit {
   contractForm: FormGroup;
+  pendingRedirect: boolean;
 
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder,
               private router: Router, private contractService: ContractService) {
@@ -36,6 +37,7 @@ export class ContractCreateComponent implements OnInit {
   }
 
   async saveContract() {
+    this.pendingRedirect = true;
     console.log(this.contractForm);
 
     const contract = this.contractForm.value as Contract;
@@ -54,6 +56,7 @@ export class ContractCreateComponent implements OnInit {
       }
     } else {
       console.log('Invalid form!');
+      this.pendingRedirect = false;
     }
   }
 }

@@ -14,10 +14,12 @@ export class ContractUpdateComponent implements OnInit {
   contract: Contract;
   contractForm: FormGroup;
   isLoading: boolean;
+  pendingRedirect: boolean;
 
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private router: Router,
               private contractService: ContractService,
               private route: ActivatedRoute) {
+    this.pendingRedirect = false;
   }
 
 
@@ -47,6 +49,7 @@ export class ContractUpdateComponent implements OnInit {
   }
 
   async updateContract() {
+    this.pendingRedirect = true;
     const contract = this.contractForm.value as Contract;
 
     if (this.contractForm.valid) {
@@ -62,6 +65,7 @@ export class ContractUpdateComponent implements OnInit {
       }
     } else {
       console.log('Invalid form!');
+      this.pendingRedirect = false;
     }
   }
 

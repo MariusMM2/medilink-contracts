@@ -108,6 +108,6 @@
     </mat-form-field>
     <br>
     <br>
-    <button id="saveButton" mat-raised-button color="primary">Save Contract</button>
+    <button id="saveButton" mat-raised-button color="primary" [disabled]="pendingRedirect">Save Contract</button>
   </form>
 </mat-card>
