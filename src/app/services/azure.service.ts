@@ -66,14 +66,14 @@ export class AzureService {
       return await this.msalService.acquireTokenSilent(environment.azure.scopes);
     } catch (error) {
       console.log(JSON.stringify(error, null, 2));
-      return new Promise((resolve) => resolve(undefined));
+      return await new Promise((resolve) => resolve(undefined));
     }
   }
 
   async getContracts(): Promise<DriveContract[]> {
     try {
       let result = await this.graphClient
-        .api(`${API_BASE}/items/${CONTRACTS_FOLDER}/search(q='.pdf')`)
+        .api(`${API_BASE}/items/${CONTRACTS_FOLDER}/children`)
         .select('name,id,webUrl,folder,file')
         .get();
 
