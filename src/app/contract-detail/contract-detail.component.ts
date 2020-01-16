@@ -22,17 +22,19 @@ export class ContractDetailComponent implements OnInit {
 
   async ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
+    if (await this.azureService.getAccessToken() !== undefined) {
+      this.isLoading = true;
 
-    this.isLoading = true;
+      const id = this.route.snapshot.paramMap.get('id');
 
-    const id = this.route.snapshot.paramMap.get('id');
+      this.contract = await this.contractService.getContract(id);
 
-    this.contract = await this.contractService.getContract(id);
+      console.log('contract:', this.contract);
 
-    console.log('contract:', this.contract);
-
-    this.isLoading = false;
-
+      this.isLoading = false;
+    } else {
+      await this.router.navigate(['../dashboard/contract-list'], {replaceUrl: true});
+    }
   }
 
   async deleteContract() {

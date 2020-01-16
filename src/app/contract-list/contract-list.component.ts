@@ -30,7 +30,7 @@ export class ContractListComponent implements OnInit {
     this.isLoading = true;
 
 
-    if (!this.azureService.authenticated) {
+    if (await this.azureService.getAccessToken() === undefined) {
       await this.azureService.signIn();
     }
     await this.contractService.syncContracts();

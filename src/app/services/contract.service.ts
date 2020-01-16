@@ -76,18 +76,8 @@ export class ContractService {
         };
       }
 
-      const isModified: boolean = dbContract.name !== driveContract.name ||
-        dbContract.description !== driveContract.company;
-
-      dbContract.name = driveContract.name;
-      dbContract.description = driveContract.company;
-
       if (isNewContract) {
         await this.addContract(dbContract);
-      } else {
-        if (isModified) {
-          await this.updateContract(dbContract);
-        }
       }
     }
   }
