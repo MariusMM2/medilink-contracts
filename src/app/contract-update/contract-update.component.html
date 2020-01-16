@@ -11,7 +11,7 @@
       <div>
 
         <mat-form-field>
-          <input type="text" id="name" matInput formControlName="name" [ngModel]="contract.name"
+          <input type="text" id="name" matInput formControlName="name" [ngModel]="contract.name" placeholder="Name"
                  (click)="clearErrorMessage()">
         </mat-form-field>
 
@@ -30,7 +30,7 @@
       <div>
 
         <mat-form-field>
-          <input type="text" id="description" matInput formControlName="description" [ngModel]="contract.description">
+          <input type="text" id="description" matInput formControlName="description" [ngModel]="contract.description" placeholder="Description">
         </mat-form-field>
 
         <div *ngIf="contractForm.controls.description.errors?.required && contractForm.controls.description.touched">
@@ -46,7 +46,7 @@
       <div>
 
         <mat-form-field>
-          <input type="date" id="startDate" matInput formControlName="startDate" [ngModel]="contract.startDate">
+          <input type="date" id="startDate" matInput formControlName="startDate" [ngModel]="contract.startDate" placeholder="Start Date">
         </mat-form-field>
 
         <div *ngIf="contractForm.controls.startDate.errors?.required && contractForm.controls.startDate.touched">
@@ -58,7 +58,7 @@
       <div>
 
         <mat-form-field>
-          <input type="date" id="expirationDate" matInput formControlName="expirationDate"
+          <input type="date" id="expirationDate" matInput formControlName="expirationDate" placeholder="Expiration Date"
                  [ngModel]="contract.expirationDate">
         </mat-form-field>
 
@@ -72,7 +72,7 @@
       <div>
 
         <mat-form-field>
-          <input type="text" id="type" matInput formControlName="type" [ngModel]="contract.type">
+          <input type="text" id="type" matInput formControlName="type" [ngModel]="contract.type" placeholder="Type">
         </mat-form-field>
 
         <div *ngIf="contractForm.controls.type.errors?.required && contractForm.controls.type.touched">
@@ -88,7 +88,7 @@
       <div>
 
         <mat-form-field>
-          <input type="text" id="file" matInput formControlName="file" [ngModel]="contract.file">
+          <input type="text" id="file" matInput formControlName="file" [ngModel]="contract.file" placeholder="File">
         </mat-form-field>
 
         <div *ngIf="contractForm.controls.file.errors?.required && contractForm.controls.file.touched">
@@ -103,15 +103,15 @@
 
       <br>
       <mat-form-field>
-        <input type="text" id="category" matInput formControlName="category" [ngModel]="contract.category">
+        <input type="text" id="category" matInput formControlName="category" [ngModel]="contract.category"  placeholder="Category">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input type="text" id="cost" matInput formControlName="cost" [ngModel]="contract.cost">
+        <input type="text" id="cost" matInput formControlName="cost" [ngModel]="contract.cost" placeholder="Cost">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input type="text" id="location" matInput formControlName="location" [ngModel]="contract.location">
+        <input type="text" id="location" matInput formControlName="location" [ngModel]="contract.location"  placeholder="Location">
       </mat-form-field>
       <br>
       <button id="updateButton" mat-raised-button color="primary">Update</button>

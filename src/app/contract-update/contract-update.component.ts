@@ -50,7 +50,7 @@ export class ContractUpdateComponent implements OnInit {
     const contract = this.contractForm.value as Contract;
 
     if (this.contractForm.valid) {
-      let backendRes = await this.contractService.updateContract(contract);
+      const backendRes = await this.contractService.updateContract(contract);
       console.log('backend response:', backendRes);
 
       if (backendRes.status === 200) {
