@@ -9,8 +9,9 @@ export class AuthService {
 
   constructor() { }
 
-  isLoggedIn = true;
+  isLoggedIn = false;
   redirectUrl: string;
+
 
   login(): Observable<boolean> {
     console.log(' login this.isLoggedIn ' + this.isLoggedIn);
@@ -20,8 +21,8 @@ export class AuthService {
     );
   }
   logout(): void {
-    console.log(' logout this.isLoggedIn ' + this.isLoggedIn);
     this.isLoggedIn = false;
+    console.log(' logout this.isLoggedIn ' + this.isLoggedIn);
   }
 
 }
