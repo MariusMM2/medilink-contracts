@@ -22,7 +22,9 @@ export class ContractListComponent implements OnInit {
   async ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
 
-    this.getContracts();
+    if (this.azureService.token !== undefined) {
+      this.getContracts();
+    }
   }
 
   async refresh() {
@@ -30,12 +32,13 @@ export class ContractListComponent implements OnInit {
     this.isLoading = true;
 
 
-    if (await this.azureService.getAccessToken() === undefined) {
+    if (this.azureService.token === undefined) {
       await this.azureService.signIn();
     }
-    await this.contractService.syncContracts();
-
-    this.getContracts();
+    if (this.azureService.token !== undefined) {
+      await this.contractService.syncContracts();
+      this.getContracts();
+    }
   }
 
   private async getContracts() {

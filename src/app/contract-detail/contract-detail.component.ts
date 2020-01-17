@@ -24,7 +24,7 @@ export class ContractDetailComponent implements OnInit {
 
   async ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
-    if (await this.azureService.getAccessToken() !== undefined) {
+    if (this.azureService.token !== undefined) {
       this.isLoading = true;
 
       const id = this.route.snapshot.paramMap.get('id');

@@ -30,7 +30,7 @@
         <th>Actions</th>
       </tr>
 
-  <ng-container *ngIf="!isLoading && contracts.length !== 0 && azureService.token !== undefined">
+  <ng-container *ngIf="!isLoading && contracts.length !== 0">
     <tr *ngFor="let contract of sorted | contractPipe: contractSearch">
       <td>{{contract.name.substring(0, 30)}}
         <span *ngIf="contract.name.length > 30"> ... </span>
@@ -59,7 +59,7 @@
     <mat-spinner style="margin: auto; align-self: center;"></mat-spinner>
   </ng-container>
 
-  <ng-container *ngIf="!isLoading && (contracts.length === 0 ||  azureService.token === undefined)">
+  <ng-container *ngIf="!isLoading && (contracts.length === 0)">
     <mat-card-title style="margin: auto; text-align: center;">Cannot retrieve contracts, try refreshing
     </mat-card-title>
   </ng-container>
