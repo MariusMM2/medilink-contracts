@@ -78,7 +78,7 @@ export class AzureService {
         .get();
 
       const contracts: DriveContract[] = [];
-      const folders: DriveFolder[] = result.value.filter(value => value.folder);
+      const folders: DriveFolder[] = result.value.filter(driveItem => driveItem.folder);
 
       console.log('contract folders:', folders);
 
@@ -88,7 +88,7 @@ export class AzureService {
           .select('name,id,webUrl,folder,file')
           .get();
 
-        const files: DriveContract[] = result.value.filter(value => value.file);
+        const files: DriveContract[] = result.value.filter(driveItem => driveItem.file);
         const pdfContracts: DriveContract[] = files.filter(file => file.name.endsWith('.pdf'));
 
         for (const contract of pdfContracts) {
