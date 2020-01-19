@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor() { }
 
-  isLoggedIn = false;
+  isLoggedIn = true;
   redirectUrl: string;
 
 
@@ -21,7 +21,7 @@ export class AuthService {
     );
   }
   logout(): void {
-    this.isLoggedIn = false;
+    this.isLoggedIn = true;
     console.log(' logout this.isLoggedIn ' + this.isLoggedIn);
   }
 
