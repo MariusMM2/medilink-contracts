@@ -51,20 +51,12 @@
               *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'"
               (click)="deleteContract()">Delete Contract
       </button>
-      <ng-container *ngIf="contract.driveRef !== undefined; then showButtons else showDisabledButtons"></ng-container>
-
-      <ng-template #showButtons>
-        <a class="action-button open-btn" mat-raised-button color="primary"
-           [href]="contract.driveRef.webUrl" target="_blank">Open
-        </a>
-        <a class="action-button download-btn" mat-raised-button color="primary"
-           [href]="contract.driveRef.downloadUrl" target="_blank">Download
-        </a>
-      </ng-template>
-      <ng-template #showDisabledButtons>
-        <a class="action-button open-btn" mat-raised-button color="primary" disabled>Open</a>
-        <a class="action-button download-btn" mat-raised-button color="primary" disabled>Download</a>
-      </ng-template>
+      <a class="action-button open-btn" mat-raised-button color="primary"
+         [href]="contract.driveRef ? contract.driveRef.webUrl : ''"
+         [disabled]="!contract.driveRef">Open</a>
+      <a class="action-button download-btn" mat-raised-button color="primary"
+         [href]="contract.driveRef ? contract.driveRef.downloadUrl : ''"
+         [disabled]="!contract.driveRef">Download</a>
     </mat-card-actions>
   </ng-container>
 
