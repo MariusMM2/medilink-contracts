@@ -53,10 +53,10 @@
       </button>
       <a class="action-button open-btn" mat-raised-button color="primary"
          [href]="contract.driveRef ? contract.driveRef.webUrl : ''"
-         [disabled]="!contract.driveRef">Open</a>
+         [disabled]="!contract.driveRef" target="_blank">Open</a>
       <a class="action-button download-btn" mat-raised-button color="primary"
          [href]="contract.driveRef ? contract.driveRef.downloadUrl : ''"
-         [disabled]="!contract.driveRef">Download</a>
+         [disabled]="!contract.driveRef" target="_blank">Download</a>
     </mat-card-actions>
   </ng-container>
 
