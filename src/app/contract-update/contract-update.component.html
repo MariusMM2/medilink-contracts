@@ -84,21 +84,6 @@
 
       </div>
       <br>
-      <div>
-
-        <mat-form-field>
-          <input type="text" id="file" matInput formControlName="file" [ngModel]="contract.file" placeholder="File">
-        </mat-form-field>
-
-        <div *ngIf="contractForm.controls.file.errors?.required && contractForm.controls.file.touched">
-          You must fill out the contract file!
-        </div>
-
-        <div *ngIf="contractForm.controls.file.errors?.maxlength && contractForm.controls.file.touched">
-          The contract file must contain maximum 20 characters!
-        </div>
-
-      </div>
 
       <br>
       <mat-form-field>
