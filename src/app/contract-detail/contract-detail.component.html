@@ -43,7 +43,7 @@
     <mat-divider></mat-divider>
 
     <mat-card-actions>
-      <button class="action-button update-btn" mat-raised-button color="accent"
+      <button class="action-button update-btn" mat-raised-button color="accent" [disabled]="pendingRedirect"
               routerLink="/dashboard/contract-update/{{contract.id}}"
               *ngIf="currentUser.role == 'Admin' || currentUser.role == 'SuperAdmin'">Update Contract
       </button>
